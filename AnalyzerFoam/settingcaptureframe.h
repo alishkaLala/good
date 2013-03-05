@@ -42,7 +42,8 @@ public:
     QWidget  *father;
     ImageProcessing *worker;
 
-
+signals:
+    void resizing(bool value, int x1, int y1, int x2, int y2);
 private:
     bool isStartResize();
     static SettingCaptureFrame *obj;
@@ -54,7 +55,7 @@ private:
     bool calculateDistanceInPixels();
     bool applyResize();
     void calculateResize();
-    qint32 frameWidth,frameHight;
+   // qint32 frameWidth,frameHight;
     qint32 frameWidthResize,frameHightResize;
     double coefficient;
     double coefficientResize;
@@ -148,6 +149,8 @@ private slots:
     void imageCalculatingGetting(IplImage *img);
 public slots:
       void imageGetting(IplImage *img);
+
+
 
 };
 

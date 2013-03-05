@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'settingcaptureframe.h'
 **
-** Created: Tue 5. Mar 01:39:08 2013
+** Created: Tue 5. Mar 15:09:33 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,41 +23,45 @@ static const uint qt_meta_data_SettingCaptureFrame[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      20,   14, // methods
+      21,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      39,   21,   20,   20, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      21,   20,   20,   20, 0x08,
-      32,   20,   20,   20, 0x08,
-      44,   20,   20,   20, 0x08,
-      60,   20,   20,   20, 0x08,
-      85,   20,   20,   20, 0x08,
-     108,  106,   20,   20, 0x08,
-     139,   20,   20,   20, 0x08,
-     168,   20,   20,   20, 0x08,
-     194,   20,   20,   20, 0x08,
-     220,   20,   20,   20, 0x08,
-     246,   20,   20,   20, 0x08,
-     272,   20,   20,   20, 0x08,
-     298,   20,   20,   20, 0x08,
-     324,   20,   20,   20, 0x08,
-     351,   20,   20,   20, 0x08,
-     380,   20,   20,   20, 0x08,
-     406,   20,   20,   20, 0x08,
-     435,   20,   20,   20, 0x08,
-     461,  457,   20,   20, 0x08,
-     496,  457,   20,   20, 0x0a,
+      70,   20,   20,   20, 0x08,
+      81,   20,   20,   20, 0x08,
+      93,   20,   20,   20, 0x08,
+     109,   20,   20,   20, 0x08,
+     134,   20,   20,   20, 0x08,
+     157,  155,   20,   20, 0x08,
+     188,   20,   20,   20, 0x08,
+     217,   20,   20,   20, 0x08,
+     243,   20,   20,   20, 0x08,
+     269,   20,   20,   20, 0x08,
+     295,   20,   20,   20, 0x08,
+     321,   20,   20,   20, 0x08,
+     347,   20,   20,   20, 0x08,
+     373,   20,   20,   20, 0x08,
+     400,   20,   20,   20, 0x08,
+     429,   20,   20,   20, 0x08,
+     455,   20,   20,   20, 0x08,
+     484,   20,   20,   20, 0x08,
+     510,  506,   20,   20, 0x08,
+     545,  506,   20,   20, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_SettingCaptureFrame[] = {
-    "SettingCaptureFrame\0\0stopWork()\0"
-    "toolTipMm()\0validMmAndSet()\0"
+    "SettingCaptureFrame\0\0value,x1,y1,x2,y2\0"
+    "resizing(bool,int,int,int,int)\0"
+    "stopWork()\0toolTipMm()\0validMmAndSet()\0"
     "timerEvent_showCapture()\0on_defRect_clicked()\0"
     "w\0calculateCaptureSizeFrame(int)\0"
     "on_defDistInPixels_clicked()\0"
@@ -105,30 +109,38 @@ int SettingCaptureFrame::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: stopWork(); break;
-        case 1: toolTipMm(); break;
-        case 2: validMmAndSet(); break;
-        case 3: timerEvent_showCapture(); break;
-        case 4: on_defRect_clicked(); break;
-        case 5: calculateCaptureSizeFrame((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 6: on_defDistInPixels_clicked(); break;
-        case 7: on_pushButton_3_clicked(); break;
-        case 8: on_pushButton_7_clicked(); break;
-        case 9: on_pushButton_8_clicked(); break;
-        case 10: on_pushButton_9_clicked(); break;
-        case 11: on_pushButtonNo_clicked(); break;
-        case 12: on_pushButtonOk_clicked(); break;
-        case 13: on_SettingCansel_clicked(); break;
-        case 14: on_SettingStandart_clicked(); break;
-        case 15: on_SettingApply_clicked(); break;
-        case 16: on_pushButtonStart_clicked(); break;
-        case 17: setValueShowing((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 18: imageCalculatingGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
-        case 19: imageGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
+        case 0: resizing((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5]))); break;
+        case 1: stopWork(); break;
+        case 2: toolTipMm(); break;
+        case 3: validMmAndSet(); break;
+        case 4: timerEvent_showCapture(); break;
+        case 5: on_defRect_clicked(); break;
+        case 6: calculateCaptureSizeFrame((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 7: on_defDistInPixels_clicked(); break;
+        case 8: on_pushButton_3_clicked(); break;
+        case 9: on_pushButton_7_clicked(); break;
+        case 10: on_pushButton_8_clicked(); break;
+        case 11: on_pushButton_9_clicked(); break;
+        case 12: on_pushButtonNo_clicked(); break;
+        case 13: on_pushButtonOk_clicked(); break;
+        case 14: on_SettingCansel_clicked(); break;
+        case 15: on_SettingStandart_clicked(); break;
+        case 16: on_SettingApply_clicked(); break;
+        case 17: on_pushButtonStart_clicked(); break;
+        case 18: setValueShowing((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 19: imageCalculatingGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
+        case 20: imageGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 20;
+        _id -= 21;
     }
     return _id;
+}
+
+// SIGNAL 0
+void SettingCaptureFrame::resizing(bool _t1, int _t2, int _t3, int _t4, int _t5)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)), const_cast<void*>(reinterpret_cast<const void*>(&_t4)), const_cast<void*>(reinterpret_cast<const void*>(&_t5)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_END_MOC_NAMESPACE

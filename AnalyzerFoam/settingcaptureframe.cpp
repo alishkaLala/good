@@ -106,26 +106,16 @@ void SettingCaptureFrame::initSetting(){
 
 void SettingCaptureFrame::initialConnections()
 {
-        //connect(ui->lineEdit,SIGNAL(textEdited(QString)),this,SLOT(validMm()));
-        //connect(ui->lineEdit,SIGNAL(editingFinished()),this,SLOT(validMmAndSet()));
         connect(ui->lineEdit,SIGNAL(textEdited(QString)),this,SLOT(validMmAndSet()));
         connect(ui->lineEdit,SIGNAL(cursorPositionChanged(int,int)),this,SLOT(toolTipMm()));
         connect(ui->doubleSpinBox,SIGNAL(valueChanged(double)), this->worker,SLOT(setK1(double)));
         connect(ui->doubleSpinBox_2,SIGNAL(valueChanged(double)), this->worker,SLOT(setK2(double)));
         connect(ui->widthCaptureWindow,SIGNAL(valueChanged(int)), this->worker,SLOT(setWindowSize(int)));
-
-
-
         connect(ui->widthCaptureWindow,SIGNAL(valueChanged(int)),this,SLOT(calculateCaptureSizeFrame(int)))  ;
         cvSetMouseCallback( this->nameCaptureFrame.toAscii().constData(),myMouseCallback, (void*)this->frame);
-        // connect (this->timerCapture, SIGNAL ( timeout () ), SLOT ( timerEvent_showCapture ( ) ) );
         connect(this,SLOT(hide()),this,SLOT(stopWork()));
         connect ( ui->checkBox,SIGNAL(toggled(bool)), this, SLOT (setValueShowing (bool)));
-
-
-
-
-
+        connect (this,SIGNAL(resizing(bool,int,int,int,int)),this->worker,SLOT(setEnabledResize(bool,int,int,int,int)));
 }
 void SettingCaptureFrame::setValueShowing (bool value)
 {
@@ -142,8 +132,8 @@ void SettingCaptureFrame::setValueShowing (bool value)
 
 void  SettingCaptureFrame::imageCalculatingGetting (IplImage *img)
 {
-           cvNamedWindow("calculation image", CV_WINDOW_AUTOSIZE);
-           cvShowImage("calculation image",img);
+        cvNamedWindow("calculation image", CV_WINDOW_AUTOSIZE);
+        cvShowImage("calculation image",img);
 
 
 }
@@ -193,6 +183,7 @@ void SettingCaptureFrame::myMouseCallbackDelegated( int event, int x, int y, int
 
                                         this->frameWidthResize = this->X2 - this->X1;
                                         this->frameHightResize = this->Y2 - this->Y1;
+                                        emit resizing(true, this->X1,this->Y1,this->X2,this->Y2);
                                 }
 
 
@@ -265,16 +256,7 @@ void SettingCaptureFrame::imageGetting(IplImage *img)
 {
         qDebug()<<"get image";
         this->frame = img;
-        IplImage* tmpForDelete;
-        //this->frame = cvQueryFrame( capture );
         cvSetMouseCallback( this->nameCaptureFrame.toAscii().constData(),myMouseCallback, (void*)this->frame);
-
-        resize = cvCreateImage(cvSize( this->frameWidth,this->frameHight), IPL_DEPTH_8U, 3);
-        cvResize( frame, resize,  CV_INTER_NN );
-        frame=resize;
-        tmpForDelete = resize;
-
-
         if (this->enabledResize){
                 cvSetImageROI(this->frame,cvRect
                               (X1,Y1,this->frameWidthResize,this->frameHightResize) );
@@ -286,8 +268,6 @@ void SettingCaptureFrame::imageGetting(IplImage *img)
 
 
         cvShowImage(this->nameCaptureFrame.toAscii().constData(),this->frame);
-        cvReleaseImage( &resize );
-        cvReleaseImage(&tmpForDelete);
         cvResetImageROI(frame);
 
 
@@ -317,14 +297,8 @@ void SettingCaptureFrame::timerStop()
 void SettingCaptureFrame::timerEvent_showCapture()
 {
 
-        IplImage* tmpForDelete;
-        //this->frame = cvQueryFrame( capture );
-        cvSetMouseCallback( this->nameCaptureFrame.toAscii().constData(),myMouseCallback, (void*)this->frame);
+          cvSetMouseCallback( this->nameCaptureFrame.toAscii().constData(),myMouseCallback, (void*)this->frame);
 
-        resize = cvCreateImage(cvSize( this->frameWidth,this->frameHight), IPL_DEPTH_8U, 3);
-        cvResize( frame, resize,  CV_INTER_NN );
-        frame=resize;
-        tmpForDelete = resize;
 
 
         if (this->enabledResize){
@@ -339,7 +313,7 @@ void SettingCaptureFrame::timerEvent_showCapture()
 
         cvShowImage(this->nameCaptureFrame.toAscii().constData(),this->frame);
         cvReleaseImage( &resize );
-        cvReleaseImage(&tmpForDelete);
+
         cvResetImageROI(frame);
 
 
@@ -418,8 +392,8 @@ void SettingCaptureFrame::calculateCaptureSizeFrame(int w)
     }*/
 
 
-        this->frameWidth = w;
-        this->frameHight = w;
+       // this->frameWidth = w;
+       // this->frameHight = w;
 
 }
 
@@ -587,8 +561,8 @@ void SettingCaptureFrame::readSetting(){
         this->enabledResize = configInformation::getEnabledResize();
         this->X1=configInformation::getX1Resize();
         this->Y1=configInformation::getY1Resize();
-        this->frameWidth=configInformation::getframeWidth();
-        this->frameHight=configInformation::getframeHight();
+        //this->frameWidth=configInformation::getframeWidth();
+   //    this->frameHight=configInformation::getframeHight();
         this->frameWidthResize=configInformation::getframeWidthResize();
         this->frameHightResize=configInformation::getframeHightResize();
         this->coefficient = configInformation::getcoefficient();
@@ -605,7 +579,7 @@ void SettingCaptureFrame::writeSetting(){
         configInformation::setdistanceInMm(this->distanceInMM);
         configInformation::setdistanceInPixels(this->distanceInPixels);
         configInformation::setEnabledResize(this->enabledResize);
-        configInformation::setframeWidthAndFrameHight(this->frameWidth,this->frameHight);
+        //configInformation::setframeWidthAndFrameHight(this->frameWidth,this->frameHight);
         configInformation::setframeWidthResizeAndframeHightResize(this->frameWidthResize,this->frameHightResize);
         configInformation::setX1ResizeCoord(this->X1,this->Y1);
         configInformation::writeToFile();

@@ -12,6 +12,8 @@ ImageProcessing::ImageProcessing(QObject *parent) :
         k1= 0.027;
         k2 = 0.65;
         x = 389,y = 292;
+        this->widthResize= 100;
+        this->heigthResize= 100;
 
 }
 
@@ -49,7 +51,7 @@ void ImageProcessing::getImage()
         unsigned long int k=0;
         while(isWorking){
 
-                //  frame = cvQueryFrame( capture );
+                frame = cvQueryFrame( capture );
 
                 //frame = cvLoadImage("4.jpg",CV_LOAD_IMAGE_COLOR);
                 if (frame ==NULL)
@@ -61,6 +63,15 @@ void ImageProcessing::getImage()
                 IplImage *src = cvCreateImage(cvSize(x,y),frame->depth,frame->nChannels);
 
                 cvResize(frame,src,CV_INTER_LINEAR);
+
+           //    if (this->enabledResize)
+                if (true)
+                        {
+                                cvSetImageROI (src,
+                                               cvRect(x1,y1,this->widthResize,this->heigthResize)
+                                               );
+                                  cvCopyImage(src, src);
+                        }
                 cvShowImage("capture", src);
                 emit imageIsReady(src);
                 if (true)
@@ -190,4 +201,12 @@ void ImageProcessing::setWindowSize (int value)
         qDebug ()<<"resize to "<<x <<"*"<<y ;
 
 
+}
+void ImageProcessing::setEnabledResize (bool value, int x1, int y1, int x2, int y2)
+{
+        this->enabledResize= value;
+        this->x1= x1;
+        this->y1 = y1;
+        this->widthResize = qAbs(x2-x1);
+        this->heigthResize =qAbs(y2-y1);
 }
