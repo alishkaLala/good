@@ -53,7 +53,7 @@ private:
 
     //Working with resizing and setting mm
     bool calculateDistanceInPixels();
-    bool applyResize();
+
 
    // qint32 frameWidth,frameHight;
     qint32 frameWidthResize,frameHightResize;
@@ -121,14 +121,12 @@ private:
 
 private slots:
     void stopWork();
-
     void toolTipMm();
     void validMmAndSet();
     void on_defRect_clicked();
 
 
 
-    void calculateCaptureSizeFrame(int w);
     void on_defDistInPixels_clicked();
 
     void on_pushButton_7_clicked();
@@ -143,7 +141,6 @@ private slots:
     void on_SettingApply_clicked();
     void on_pushButtonStart_clicked();
 
-    void imageCalculatingGetting(IplImage *img);
 
 
 
@@ -151,7 +148,7 @@ private slots:
 
 public slots:
       void imageGetting(IplImage *img);
-
+      void imageCalculatingGetting(IplImage *img);
 
 
 };

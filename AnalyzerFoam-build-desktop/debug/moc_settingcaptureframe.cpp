@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'settingcaptureframe.h'
 **
-** Created: Tue 5. Mar 19:42:23 2013
+** Created: Tue 5. Mar 20:42:30 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_SettingCaptureFrame[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      16,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -38,17 +38,16 @@ static const uint qt_meta_data_SettingCaptureFrame[] = {
       81,   20,   20,   20, 0x08,
       93,   20,   20,   20, 0x08,
      109,   20,   20,   20, 0x08,
-     132,  130,   20,   20, 0x08,
-     163,   20,   20,   20, 0x08,
-     192,   20,   20,   20, 0x08,
-     218,   20,   20,   20, 0x08,
-     244,   20,   20,   20, 0x08,
-     271,   20,   20,   20, 0x08,
-     300,   20,   20,   20, 0x08,
-     326,   20,   20,   20, 0x08,
-     359,  355,   20,   20, 0x08,
-     394,   20,   20,   20, 0x08,
-     420,  355,   20,   20, 0x0a,
+     130,   20,   20,   20, 0x08,
+     159,   20,   20,   20, 0x08,
+     185,   20,   20,   20, 0x08,
+     211,   20,   20,   20, 0x08,
+     238,   20,   20,   20, 0x08,
+     267,   20,   20,   20, 0x08,
+     293,   20,   20,   20, 0x08,
+     322,   20,   20,   20, 0x08,
+     352,  348,   20,   20, 0x0a,
+     376,  348,   20,   20, 0x0a,
 
        0        // eod
 };
@@ -57,18 +56,16 @@ static const char qt_meta_stringdata_SettingCaptureFrame[] = {
     "SettingCaptureFrame\0\0value,x1,y1,x2,y2\0"
     "resizing(bool,int,int,int,int)\0"
     "stopWork()\0toolTipMm()\0validMmAndSet()\0"
-    "on_defRect_clicked()\0w\0"
-    "calculateCaptureSizeFrame(int)\0"
-    "on_defDistInPixels_clicked()\0"
+    "on_defRect_clicked()\0on_defDistInPixels_clicked()\0"
     "on_pushButton_7_clicked()\0"
     "on_pushButton_8_clicked()\0"
     "on_SettingCansel_clicked()\0"
     "on_SettingStandart_clicked()\0"
     "on_SettingApply_clicked()\0"
-    "on_pushButtonStart_clicked()\0img\0"
-    "imageCalculatingGetting(IplImage*)\0"
-    "on_pushButtonOk_clicked()\0"
+    "on_pushButtonStart_clicked()\0"
+    "on_pushButtonOk_clicked()\0img\0"
     "imageGetting(IplImage*)\0"
+    "imageCalculatingGetting(IplImage*)\0"
 };
 
 const QMetaObject SettingCaptureFrame::staticMetaObject = {
@@ -105,20 +102,19 @@ int SettingCaptureFrame::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 2: toolTipMm(); break;
         case 3: validMmAndSet(); break;
         case 4: on_defRect_clicked(); break;
-        case 5: calculateCaptureSizeFrame((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 6: on_defDistInPixels_clicked(); break;
-        case 7: on_pushButton_7_clicked(); break;
-        case 8: on_pushButton_8_clicked(); break;
-        case 9: on_SettingCansel_clicked(); break;
-        case 10: on_SettingStandart_clicked(); break;
-        case 11: on_SettingApply_clicked(); break;
-        case 12: on_pushButtonStart_clicked(); break;
-        case 13: imageCalculatingGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
-        case 14: on_pushButtonOk_clicked(); break;
-        case 15: imageGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
+        case 5: on_defDistInPixels_clicked(); break;
+        case 6: on_pushButton_7_clicked(); break;
+        case 7: on_pushButton_8_clicked(); break;
+        case 8: on_SettingCansel_clicked(); break;
+        case 9: on_SettingStandart_clicked(); break;
+        case 10: on_SettingApply_clicked(); break;
+        case 11: on_pushButtonStart_clicked(); break;
+        case 12: on_pushButtonOk_clicked(); break;
+        case 13: imageGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
+        case 14: imageCalculatingGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 16;
+        _id -= 15;
     }
     return _id;
 }

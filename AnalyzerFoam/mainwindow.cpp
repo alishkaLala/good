@@ -59,7 +59,7 @@ void MainWindow::initialMenuCapture()
 
         for (int i=0 ;i<this->numberOfCapture;i++){
                 this->menuCaptureArray.append( new QAction (QString::number(i+1), this->ui->menuChoise_capture));
-                connect (this->menuCaptureArray[i],SIGNAL(triggered()),SLOT (captureChoised(i)));
+                connect (this->menuCaptureArray[i],SIGNAL(triggered()),SLOT (captureChoised()));
 
         }
 
@@ -118,10 +118,11 @@ void MainWindow::captureOff()
 {
         this->worker->working (false);
 }
-void MainWindow::captureChoised(int value)
+void MainWindow::captureChoised()
 {
-        worker->setChoisedCpture (value);
-        qDebug ()<<value;
+
+     //  worker->setChoisedCpture (value);
+        qDebug ()<< "clic";
 
 }
 

@@ -152,14 +152,14 @@
      </layout>
     </widget>
    </item>
-   <item row="7" column="0">
+   <item row="6" column="0">
     <widget class="QPushButton" name="pushButtonStart">
      <property name="text">
       <string>спочатку</string>
      </property>
     </widget>
    </item>
-   <item row="8" column="0">
+   <item row="7" column="0">
     <widget class="QGroupBox" name="groupBox_4">
      <property name="title">
       <string/>
@@ -189,7 +189,7 @@
      </layout>
     </widget>
    </item>
-   <item row="6" column="0">
+   <item row="5" column="0">
     <widget class="QFrame" name="frame">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -245,13 +245,6 @@
        </widget>
       </item>
      </layout>
-    </widget>
-   </item>
-   <item row="5" column="0">
-    <widget class="QPushButton" name="setCapture">
-     <property name="text">
-      <string>налаштувати камеру</string>
-     </property>
     </widget>
    </item>
   </layout>

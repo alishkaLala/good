@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'settingcaptureframe.ui'
 **
-** Created: Tue 5. Mar 19:40:51 2013
+** Created: Tue 5. Mar 20:46:39 2013
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -70,7 +70,6 @@ public:
     QDoubleSpinBox *doubleSpinBox;
     QDoubleSpinBox *doubleSpinBox_2;
     QLabel *label_6;
-    QPushButton *setCapture;
 
     void setupUi(QWidget *SettingCaptureFrame)
     {
@@ -192,7 +191,7 @@ public:
         pushButtonStart = new QPushButton(SettingCaptureFrame);
         pushButtonStart->setObjectName(QString::fromUtf8("pushButtonStart"));
 
-        gridLayout_4->addWidget(pushButtonStart, 7, 0, 1, 1);
+        gridLayout_4->addWidget(pushButtonStart, 6, 0, 1, 1);
 
         groupBox_4 = new QGroupBox(SettingCaptureFrame);
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
@@ -214,7 +213,7 @@ public:
         verticalLayout_2->addWidget(SettingStandart);
 
 
-        gridLayout_4->addWidget(groupBox_4, 8, 0, 1, 1);
+        gridLayout_4->addWidget(groupBox_4, 7, 0, 1, 1);
 
         frame = new QFrame(SettingCaptureFrame);
         frame->setObjectName(QString::fromUtf8("frame"));
@@ -251,12 +250,7 @@ public:
         gridLayout_5->addWidget(label_6, 1, 2, 1, 1);
 
 
-        gridLayout_4->addWidget(frame, 6, 0, 1, 1);
-
-        setCapture = new QPushButton(SettingCaptureFrame);
-        setCapture->setObjectName(QString::fromUtf8("setCapture"));
-
-        gridLayout_4->addWidget(setCapture, 5, 0, 1, 1);
+        gridLayout_4->addWidget(frame, 5, 0, 1, 1);
 
 
         retranslateUi(SettingCaptureFrame);
@@ -291,7 +285,6 @@ public:
         SettingStandart->setText(QApplication::translate("SettingCaptureFrame", "\320\277\320\276 \320\267\320\260\320\274\320\276\320\262\321\207\321\203\320\262\320\260\320\275\320\275\321\216", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("SettingCaptureFrame", "k1=", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("SettingCaptureFrame", "k2=", 0, QApplication::UnicodeUTF8));
-        setCapture->setText(QApplication::translate("SettingCaptureFrame", "\320\275\320\260\320\273\320\260\321\210\321\202\321\203\320\262\320\260\321\202\320\270 \320\272\320\260\320\274\320\265\321\200\321\203", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

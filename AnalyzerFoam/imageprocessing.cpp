@@ -177,7 +177,7 @@ void ImageProcessing::setWindowSize (int value)
 
 
 }
-void ImageProcessing::setEnabledResize (bool value, int x1, int y1, int x2, int y2)
+void ImageProcessing::setEnabledResize (bool value, int x1=0, int y1=0, int x2=0, int y2=0)
 {
         this->enabledResize= value;
         this->x1= x1;

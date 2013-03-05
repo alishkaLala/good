@@ -12,7 +12,7 @@ SettingCaptureFrame::SettingCaptureFrame(ImageProcessing *worker, QWidget *paren
 {
         ui->setupUi(this);
         this->worker = worker;
-        //  SettingCaptureFrame::obj = this;
+        SettingCaptureFrame::obj = this; //   need  for right work callback
         this->father=parent;
         this->initialConnections();
 }
@@ -30,7 +30,9 @@ void SettingCaptureFrame::showEvent(QShowEvent *event){
         this->initialize();
         this->hideAllBoxes();
         this->ui->groupBox_3->setEnabled(true);
-        // this->enabledResize = false;
+        this->enabledResize = false;
+        this->startCalculateDistance = false;
+        this->startResize=false;
 
 
 
@@ -119,6 +121,7 @@ void SettingCaptureFrame::myMouseCallbackDelegated( int event, int x, int y, int
         case CV_EVENT_LBUTTONDOWN:
                         if (this->startResize)
                                 {
+                                        qDebug ()<<"resize" <<x <<" "<<y;
                                         this->X1 = x;
                                         this->Y1 = y;
                                         ui->labelX1->setText("x1= " + QString::number(x));
@@ -126,13 +129,10 @@ void SettingCaptureFrame::myMouseCallbackDelegated( int event, int x, int y, int
                                 }
                         if ( this->startCalculateDistance)
                                 {
-
+                                        qDebug ()<<"distance"<<x<<"  "<<y;
                                         this->x1=x; ui->labelX1->setText("x2= " + QString::number(x));
                                         this->y1=y; ui->labelY1->setText("y2= " + QString::number(y));
                                 }
-
-
-
                         break;
 
                 case CV_EVENT_RBUTTONDOWN:
@@ -146,10 +146,6 @@ void SettingCaptureFrame::myMouseCallbackDelegated( int event, int x, int y, int
                                         this->startResize=false;
                                         this->hideAllBoxes();
                                         this->ui->groupBox_2->setEnabled(true);
-
-
-                                        this->frameWidthResize = this->X2 - this->X1;
-                                        this->frameHightResize = this->Y2 - this->Y1;
                                         emit resizing(true, this->X1,this->Y1,this->X2,this->Y2);
                                 }
 
@@ -168,14 +164,11 @@ void SettingCaptureFrame::myMouseCallbackDelegated( int event, int x, int y, int
 
                         break;
                 case CV_EVENT_MOUSEMOVE:
-                        // if (this->startResize || this->startCalculateDistance)
-                        //{
                         QToolTip::showText(QCursor::pos(),
                                            tr(" x= ")+ QString::number(x) +
                                            tr(" y= ")+ QString::number(y) );
 
 
-                        // }
 
                         break;
 
@@ -200,36 +193,19 @@ void SettingCaptureFrame::clearResize(){
         this->y1Resize=0;
         this->y2Resize=0;
 }
-bool SettingCaptureFrame::checkCoords(){
-        if (this->startResize)
-                {
-                        return this->applyResize();
 
-                }
-        else
-                {
-                        return this->calculateDistanceInPixels();
-                }
-
-
-
-}
 
 
 //timer&&timerEvent
 void SettingCaptureFrame::imageGetting(IplImage *img)
 {
-        qDebug()<<"get image";
         this->frame = img;
-        cvSetMouseCallback( this->nameCaptureFrame.toAscii().constData(),myMouseCallback, (void*)this->frame);
-        /*if (this->enabledResize)
-                {
-                cvSetImageROI(this->frame,cvRect
-                              (X1,Y1,this->frameWidthResize,this->frameHightResize) );
-
-        }*/
         cvShowImage(this->nameCaptureFrame.toAscii().constData(),this->frame);
-        cvResetImageROI(frame);
+        cvSetMouseCallback( this->nameCaptureFrame.toAscii().constData(),myMouseCallback, (void*)this->frame);
+
+
+
+
 
 
 }
@@ -238,51 +214,13 @@ void SettingCaptureFrame::imageGetting(IplImage *img)
 
 
 //resizing+distance
-
-bool SettingCaptureFrame::applyResize()
-{
-        /*
-    if (( this->x1 <= this->x2) && ( this->y1 <= this->y2 ))
-    {
-        this->x1Resize = this->x1;
-        this->y1Resize = this->y1;
-        this->x2Resize = this->x2;
-        this->y2Resize = this->y2;
-        this->startResize=false;
-        this->enabledResize=true;
-
-        this->calculateCaptureSizeFrame();
-
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-    */
-        this->x1Resize = this->x1;
-        this->y1Resize = this->y1;
-        this->x2Resize = this->x2;
-        this->y2Resize = this->y2;
-        this->startResize=false;
-        this->enabledResize=true;
-
-        //this->calculateCaptureSizeFrame();
-        return true;
-
-
-}
-
-
-
 void SettingCaptureFrame::startingResize(){
         this->hideBoxes();
         this->enabledResize=false;
         this->clearResize();
         this->startResize= true;
-       // emit resizing(false, this->X1,this->Y1,this->X2,this->Y2);
+        emit resizing(false, 0,0,0,0);
 }
-
 void SettingCaptureFrame::startingCalculateDistance()
 {
         this->hideBoxes();
@@ -290,29 +228,6 @@ void SettingCaptureFrame::startingCalculateDistance()
         this->startCalculateDistance = true;
 }
 
-void SettingCaptureFrame::calculateCaptureSizeFrame(int w)
-{
-        //IplImage* tmpForDelete;
-        //tmpForDelete = cvQueryFrame(capture);
-
-        /* this->frameWidth = this->standard->width,
-    this->frameHight = this->standard->height;
-
-    this->coefficient =std::max( ( double ) this->frameWidth / ui->widthCaptureWindow->value(),
-                                 ( double )this->frameHight / ui->widthCaptureWindow->value());
-    this->frameWidth /= this->coefficient ;
-    this->frameHight /= this->coefficient;
-
-    if(this->enabledResize)
-    {
-        this->calculateResize();
-    }*/
-
-
-        // this->frameWidth = w;
-        // this->frameHight = w;
-
-}
 
 
 
@@ -346,14 +261,10 @@ void SettingCaptureFrame::hideBoxes()
         ui->groupBox->setEnabled(false);
         ui->groupBox_2->setEnabled(false);
         ui->groupBox_3->setEnabled(false);
-        //ui->groupBox_4->setEnabled(false);
-        //ui->groupBox_5->setEnabled(false);
-
         ui->labelX2->setText("x2= " );
         ui->labelY2->setText("y2= " );
         ui->labelX1->setText("x1= " );
         ui->labelY1->setText("y1= " );
-
         this->ui->groupBox_6->setEnabled(true);
 }
 void SettingCaptureFrame::showBoxes(){
@@ -361,8 +272,6 @@ void SettingCaptureFrame::showBoxes(){
         ui->groupBox_2->setEnabled(true);
         ui->groupBox_3->setEnabled(true);
         ui->groupBox_4->setEnabled(true);
-        // ui->groupBox_5->setEnabled(true);
-
         this->ui->groupBox_6->setEnabled(false);
 }
 
@@ -376,14 +285,12 @@ void SettingCaptureFrame::toolTipMm()
 void SettingCaptureFrame::validMmAndSet(){
         if (!ui->lineEdit->hasAcceptableInput())
                 {
-                        //QMessageBox::information(this,tr("Warning"),tr("Invalid input"),QMessageBox::Ok);
                         ui->lineEdit->clear();
                         ui->lineEdit->setFocus();
                 }
         else{
                 this->distanceInMM = ui->lineEdit->text().toDouble();
         }
-
 
 }
 
@@ -493,6 +400,8 @@ void SettingCaptureFrame::on_pushButtonStart_clicked()
         this->hideAllBoxes();
         this->ui->groupBox_3->setEnabled(true);
         this->enabledResize= false;
+         emit resizing(false, 0,0,0,0);
+
 }
 
 void SettingCaptureFrame::on_pushButtonOk_clicked()

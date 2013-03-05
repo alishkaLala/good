@@ -41,7 +41,7 @@ public:
 private slots:
 
 
-    void captureChoised(int);
+    void captureChoised();
     void on_pushButton_clicked();
 
     void on_buttonStart_clicked();
