@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
+    <width>735</width>
     <height>464</height>
    </rect>
   </property>
@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout_2" rowstretch="0" columnstretch="0,0,0,0" rowminimumheight="0" columnminimumwidth="0,0,0,0">
+   <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0" columnstretch="0,0,0">
     <property name="sizeConstraint">
      <enum>QLayout::SetMinAndMaxSize</enum>
     </property>
@@ -40,7 +40,7 @@
       </property>
       <property name="maximumSize">
        <size>
-        <width>16777215</width>
+        <width>2000</width>
         <height>16777215</height>
        </size>
       </property>
@@ -59,7 +59,7 @@
      <widget class="QGroupBox" name="groupBox_2">
       <property name="maximumSize">
        <size>
-        <width>300</width>
+        <width>500</width>
         <height>16777215</height>
        </size>
       </property>
@@ -239,11 +239,25 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
-         <property name="text">
-          <string>запустити та перевірити камеру</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>камера №</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton">
+           <property name="text">
+            <string>запустити та перевірити камеру</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <spacer name="verticalSpacer">
@@ -261,19 +275,6 @@
       </layout>
      </widget>
     </item>
-    <item row="0" column="3">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -281,7 +282,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>650</width>
+     <width>735</width>
      <height>21</height>
     </rect>
    </property>
@@ -301,7 +302,7 @@
     </property>
     <widget class="QMenu" name="menuChoise_capture">
      <property name="title">
-      <string>Choise  capture</string>
+      <string>Список підкючених камер</string>
      </property>
      <addaction name="action1"/>
     </widget>

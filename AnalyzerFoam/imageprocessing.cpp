@@ -151,7 +151,7 @@ void ImageProcessing::getImage()
 void ImageProcessing::working(bool setting){
 
         this->isWorking = setting;
-        qDebug ()<<"getValue"<<setting;
+        qDebug ()<<"set value working "<<setting;
 }
 void ImageProcessing:: setK1 (double value)
 {

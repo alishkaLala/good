@@ -41,7 +41,7 @@ public:
 private slots:
 
 
-    void captureChoised();
+    void captureChoised(int);
     void on_pushButton_clicked();
 
     void on_buttonStart_clicked();
@@ -69,6 +69,7 @@ private slots:
     void on_pushButton_2_clicked();
 
     void on_startCalculation_clicked();
+    void  end();
 
 public:
      IplImage* tmpImg;
@@ -103,7 +104,8 @@ public:
 
     void readSettingCaprure();
 
-    //QTimer *timerCapture;
+    QTimer *workingPeriod;
+
     //qint32 timerPeriod;
 
     void initialMenuCapture();

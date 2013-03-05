@@ -93,7 +93,7 @@ void SettingCaptureFrame::initialConnections()
         connect(ui->doubleSpinBox,SIGNAL(valueChanged(double)), this->worker,SLOT(setK1(double)));
         connect(ui->doubleSpinBox_2,SIGNAL(valueChanged(double)), this->worker,SLOT(setK2(double)));
         connect(ui->widthCaptureWindow,SIGNAL(valueChanged(int)), this->worker,SLOT(setWindowSize(int)));
-        connect(ui->widthCaptureWindow,SIGNAL(valueChanged(int)),this,SLOT(calculateCaptureSizeFrame(int)))  ;
+        //connect(ui->widthCaptureWindow,SIGNAL(valueChanged(int)),this,SLOT(calculateCaptureSizeFrame(int)))  ;
         cvSetMouseCallback( this->nameCaptureFrame.toAscii().constData(),myMouseCallback, (void*)this->frame);
         connect(this,SLOT(hide()),this,SLOT(stopWork()));
         connect (this,SIGNAL(resizing(bool,int,int,int,int)),this->worker,SLOT(setEnabledResize(bool,int,int,int,int)));

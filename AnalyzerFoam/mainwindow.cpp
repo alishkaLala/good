@@ -59,7 +59,7 @@ void MainWindow::initialMenuCapture()
 
         for (int i=0 ;i<this->numberOfCapture;i++){
                 this->menuCaptureArray.append( new QAction (QString::number(i+1), this->ui->menuChoise_capture));
-                connect (this->menuCaptureArray[i],SIGNAL(triggered()),SLOT (captureChoised()));
+                ui->comboBox->addItem (QString::number (i+1));
 
         }
 
@@ -81,7 +81,7 @@ void MainWindow::initialConnections()
         connect (ui->actionTo_graphik,SIGNAL(triggered()),SLOT (showOpenGLGraph()));
         connect( ui->processingImageShow,SIGNAL(toggled(bool)),this,SLOT(setSartStopImegeGetting(bool)));
         connect(ui->startCalculation,SIGNAL(toggled(bool)), this->worker,SLOT(setCalculation(bool)));
-        connect(ui->startCalculation,SIGNAL(toggled(bool)), this->worker,SLOT(working(bool)));
+ //       connect(ui->startCalculation,SIGNAL(toggled(bool)), this->worker,SLOT(working(bool)));
         connect (ui->pushButton, SIGNAL(clicked()), this->worker,SLOT(getImage()));
 
 
@@ -118,17 +118,17 @@ void MainWindow::captureOff()
 {
         this->worker->working (false);
 }
-void MainWindow::captureChoised()
+void MainWindow::captureChoised(int value)
 {
-
-     //  worker->setChoisedCpture (value);
-        qDebug ()<< "clic";
+   //     worker->setChoisedCpture (value);
+        qDebug ()<<value;
 
 }
 
 // Cheking capture !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 void MainWindow::on_pushButton_clicked()
 {
+        this->worker->setChoisedCpture (this->ui->comboBox->currentIndex ());
         this->worker->working(true);
 }
 bool MainWindow::okToContinue(QString Msg){
@@ -484,6 +484,7 @@ void MainWindow::on_startCalculation_clicked()
 {
         if (ui->startCalculation->isChecked ())
                 {
+                        this->worker->working (true);
 
                         ui->menuSetting->setEnabled(false);
                         ui->menuCapture->setEnabled(false);
@@ -491,6 +492,10 @@ void MainWindow::on_startCalculation_clicked()
                         ui->spinBox->setEnabled (false);
                         ui->startCalculation->setText ("«упинити анал≥з");
                         this->worker->getImage ();
+                       /*  QTimer::singleShot (this->ui->spinBox->value (),this,SLOT(on_startCalculation_clicked));*/
+
+                        this->workingPeriod->start ();
+
 
                 }
         else{
@@ -502,5 +507,11 @@ void MainWindow::on_startCalculation_clicked()
 
         }
 
+
+}
+
+
+void MainWindow::end()
+{
 
 }

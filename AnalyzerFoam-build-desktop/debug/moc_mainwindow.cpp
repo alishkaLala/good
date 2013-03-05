@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Tue 5. Mar 20:51:43 2013
+** Created: Tue 5. Mar 21:27:35 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      17,   14, // methods
+      18,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -32,28 +32,29 @@ static const uint qt_meta_data_MainWindow[] = {
 
  // slots: signature, parameters, type, tag, flags
       12,   11,   11,   11, 0x08,
-      29,   11,   11,   11, 0x08,
-      53,   11,   11,   11, 0x08,
-      78,   11,   11,   11, 0x08,
-     102,   11,   11,   11, 0x08,
-     115,   11,   11,   11, 0x08,
-     129,   11,   11,   11, 0x08,
-     143,   11,   11,   11, 0x08,
-     162,   11,   11,   11, 0x08,
-     178,   11,   11,   11, 0x08,
-     197,   11,   11,   11, 0x08,
-     218,   11,   11,   11, 0x08,
-     240,  236,   11,   11, 0x08,
-     272,  264,   11,   11, 0x08,
-     316,  302,   11,   11, 0x08,
-     343,   11,   11,   11, 0x08,
-     369,   11,   11,   11, 0x08,
+      32,   11,   11,   11, 0x08,
+      56,   11,   11,   11, 0x08,
+      81,   11,   11,   11, 0x08,
+     105,   11,   11,   11, 0x08,
+     118,   11,   11,   11, 0x08,
+     132,   11,   11,   11, 0x08,
+     146,   11,   11,   11, 0x08,
+     165,   11,   11,   11, 0x08,
+     181,   11,   11,   11, 0x08,
+     200,   11,   11,   11, 0x08,
+     221,   11,   11,   11, 0x08,
+     243,  239,   11,   11, 0x08,
+     275,  267,   11,   11, 0x08,
+     319,  305,   11,   11, 0x08,
+     346,   11,   11,   11, 0x08,
+     372,   11,   11,   11, 0x08,
+     402,   11,   11,   11, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_MainWindow[] = {
-    "MainWindow\0\0captureChoised()\0"
+    "MainWindow\0\0captureChoised(int)\0"
     "on_pushButton_clicked()\0"
     "on_buttonStart_clicked()\0"
     "on_buttonStop_clicked()\0captureOff()\0"
@@ -64,7 +65,7 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "enabled\0setSartStopImegeGetting(bool)\0"
     "count,diametr\0infoGetting(double,double)\0"
     "on_pushButton_2_clicked()\0"
-    "on_startCalculation_clicked()\0"
+    "on_startCalculation_clicked()\0end()\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -96,7 +97,7 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: captureChoised(); break;
+        case 0: captureChoised((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 1: on_pushButton_clicked(); break;
         case 2: on_buttonStart_clicked(); break;
         case 3: on_buttonStop_clicked(); break;
@@ -113,9 +114,10 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 14: infoGetting((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;
         case 15: on_pushButton_2_clicked(); break;
         case 16: on_startCalculation_clicked(); break;
+        case 17: end(); break;
         default: ;
         }
-        _id -= 17;
+        _id -= 18;
     }
     return _id;
 }

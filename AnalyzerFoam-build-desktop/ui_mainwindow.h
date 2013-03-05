@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Tue 5. Mar 19:40:51 2013
+** Created: Tue 5. Mar 21:12:07 2013
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -15,6 +15,7 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QCheckBox>
+#include <QtGui/QComboBox>
 #include <QtGui/QFrame>
 #include <QtGui/QGridLayout>
 #include <QtGui/QGroupBox>
@@ -72,9 +73,11 @@ public:
     QSpinBox *spinBox;
     QCheckBox *processingImageShow;
     QCheckBox *checkBox;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *label_6;
+    QComboBox *comboBox;
     QPushButton *pushButton;
     QSpacerItem *verticalSpacer;
-    QSpacerItem *horizontalSpacer;
     QMenuBar *menuBar;
     QMenu *menuExport;
     QMenu *menuCapture;
@@ -88,7 +91,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(650, 464);
+        MainWindow->resize(735, 464);
         actionHelper = new QAction(MainWindow);
         actionHelper->setObjectName(QString::fromUtf8("actionHelper"));
         actionDisable_capture = new QAction(MainWindow);
@@ -128,7 +131,7 @@ public:
         capturePicture = new QLabel(centralWidget);
         capturePicture->setObjectName(QString::fromUtf8("capturePicture"));
         capturePicture->setMinimumSize(QSize(400, 400));
-        capturePicture->setMaximumSize(QSize(16777215, 16777215));
+        capturePicture->setMaximumSize(QSize(2000, 16777215));
         capturePicture->setFrameShape(QFrame::WinPanel);
         capturePicture->setScaledContents(true);
 
@@ -136,7 +139,7 @@ public:
 
         groupBox_2 = new QGroupBox(centralWidget);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setMaximumSize(QSize(300, 16777215));
+        groupBox_2->setMaximumSize(QSize(500, 16777215));
         verticalLayout = new QVBoxLayout(groupBox_2);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -244,10 +247,26 @@ public:
 
         verticalLayout->addWidget(checkBox);
 
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        label_6 = new QLabel(groupBox_2);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        horizontalLayout_3->addWidget(label_6);
+
+        comboBox = new QComboBox(groupBox_2);
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+
+        horizontalLayout_3->addWidget(comboBox);
+
         pushButton = new QPushButton(groupBox_2);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
 
-        verticalLayout->addWidget(pushButton);
+        horizontalLayout_3->addWidget(pushButton);
+
+
+        verticalLayout->addLayout(horizontalLayout_3);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -256,14 +275,10 @@ public:
 
         gridLayout_2->addWidget(groupBox_2, 0, 1, 1, 1);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_2->addItem(horizontalSpacer, 0, 3, 1, 1);
-
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 650, 21));
+        menuBar->setGeometry(QRect(0, 0, 735, 21));
         menuExport = new QMenu(menuBar);
         menuExport->setObjectName(QString::fromUtf8("menuExport"));
         menuCapture = new QMenu(menuBar);
@@ -339,10 +354,11 @@ public:
         startCalculation->setText(QApplication::translate("MainWindow", "\321\200\320\276\320\267\320\277\320\276\321\207\320\260\321\202\320\270", 0, QApplication::UnicodeUTF8));
         processingImageShow->setText(QApplication::translate("MainWindow", "\320\262\320\270\320\262\320\276\320\264\320\270  \320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\275\321\217, \321\211\320\276 \320\276\320\261\321\200\320\276\320\261\320\273\321\217\321\224\321\202\321\214\321\201\321\217", 0, QApplication::UnicodeUTF8));
         checkBox->setText(QApplication::translate("MainWindow", "\320\276\320\264\321\200\320\260\320\267\321\203 \321\200\320\276\320\267\320\277\320\276\321\207\320\260\321\202\320\270 \321\215\320\272\321\201\320\277\320\276\321\200\321\202 \321\203 \321\204\320\260\320\271\320\273", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("MainWindow", "\320\272\320\260\320\274\320\265\321\200\320\260 \342\204\226", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("MainWindow", "\320\267\320\260\320\277\321\203\321\201\321\202\320\270\321\202\320\270 \321\202\320\260 \320\277\320\265\321\200\320\265\320\262\321\226\321\200\320\270\321\202\320\270 \320\272\320\260\320\274\320\265\321\200\321\203", 0, QApplication::UnicodeUTF8));
         menuExport->setTitle(QApplication::translate("MainWindow", "Export", 0, QApplication::UnicodeUTF8));
         menuCapture->setTitle(QApplication::translate("MainWindow", "Capture", 0, QApplication::UnicodeUTF8));
-        menuChoise_capture->setTitle(QApplication::translate("MainWindow", "Choise  capture", 0, QApplication::UnicodeUTF8));
+        menuChoise_capture->setTitle(QApplication::translate("MainWindow", "\320\241\320\277\320\270\321\201\320\276\320\272 \320\277\321\226\320\264\320\272\321\216\321\207\320\265\320\275\320\270\321\205 \320\272\320\260\320\274\320\265\321\200", 0, QApplication::UnicodeUTF8));
         menuSetting->setTitle(QApplication::translate("MainWindow", "Setting", 0, QApplication::UnicodeUTF8));
         menuInformation->setTitle(QApplication::translate("MainWindow", "information", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
