@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'settingcaptureframe.ui'
 **
-** Created: Tue 5. Mar 01:38:40 2013
+** Created: Tue 5. Mar 13:10:50 2013
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -241,11 +241,19 @@ public:
 
         doubleSpinBox = new QDoubleSpinBox(frame);
         doubleSpinBox->setObjectName(QString::fromUtf8("doubleSpinBox"));
+        doubleSpinBox->setDecimals(3);
+        doubleSpinBox->setMaximum(3);
+        doubleSpinBox->setSingleStep(0.001);
+        doubleSpinBox->setValue(0.03);
 
         gridLayout_5->addWidget(doubleSpinBox, 1, 1, 1, 1);
 
         doubleSpinBox_2 = new QDoubleSpinBox(frame);
         doubleSpinBox_2->setObjectName(QString::fromUtf8("doubleSpinBox_2"));
+        doubleSpinBox_2->setDecimals(3);
+        doubleSpinBox_2->setMaximum(3);
+        doubleSpinBox_2->setSingleStep(0.001);
+        doubleSpinBox_2->setValue(0.75);
 
         gridLayout_5->addWidget(doubleSpinBox_2, 1, 4, 1, 1);
 

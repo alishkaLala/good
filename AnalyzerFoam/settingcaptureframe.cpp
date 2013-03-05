@@ -110,7 +110,9 @@ void SettingCaptureFrame::initialConnections()
         //connect(ui->lineEdit,SIGNAL(editingFinished()),this,SLOT(validMmAndSet()));
         connect(ui->lineEdit,SIGNAL(textEdited(QString)),this,SLOT(validMmAndSet()));
         connect(ui->lineEdit,SIGNAL(cursorPositionChanged(int,int)),this,SLOT(toolTipMm()));
-
+        connect(ui->doubleSpinBox,SIGNAL(valueChanged(double)), this->worker,SLOT(setK1(double)));
+        connect(ui->doubleSpinBox_2,SIGNAL(valueChanged(double)), this->worker,SLOT(setK2(double)));
+        connect(ui->widthCaptureWindow,SIGNAL(valueChanged(int)), this->worker,SLOT(setWindowSize(int)));
 
 
 
@@ -119,6 +121,7 @@ void SettingCaptureFrame::initialConnections()
         // connect (this->timerCapture, SIGNAL ( timeout () ), SLOT ( timerEvent_showCapture ( ) ) );
         connect(this,SLOT(hide()),this,SLOT(stopWork()));
         connect ( ui->checkBox,SIGNAL(toggled(bool)), this, SLOT (setValueShowing (bool)));
+
 
 
 

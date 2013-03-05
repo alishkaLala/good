@@ -33,12 +33,20 @@ public slots:
     void working(bool);
     void getImage();
     void setCalculation(bool);
+    void setK1(double value);
+    void setK2(double value);
+    void setWindowSize(int value);
+
 private:
     bool isWorking;
     bool calculateImage;
     unsigned long int  kadrProssesd;
     int choisedCapture;
     double k1,k2;
+      int x  ,y ;
+    int captureWidth,captureHeight;
+      CvCapture* capture;
+
 
 };
 
