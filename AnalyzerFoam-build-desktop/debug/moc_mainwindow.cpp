@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Tue 5. Mar 15:09:29 2013
+** Created: Tue 5. Mar 19:42:20 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      16,   14, // methods
+      17,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -47,6 +47,7 @@ static const uint qt_meta_data_MainWindow[] = {
      275,  267,   11,   11, 0x08,
      319,  305,   11,   11, 0x08,
      346,   11,   11,   11, 0x08,
+     372,   11,   11,   11, 0x08,
 
        0        // eod
 };
@@ -63,6 +64,7 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "enabled\0setSartStopImegeGetting(bool)\0"
     "count,diametr\0infoGetting(double,double)\0"
     "on_pushButton_2_clicked()\0"
+    "on_startCalculation_clicked()\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -110,9 +112,10 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 13: setSartStopImegeGetting((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 14: infoGetting((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;
         case 15: on_pushButton_2_clicked(); break;
+        case 16: on_startCalculation_clicked(); break;
         default: ;
         }
-        _id -= 16;
+        _id -= 17;
     }
     return _id;
 }

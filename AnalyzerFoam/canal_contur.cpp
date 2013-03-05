@@ -5,7 +5,6 @@ Canal_contur::Canal_contur(QObject *parent) :
 {
 }
 
-
 Canal_contur::Canal_contur(const IplImage *in, IplImage *out, int gaus, double threshold1, double threshold2, double k1, double k2,QObject *parent) :
         QThread(parent)
 {
@@ -18,7 +17,6 @@ Canal_contur::Canal_contur(const IplImage *in, IplImage *out, int gaus, double t
         this->k2= k2;
         this->start();
 }
-
 void Canal_contur::run(){
         pr_1 = cvCreateImage( cvGetSize(in), 8, 1 );
         pr_2 = cvCreateImage( cvGetSize(in), 8, 1 );
@@ -34,13 +32,8 @@ void Canal_contur::run(){
         int radius = 1,iterations=1;
         Kern = cvCreateStructuringElementEx(radius*2+1, radius*2+1, radius, radius, CV_SHAPE_ELLIPSE);
         cvDilate(out, out, Kern, iterations);cvErode(out, out, Kern, iterations);
-
         cvReleaseImage(&pr_1);cvReleaseImage(&pr_2);cvReleaseImage(&dst);
         cvReleaseStructuringElement(&Kern);
-
-
-
-
 }
 void Canal_contur::normalize(const IplImage* in, IplImage* out)
 {

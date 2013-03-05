@@ -12,30 +12,27 @@ SettingCaptureFrame::SettingCaptureFrame(ImageProcessing *worker, QWidget *paren
 {
         ui->setupUi(this);
         this->worker = worker;
-        SettingCaptureFrame::obj = this;
-        this->timerCapture = new QTimer(this);
+        //  SettingCaptureFrame::obj = this;
         this->father=parent;
         this->initialConnections();
-
-
-
-
 }
 
 //Events
 
 void SettingCaptureFrame::showEvent(QShowEvent *event){
         connect (this->worker,SIGNAL(imageIsReady( IplImage*)),this,SLOT(imageGetting( IplImage*)));
-
+        this->worker->working (true);
+        this->worker->setCalculation (true);
+        connect(this->worker,SIGNAL(imageCalculateReady(IplImage*)),this,SLOT(imageCalculatingGetting(IplImage*)));
         this->setPalette(configInformation::getpalleteAllWindows());
         this->setFont(configInformation::getfont());
         this->repaint();
-
         this->initialize();
-        this->timerStart();
         this->hideAllBoxes();
         this->ui->groupBox_3->setEnabled(true);
-        this->enabledResize = false;
+        // this->enabledResize = false;
+
+
 
 }
 void SettingCaptureFrame::hideAllBoxes(){
@@ -46,19 +43,18 @@ void SettingCaptureFrame::hideAllBoxes(){
         //ui->groupBox_5->setEnabled(false);
         ui->groupBox_6->setEnabled(false);
 }
-
 void SettingCaptureFrame::closeEvent(QCloseEvent *event = NULL)
 {
         this->father->show();
         disconnect (this->worker,SIGNAL(imageIsReady( IplImage*)),this,SLOT(imageGetting( IplImage*)));
+        disconnect(this->worker,SIGNAL(imageCalculateReady(IplImage*)),this,SLOT(imageCalculatingGetting(IplImage*)));
+        this->worker->setCalculation (false);
         this->stopWork();
 
 
 }
 void SettingCaptureFrame::stopWork()
 {
-        this->timerStop();
-        //cvReleaseCapture(&this->capture);
         cvDestroyWindow(this->nameCaptureFrame.toAscii().constData());
 }
 
@@ -72,38 +68,22 @@ void SettingCaptureFrame::initialize()
         ui->lineEdit->setText(QString::number(this->distanceInMM));
         ui->pixels->setText(QString::number(this->distanceInPixels));
         ui->widthCaptureWindow->setSingleStep(10);
-        this->nameCaptureFrame="captureLala";
-
-        //this->capture = cvCreateCameraCapture(this->captureNumber);
-
-
-        //standard = cvQueryFrame(capture);
+        this->nameCaptureFrame="Capture to work";
         this->timerPeriod=40;
         cvNamedWindow(this->nameCaptureFrame.toAscii().constData(), CV_WINDOW_AUTOSIZE);
         this->showBoxes();
-
         this->startResize=false;
         this->startCalculateDistance=false;
 
-
-
-
-
 }
-void SettingCaptureFrame::initSetting(){
-
+void SettingCaptureFrame::initSetting()
+{
         this->readSetting();
-
         ui->spinBox->setRange(10,100);
-        ui->widthCaptureWindow->setRange(40,500);
+        ui->widthCaptureWindow->setRange(300,1000);
         ui->widthCaptureWindow->setValue(configInformation::getSizeWindowCapture());
         ui->spinBox->setValue(configInformation::getperiodCapture());
-
-
-
-
 }
-
 void SettingCaptureFrame::initialConnections()
 {
         connect(ui->lineEdit,SIGNAL(textEdited(QString)),this,SLOT(validMmAndSet()));
@@ -114,22 +94,9 @@ void SettingCaptureFrame::initialConnections()
         connect(ui->widthCaptureWindow,SIGNAL(valueChanged(int)),this,SLOT(calculateCaptureSizeFrame(int)))  ;
         cvSetMouseCallback( this->nameCaptureFrame.toAscii().constData(),myMouseCallback, (void*)this->frame);
         connect(this,SLOT(hide()),this,SLOT(stopWork()));
-        connect ( ui->checkBox,SIGNAL(toggled(bool)), this, SLOT (setValueShowing (bool)));
         connect (this,SIGNAL(resizing(bool,int,int,int,int)),this->worker,SLOT(setEnabledResize(bool,int,int,int,int)));
-}
-void SettingCaptureFrame::setValueShowing (bool value)
-{
-        qDebug ()<<value;
-        if (value){
-                connect(this->worker,SIGNAL(imageCalculateReady(IplImage*)),this,SLOT(imageCalculatingGetting(IplImage*)));
-
-        }
-        else {
-                disconnect(this->worker,SIGNAL(imageCalculateReady(IplImage*)),this,SLOT(imageCalculatingGetting(IplImage*)));
-        }
 
 }
-
 void  SettingCaptureFrame::imageCalculatingGetting (IplImage *img)
 {
         cvNamedWindow("calculation image", CV_WINDOW_AUTOSIZE);
@@ -227,14 +194,12 @@ void SettingCaptureFrame::clearCoords(){
         this->y1=0;
         this->y2=0;
 }
-
 void SettingCaptureFrame::clearResize(){
         this->x1Resize=0;
         this->x2Resize=0;
         this->y1Resize=0;
         this->y2Resize=0;
 }
-
 bool SettingCaptureFrame::checkCoords(){
         if (this->startResize)
                 {
@@ -257,68 +222,19 @@ void SettingCaptureFrame::imageGetting(IplImage *img)
         qDebug()<<"get image";
         this->frame = img;
         cvSetMouseCallback( this->nameCaptureFrame.toAscii().constData(),myMouseCallback, (void*)this->frame);
-        if (this->enabledResize){
+        /*if (this->enabledResize)
+                {
                 cvSetImageROI(this->frame,cvRect
                               (X1,Y1,this->frameWidthResize,this->frameHightResize) );
-                //resize = cvCreateImage(cvSize(this->frameWidthResize,this->frameHightResize), IPL_DEPTH_8U, 3);
-                //cvResize( frame, resize,  CV_INTER_NN );
-                //frame=resize;
-        }
 
-
-
+        }*/
         cvShowImage(this->nameCaptureFrame.toAscii().constData(),this->frame);
         cvResetImageROI(frame);
 
 
 }
-void SettingCaptureFrame::timerStart()
-{
-        if (!this->timerCapture->isActive())
-                {
-                        //this->calculateCaptureSizeFrame();
-                        this->timerCapture->setInterval(this->timerPeriod);
-                        this->timerCapture->start();
-                }
 
 
-}
-
-void SettingCaptureFrame::timerStop()
-{
-        if (this->timerCapture->isActive())
-                {
-                        this->timerCapture->stop();
-                }
-
-
-}
-
-void SettingCaptureFrame::timerEvent_showCapture()
-{
-
-          cvSetMouseCallback( this->nameCaptureFrame.toAscii().constData(),myMouseCallback, (void*)this->frame);
-
-
-
-        if (this->enabledResize){
-                cvSetImageROI(this->frame,cvRect
-                              (X1,Y1,this->frameWidthResize,this->frameHightResize) );
-                //resize = cvCreateImage(cvSize(this->frameWidthResize,this->frameHightResize), IPL_DEPTH_8U, 3);
-                //cvResize( frame, resize,  CV_INTER_NN );
-                //frame=resize;
-        }
-
-
-
-        cvShowImage(this->nameCaptureFrame.toAscii().constData(),this->frame);
-        cvReleaseImage( &resize );
-
-        cvResetImageROI(frame);
-
-
-
-}
 
 
 //resizing+distance
@@ -364,6 +280,7 @@ void SettingCaptureFrame::startingResize(){
         this->enabledResize=false;
         this->clearResize();
         this->startResize= true;
+       // emit resizing(false, this->X1,this->Y1,this->X2,this->Y2);
 }
 
 void SettingCaptureFrame::startingCalculateDistance()
@@ -392,19 +309,12 @@ void SettingCaptureFrame::calculateCaptureSizeFrame(int w)
     }*/
 
 
-       // this->frameWidth = w;
-       // this->frameHight = w;
+        // this->frameWidth = w;
+        // this->frameHight = w;
 
 }
 
-void SettingCaptureFrame::calculateResize(){
-        this->frameWidthResize = std::fabs(this->x2Resize-this->x1Resize),
-                        this->frameHightResize = std::fabs(this->y2Resize-this->y1Resize);
-        this->coefficientResize =std::max( ( double ) this->frameWidthResize / ui->widthCaptureWindow->value(),
-                                          ( double )this->frameHightResize / ui->widthCaptureWindow->value());
-        this->frameWidthResize /=this->coefficientResize ;
-        this->frameHightResize /= this->coefficientResize   ;
-}
+
 
 
 bool SettingCaptureFrame::calculateDistanceInPixels()
@@ -420,7 +330,6 @@ bool SettingCaptureFrame::calculateDistanceInPixels()
                         distanceInPixels=tmpDist;
                         ui->pixels->setText(QString::number(this->distanceInPixels));
                         this->startCalculateDistance= false;
-                        //this->showBoxes();
                         return true;
                 }
         else {
@@ -447,7 +356,6 @@ void SettingCaptureFrame::hideBoxes()
 
         this->ui->groupBox_6->setEnabled(true);
 }
-
 void SettingCaptureFrame::showBoxes(){
         ui->groupBox->setEnabled(true);
         ui->groupBox_2->setEnabled(true);
@@ -487,71 +395,31 @@ SettingCaptureFrame::~SettingCaptureFrame()
         delete ui;
 }
 
-
 //buttons
-
 void SettingCaptureFrame::on_defRect_clicked()
 {
 
         this->startingResize();
 }
-
 void SettingCaptureFrame::on_defDistInPixels_clicked()
 {
         this->startingCalculateDistance();
 
 }
-
-void SettingCaptureFrame::on_pushButton_3_clicked()
-{
-
-}
-
 void SettingCaptureFrame::on_pushButton_7_clicked()
 {
         this->stopWork();
 
 }
-
-
-
-
 void SettingCaptureFrame::on_pushButton_8_clicked()
 {
         this->stopWork();
 }
 
 
-
-
-
-void SettingCaptureFrame::on_pushButton_9_clicked()
+// Setting
+void SettingCaptureFrame::readSetting()
 {
-
-}
-
-
-// Size Ok/No
-
-void SettingCaptureFrame::on_pushButtonNo_clicked()
-{
-        //calculateCaptureSizeFrame();
-
-}
-
-void SettingCaptureFrame::on_pushButtonOk_clicked()
-{
-        ui->groupBox_3->setEnabled(false);
-        ui->groupBox->setEnabled(true);
-
-
-}
-
-
-// Setting\
-
-
-void SettingCaptureFrame::readSetting(){
 
         this->captureNumber= configInformation::getCaptureNumber();
 
@@ -562,16 +430,15 @@ void SettingCaptureFrame::readSetting(){
         this->X1=configInformation::getX1Resize();
         this->Y1=configInformation::getY1Resize();
         //this->frameWidth=configInformation::getframeWidth();
-   //    this->frameHight=configInformation::getframeHight();
+        //    this->frameHight=configInformation::getframeHight();
         this->frameWidthResize=configInformation::getframeWidthResize();
         this->frameHightResize=configInformation::getframeHightResize();
         this->coefficient = configInformation::getcoefficient();
         this->coefficientResize = configInformation::getcoefficientResize();
 
 }
-
-
-void SettingCaptureFrame::writeSetting(){
+void SettingCaptureFrame::writeSetting()
+{
         configInformation::setSizeWindowCapture(ui->widthCaptureWindow->value());
         configInformation::setperiodCapture(ui->spinBox->value());
         configInformation::setcoefficient(this->coefficient);
@@ -585,16 +452,16 @@ void SettingCaptureFrame::writeSetting(){
         configInformation::writeToFile();
 
 }
-
-
-void SettingCaptureFrame::backSetting(){
+void SettingCaptureFrame::backSetting()
+{
 
 
 }
 
 
 
-void SettingCaptureFrame::on_SettingApply_clicked(){
+void SettingCaptureFrame::on_SettingApply_clicked()
+{
         if (ui->lineEdit->text().trimmed()=="")
                 if (QMessageBox::Yes == QMessageBox::warning(this,tr("MM not defined"),
                                                              tr("Set dedault?"),
@@ -610,13 +477,9 @@ void SettingCaptureFrame::on_SettingApply_clicked(){
 
 
 }
-
 void SettingCaptureFrame::on_SettingCansel_clicked()
 {
-        /*this->closeEvent();
-    this->hide();*/
         this->close();
-
 }
 void SettingCaptureFrame::on_SettingStandart_clicked()
 {
@@ -625,10 +488,15 @@ void SettingCaptureFrame::on_SettingStandart_clicked()
 
 
 }
-
 void SettingCaptureFrame::on_pushButtonStart_clicked()
 {
         this->hideAllBoxes();
         this->ui->groupBox_3->setEnabled(true);
         this->enabledResize= false;
+}
+
+void SettingCaptureFrame::on_pushButtonOk_clicked()
+{
+        ui->groupBox_3->setEnabled(false);
+        ui->groupBox->setEnabled(true);
 }

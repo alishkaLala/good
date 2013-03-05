@@ -54,7 +54,7 @@ private:
     //Working with resizing and setting mm
     bool calculateDistanceInPixels();
     bool applyResize();
-    void calculateResize();
+
    // qint32 frameWidth,frameHight;
     qint32 frameWidthResize,frameHightResize;
     double coefficient;
@@ -82,8 +82,7 @@ private:
     void initialize();
     void initSetting();
     void initialConnections();
-    void timerStart();
-    void timerStop();
+
 
     void startingResize();
     void startingCalculateDistance();
@@ -100,7 +99,7 @@ private:
 
 
 
-    QTimer *timerCapture;
+    //QTimer *timerCapture;
     qint32 timerPeriod;
     QString nameCaptureFrame;
 
@@ -125,28 +124,31 @@ private slots:
 
     void toolTipMm();
     void validMmAndSet();
-    void timerEvent_showCapture();
     void on_defRect_clicked();
 
 
 
     void calculateCaptureSizeFrame(int w);
     void on_defDistInPixels_clicked();
-    void on_pushButton_3_clicked();
+
     void on_pushButton_7_clicked();
 
     void on_pushButton_8_clicked();
-    void on_pushButton_9_clicked();
-    void on_pushButtonNo_clicked();
-    void on_pushButtonOk_clicked();
+
+
 
     void on_SettingCansel_clicked();
     void on_SettingStandart_clicked();
 
     void on_SettingApply_clicked();
     void on_pushButtonStart_clicked();
-    void setValueShowing(bool);
+
     void imageCalculatingGetting(IplImage *img);
+
+
+
+    void on_pushButtonOk_clicked();
+
 public slots:
       void imageGetting(IplImage *img);
 

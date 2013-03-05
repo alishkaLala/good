@@ -3,27 +3,23 @@
 ImageProcessing::ImageProcessing(QObject *parent) :
         QThread(parent)
 {
-
-        // emit test();
         this->choisedCapture= 0;
         this->isWorking=false;
-        this->calculateImage= false;
+       // this->calculateImage= false;
         this->kadrProssesd = 0;
         k1= 0.027;
         k2 = 0.65;
         x = 389,y = 292;
         this->widthResize= 100;
         this->heigthResize= 100;
-
+        this->delay= 1000;
 }
-
-
-
 
 void ImageProcessing::setCalculation (bool value)
 {
         this->calculateImage= value;
         this->kadrProssesd = 0;
+        qDebug ()<<"get Signal to calculate :  "<<value;
 }
 void ImageProcessing::setChoisedCpture (int value)
 {
@@ -36,23 +32,17 @@ void ImageProcessing::run()
 void ImageProcessing::getImage()
 {
         int number = this->choisedCapture;
-
         IplImage* frame =0;
         char filename[512];
         capture = cvCreateCameraCapture(number);
-
-        assert(capture);
         cvNamedWindow("capture", CV_WINDOW_AUTOSIZE);
         frame = cvLoadImage("4.jpg",CV_LOAD_IMAGE_COLOR);
         this->captureWidth=  cvGetCaptureProperty (this->capture,3);
         this->captureHeight= cvGetCaptureProperty (this->capture,4);
         qDebug ()<< "capture size : "<< this->captureWidth<<"*"<<this->captureHeight;
-        /// int x = 389,y = 292;//2592*1944 ->389*292
         unsigned long int k=0;
         while(isWorking){
-
                 frame = cvQueryFrame( capture );
-
                 //frame = cvLoadImage("4.jpg",CV_LOAD_IMAGE_COLOR);
                 if (frame ==NULL)
                         {
@@ -61,21 +51,19 @@ void ImageProcessing::getImage()
                                 break;
                         }
                 IplImage *src = cvCreateImage(cvSize(x,y),frame->depth,frame->nChannels);
-
                 cvResize(frame,src,CV_INTER_LINEAR);
-
-           //    if (this->enabledResize)
-                if (true)
+                if (this->enabledResize)
                         {
                                 cvSetImageROI (src,
                                                cvRect(x1,y1,this->widthResize,this->heigthResize)
                                                );
-                                  cvCopyImage(src, src);
+                                cvCopyImage(src, src);
                         }
                 cvShowImage("capture", src);
-                emit imageIsReady(src);
-                if (true)
+                if (this->calculateImage)
                         {
+                                int countBell=0;
+                                double averageDiametr =0;
                                 IplImage* hsv = cvCreateImage( cvGetSize(src), 8, 3 );// зображення в форматі HSV
                                 IplImage* h_plane = cvCreateImage( cvGetSize(src), 8, 1 );// канал H
                                 IplImage* s_plane = cvCreateImage( cvGetSize(src), 8, 1 );// канал S
@@ -88,8 +76,7 @@ void ImageProcessing::getImage()
                                 int b=0,a=0;
                                 cvCvtPixToPlane( src, h_plane, s_plane, v_plane, 0 ); //RGB  канали
                                 k++;
-
-                                qDebug ()<<"kadr :"<<k<<"CAPURE SIZE :"<<x<<"*"<<y<< " use k1= "<<k1 <<"k2 =  "<<k2 ;
+                                qDebug ()<<"kadr :"<<k<<"CAPURE SIZE :"<<x<<"*"<<y<< " use k1= "<<k1 <<"k2 =  "<<k2 << "with delay: "<<this->delay;
                                 Canal_contur * pr1 = new Canal_contur(v_plane,v_can,11,a,b,k1,k2);//запускати окремими потоками
                                 Canal_contur * pr2 = new Canal_contur(h_plane,h_can,11,a,b,k1,k2);//запускати окремими потоками
                                 Canal_contur *pr3 = new Canal_contur(s_plane,s_can,11,a,b,k1,k2);//запускати окремими потоками
@@ -113,77 +100,65 @@ void ImageProcessing::getImage()
                                 cvShowImage("summa_s",sum_can);
                                 storage = cvCreateMemStorage(0); contours=0;
                                 cvFindContours( sum_can, storage,&contours,sizeof(CvContour),CV_RETR_EXTERNAL,CV_CHAIN_APPROX_SIMPLE,cvPoint(0,0));
-
                                 for(CvSeq* seq0 = contours;seq0!=0;seq0 = seq0->h_next){
+
                                         int count = seq0->total;
                                         CvPoint center;CvSize size;CvBox2D box;
                                         if( count < 10 ) continue;
-
                                         CvMat* points_f = cvCreateMat( 1, count, CV_32FC2 );
                                         CvMat points_i = cvMat( 1, count, CV_32SC2, points_f->data.ptr );
                                         cvCvtSeqToArray( seq0, points_f->data.ptr, CV_WHOLE_SEQ );
                                         cvConvert( &points_i, points_f );
                                         box = cvFitEllipse2( points_f );
-
                                         center = cvPointFrom32f(box.center);
                                         size.width = cvRound(box.size.width*0.5);
                                         size.height = cvRound(box.size.height*0.5);
-
-
-                                        //cvEllipse(src, center, size,-box.angle, 0, 360,CV_RGB(0,0,255), -1, CV_AA, 0);
-                                        //cvDrawContours(src, seq0, CV_RGB(0,0,0), CV_RGB(0,0,250), 0, CV_FILLED, 8); // рисуем контур
                                         cvCircle(src,center,(size.width+size.height)/2,CV_RGB(0,0,255),1, CV_AA, 0);
                                         double diametr = size.width+size.height;
-
+                                        averageDiametr+=diametr;
+                                        countBell++;
                                         cvReleaseMat(&points_f);
                                 }
-
-
                                 cvShowImage("7kontur",src);
 
-
-
-
                                 emit this->imageCalculateReady (src);
-
-
-
-
-
                                 delete  pr1;
                                 delete  pr2;
                                 delete  pr3;
+                                emit infoIsReady (countBell*0.1,2.0 *averageDiametr/countBell);
+                                qDebug ()<<"count Bell "<< countBell<<"average diametr = " <<3*averageDiametr/countBell;
+                                /*
+                                                max value 40*40
+                                          GET :  count Bell  281 average diametr =  11.0071
 
-                        }
+                                          400 count Bell  - 40
+                                          1count Bell  -  0.1
 
+                                        20  average diametr - 40
+                                        1 average diametr - 2
+                                */
 
-                emit infoIsReady (qrand ()%40,qrand ()%40);
-
-
-                cvWaitKey(1000);
+                   }
+                   emit imageIsReady(src);
+                //emit infoIsReady (qrand ()%40,qrand ()%40);
+                cvWaitKey(delay);
                 cvReleaseImage(&src);
-
-
         }
-
-
         cvReleaseCapture(&capture);
         cvReleaseImage(&frame);
-
 }
+
 void ImageProcessing::working(bool setting){
 
         this->isWorking = setting;
         qDebug ()<<"getValue"<<setting;
 }
-
 void ImageProcessing:: setK1 (double value)
 {
 
         k1= value;
         qDebug ()<<"get value k1= "<<k1;
 }
-
 void ImageProcessing::setK2(double value)
 {
         this->k2= value;

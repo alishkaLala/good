@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'settingcaptureframe.h'
 **
-** Created: Tue 5. Mar 15:09:33 2013
+** Created: Tue 5. Mar 19:42:23 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_SettingCaptureFrame[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      21,   14, // methods
+      16,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -38,22 +38,17 @@ static const uint qt_meta_data_SettingCaptureFrame[] = {
       81,   20,   20,   20, 0x08,
       93,   20,   20,   20, 0x08,
      109,   20,   20,   20, 0x08,
-     134,   20,   20,   20, 0x08,
-     157,  155,   20,   20, 0x08,
-     188,   20,   20,   20, 0x08,
-     217,   20,   20,   20, 0x08,
-     243,   20,   20,   20, 0x08,
-     269,   20,   20,   20, 0x08,
-     295,   20,   20,   20, 0x08,
-     321,   20,   20,   20, 0x08,
-     347,   20,   20,   20, 0x08,
-     373,   20,   20,   20, 0x08,
-     400,   20,   20,   20, 0x08,
-     429,   20,   20,   20, 0x08,
-     455,   20,   20,   20, 0x08,
-     484,   20,   20,   20, 0x08,
-     510,  506,   20,   20, 0x08,
-     545,  506,   20,   20, 0x0a,
+     132,  130,   20,   20, 0x08,
+     163,   20,   20,   20, 0x08,
+     192,   20,   20,   20, 0x08,
+     218,   20,   20,   20, 0x08,
+     244,   20,   20,   20, 0x08,
+     271,   20,   20,   20, 0x08,
+     300,   20,   20,   20, 0x08,
+     326,   20,   20,   20, 0x08,
+     359,  355,   20,   20, 0x08,
+     394,   20,   20,   20, 0x08,
+     420,  355,   20,   20, 0x0a,
 
        0        // eod
 };
@@ -62,21 +57,17 @@ static const char qt_meta_stringdata_SettingCaptureFrame[] = {
     "SettingCaptureFrame\0\0value,x1,y1,x2,y2\0"
     "resizing(bool,int,int,int,int)\0"
     "stopWork()\0toolTipMm()\0validMmAndSet()\0"
-    "timerEvent_showCapture()\0on_defRect_clicked()\0"
-    "w\0calculateCaptureSizeFrame(int)\0"
+    "on_defRect_clicked()\0w\0"
+    "calculateCaptureSizeFrame(int)\0"
     "on_defDistInPixels_clicked()\0"
-    "on_pushButton_3_clicked()\0"
     "on_pushButton_7_clicked()\0"
     "on_pushButton_8_clicked()\0"
-    "on_pushButton_9_clicked()\0"
-    "on_pushButtonNo_clicked()\0"
-    "on_pushButtonOk_clicked()\0"
     "on_SettingCansel_clicked()\0"
     "on_SettingStandart_clicked()\0"
     "on_SettingApply_clicked()\0"
-    "on_pushButtonStart_clicked()\0"
-    "setValueShowing(bool)\0img\0"
+    "on_pushButtonStart_clicked()\0img\0"
     "imageCalculatingGetting(IplImage*)\0"
+    "on_pushButtonOk_clicked()\0"
     "imageGetting(IplImage*)\0"
 };
 
@@ -113,26 +104,21 @@ int SettingCaptureFrame::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 1: stopWork(); break;
         case 2: toolTipMm(); break;
         case 3: validMmAndSet(); break;
-        case 4: timerEvent_showCapture(); break;
-        case 5: on_defRect_clicked(); break;
-        case 6: calculateCaptureSizeFrame((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 7: on_defDistInPixels_clicked(); break;
-        case 8: on_pushButton_3_clicked(); break;
-        case 9: on_pushButton_7_clicked(); break;
-        case 10: on_pushButton_8_clicked(); break;
-        case 11: on_pushButton_9_clicked(); break;
-        case 12: on_pushButtonNo_clicked(); break;
-        case 13: on_pushButtonOk_clicked(); break;
-        case 14: on_SettingCansel_clicked(); break;
-        case 15: on_SettingStandart_clicked(); break;
-        case 16: on_SettingApply_clicked(); break;
-        case 17: on_pushButtonStart_clicked(); break;
-        case 18: setValueShowing((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 19: imageCalculatingGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
-        case 20: imageGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
+        case 4: on_defRect_clicked(); break;
+        case 5: calculateCaptureSizeFrame((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: on_defDistInPixels_clicked(); break;
+        case 7: on_pushButton_7_clicked(); break;
+        case 8: on_pushButton_8_clicked(); break;
+        case 9: on_SettingCansel_clicked(); break;
+        case 10: on_SettingStandart_clicked(); break;
+        case 11: on_SettingApply_clicked(); break;
+        case 12: on_pushButtonStart_clicked(); break;
+        case 13: imageCalculatingGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
+        case 14: on_pushButtonOk_clicked(); break;
+        case 15: imageGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 21;
+        _id -= 16;
     }
     return _id;
 }

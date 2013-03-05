@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'imageprocessing.h'
 **
-** Created: Tue 5. Mar 15:01:33 2013
+** Created: Tue 5. Mar 19:41:22 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!

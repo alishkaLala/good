@@ -49,6 +49,7 @@ public slots:
         int captureWidth,captureHeight;
         CvCapture* capture;
        qint32 x1,y1,widthResize,heigthResize;
+       int delay;
 
 
 };

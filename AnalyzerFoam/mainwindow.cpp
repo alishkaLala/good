@@ -9,15 +9,11 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->setupUi(this);
 
         this->initValues();
-
-        this->initialConnections();
+           this->initialConnections();
         this->elementHide();
-
-
-
-        worker->start();
+         worker->start();
         this->createWindows();
-        connect (ui->pushButton,SIGNAL(clicked()),this->worker,   SLOT(getImage()));
+
 
 
         connect(this->worker,SIGNAL(infoIsReady(double,double)),this,SLOT(infoGetting(double,double)));
@@ -84,6 +80,9 @@ void MainWindow::initialConnections()
         //connect (this->timerCapture, SIGNAL ( timeout () ), SLOT ( timerEvent_showCapture ( ) ) );
         connect (ui->actionTo_graphik,SIGNAL(triggered()),SLOT (showOpenGLGraph()));
         connect( ui->processingImageShow,SIGNAL(toggled(bool)),this,SLOT(setSartStopImegeGetting(bool)));
+        connect(ui->startCalculation,SIGNAL(toggled(bool)), this->worker,SLOT(setCalculation(bool)));
+        connect(ui->startCalculation,SIGNAL(toggled(bool)), this->worker,SLOT(working(bool)));
+        connect (ui->pushButton, SIGNAL(clicked()), this->worker,SLOT(getImage()));
 
 
 
@@ -126,7 +125,7 @@ void MainWindow::captureChoised(int value)
 
 }
 
-
+// Cheking capture !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 void MainWindow::on_pushButton_clicked()
 {
         this->worker->working(true);
@@ -142,14 +141,6 @@ bool MainWindow::okToContinue(QString Msg){
 void MainWindow::on_buttonStart_clicked()
 {
 
-        if (this->okToContinue(tr("Ви впевнені, що хочете розпочати аналіз?")))
-                {
-                        ui->menuSetting->setEnabled(false);
-                        ui->menuCapture->setEnabled(false);
-                        ui->checkBox->setEnabled(false);
-                        ui->spinBox->setEnabled (false);
-
-                }
 
 
 }
@@ -158,10 +149,7 @@ void MainWindow::on_buttonStop_clicked()
 
         if (this->okToContinue(tr("Ви впевнені, що хочете завершити аналіз?")))
                 {
-                        ui->menuSetting->setEnabled(true);
-                        ui->menuCapture->setEnabled(true);
-                        ui->checkBox->setEnabled(true);
-                        ui->spinBox->setEnabled (true);
+
 
                 }
 
@@ -216,11 +204,12 @@ qint8 MainWindow::findCapture(){
 void MainWindow::setSartStopImegeGetting(bool enabled)
 {
         if (enabled){
-                qDebug ()<<"get";
+                qDebug ()<<"enable gettin image";
                 connect(this->worker,SIGNAL(imageIsReady(IplImage*)),this,SLOT(imageGetting(IplImage*)));
 
         }
         else {
+                 qDebug ()<<"disable gettin image";
                 disconnect(this->worker,SIGNAL(imageIsReady( IplImage*)),this,SLOT(imageGetting( IplImage*)));
                 this->showImage();
         }
@@ -237,7 +226,6 @@ void MainWindow::hideCapture()
 }
 void MainWindow::showImage(){
         ui->capturePicture->setPixmap(QPixmap(":/image/4x.jpg"));
-
 
 }
 
@@ -258,14 +246,9 @@ void MainWindow::showSettingFrame(){
 void MainWindow::showSettingCapture(){
 
         this->close();
-
         this->setSartStopImegeGetting(false);
-        disconnect(this->worker,SIGNAL(imageIsReady( IplImage*)),this,SLOT(imageGetting( IplImage*)));
-
-
-
         this->settingCaptureFrame->show();
-        this->worker->working (true);
+
 
 }
 void MainWindow::showOpenGLGraph(){
@@ -494,4 +477,29 @@ QImage* MainWindow::IplImageToQImage(const IplImage * iplImage, uchar **data,
 void MainWindow::on_pushButton_2_clicked()
 {
         this->worker->working(false);
+}
+
+void MainWindow::on_startCalculation_clicked()
+{
+        if (ui->startCalculation->isChecked ())
+                {
+
+                        ui->menuSetting->setEnabled(false);
+                        ui->menuCapture->setEnabled(false);
+                        ui->checkBox->setEnabled(false);
+                        ui->spinBox->setEnabled (false);
+                        ui->startCalculation->setText ("Зупинити аналіз");
+                        this->worker->getImage ();
+
+                }
+        else{
+                ui->menuSetting->setEnabled(true);
+                ui->menuCapture->setEnabled(true);
+                ui->checkBox->setEnabled(true);
+                ui->spinBox->setEnabled (true);
+                ui->startCalculation->setText ("Розпочати аналіз");
+
+        }
+
+
 }
