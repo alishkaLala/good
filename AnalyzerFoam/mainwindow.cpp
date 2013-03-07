@@ -36,7 +36,13 @@ void MainWindow::showEvent(QShowEvent *event){
 }
 
 void MainWindow::closeEvent(QCloseEvent *event= NULL){
-        this->worker->working(false);
+
+        this->worker->setCalculation (false);
+       this->worker->working(false);
+       this->setSartStopImegeGetting(false);
+
+
+
 
 }
 void MainWindow::readSettingCaprure(){
@@ -77,11 +83,9 @@ void MainWindow::initialConnections()
         connect(ui->actionInformation,SIGNAL(triggered()),this,SLOT(showInfoFrame()));
         connect(ui->actionConfiguration_of_program,SIGNAL(triggered()),this ,SLOT(showSettingFrame()));
         connect(ui->actionConfiguration_of_capture,SIGNAL(triggered()),this,SLOT(showSettingCapture()));
-        //connect (this->timerCapture, SIGNAL ( timeout () ), SLOT ( timerEvent_showCapture ( ) ) );
         connect (ui->actionTo_graphik,SIGNAL(triggered()),SLOT (showOpenGLGraph()));
         connect( ui->processingImageShow,SIGNAL(toggled(bool)),this,SLOT(setSartStopImegeGetting(bool)));
-        connect(ui->startCalculation,SIGNAL(toggled(bool)), this->worker,SLOT(setCalculation(bool)));
- //       connect(ui->startCalculation,SIGNAL(toggled(bool)), this->worker,SLOT(working(bool)));
+ //       connect(ui->startCalculation,SIGNAL(toggled(bool)), this->worker,SLOT(setCalculation(bool)));
         connect (ui->pushButton, SIGNAL(clicked()), this->worker,SLOT(getImage()));
 
 
@@ -129,6 +133,7 @@ void MainWindow::captureChoised(int value)
 void MainWindow::on_pushButton_clicked()
 {
         this->worker->setChoisedCpture (this->ui->comboBox->currentIndex ());
+        this->worker->setCalculation (true);
         this->worker->working(true);
 }
 bool MainWindow::okToContinue(QString Msg){
@@ -268,7 +273,7 @@ void MainWindow::showing()
 
 MainWindow::~MainWindow()
 {
-        this->infoFrame->destroyThis();
+       this->infoFrame->destroyThis();
         this->setSartStopImegeGetting(false);
         this->worker->working (false);
         //delete frame;
@@ -499,6 +504,9 @@ void MainWindow::on_startCalculation_clicked()
 
                 }
         else{
+                this->worker->setCalculation (false);
+                this->worker->working(false);
+                 this->setSartStopImegeGetting(false);
                 ui->menuSetting->setEnabled(true);
                 ui->menuCapture->setEnabled(true);
                 ui->checkBox->setEnabled(true);

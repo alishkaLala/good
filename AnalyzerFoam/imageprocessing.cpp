@@ -60,8 +60,10 @@ void ImageProcessing::getImage()
                                 cvCopyImage(src, src);
                         }
                 cvShowImage("capture", src);
-                if (this->calculateImage)
+                //if (this->calculateImage)
+                if (true)
                         {
+
                                 int countBell=0;
                                 double averageDiametr =0;
                                 IplImage* hsv = cvCreateImage( cvGetSize(src), 8, 3 );// зображення в форматі HSV
@@ -139,13 +141,14 @@ void ImageProcessing::getImage()
                                 */
 
                    }
+
                    emit imageIsReady(src);
                 //emit infoIsReady (qrand ()%40,qrand ()%40);
                 cvWaitKey(delay);
                 cvReleaseImage(&src);
         }
-        cvReleaseCapture(&capture);
-        cvReleaseImage(&frame);
+
+        cvReleaseImage(&frame);  cvReleaseCapture(&capture);
 }
 
 void ImageProcessing::working(bool setting){
