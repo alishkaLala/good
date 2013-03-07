@@ -16,6 +16,12 @@ Canal_contur::Canal_contur(const IplImage *in, IplImage *out, int gaus, double t
         this->k1 = k1;
         this->k2= k2;
         this->start();
+
+
+
+
+
+
 }
 void Canal_contur::run(){
         pr_1 = cvCreateImage( cvGetSize(in), 8, 1 );
