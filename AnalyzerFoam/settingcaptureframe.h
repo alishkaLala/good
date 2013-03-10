@@ -10,6 +10,7 @@
 #include <QApplication>
 #include <QDebug>
 
+
 #include <iostream>
 #include<cmath>
 
@@ -21,134 +22,82 @@
 #include <imageprocessing.h>
 
 namespace Ui {
-    class SettingCaptureFrame;
+class SettingCaptureFrame;
 }
 
 class SettingCaptureFrame : public QWidget
 {
-    Q_OBJECT
-
+        Q_OBJECT
+        static SettingCaptureFrame *obj;
 public:
-
-    void startWork();
-    void showEvent(QShowEvent *event);
-    void closeEvent(QCloseEvent *event);
-
-    explicit SettingCaptureFrame(ImageProcessing *worker, QWidget *parent = 0);
-    ~SettingCaptureFrame();
-
-
-
-    QWidget  *father;
-    ImageProcessing *worker;
+        explicit SettingCaptureFrame(ImageProcessing *worker, QWidget *parent = 0);
+        ~SettingCaptureFrame();
+        void showEvent(QShowEvent *event);
+        void closeEvent(QCloseEvent *event);
 
 signals:
-    void resizing(bool value, int x1, int y1, int x2, int y2);
+        void resizing(bool value, int x1, int y1, int x2, int y2);
 private:
-    bool isStartResize();
-    static SettingCaptureFrame *obj;
-
-    static void myMouseCallback( int event, int x, int y, int flags, void* param);
-    void myMouseCallbackDelegated( int event, int x, int y, int flags, void* param);
-
-    //Working with resizing and setting mm
-    bool calculateDistanceInPixels();
-
-
-   // qint32 frameWidth,frameHight;
-    qint32 frameWidthResize,frameHightResize;
-    double coefficient;
-    double coefficientResize;
-
-
-
-    qint32 distanceInPixels;
-    double distanceInMM;
+ // values:
+         Ui::SettingCaptureFrame *ui;
+        QWidget  *father;
+        ImageProcessing *worker;
+        QString nameCaptureFrame;
+        bool startResize;
+        bool startCalculateDistance;
+        bool enabledResize;
+        IplImage* frame;
+        qint32 distanceInPixels;
+        double distanceInMM;
+        qint32 x1,y1,x2,y2;
+        qint32 X1,Y1;
+        qint32 X2,Y2;
 
 
-    IplImage *standard;
-    //coordinate points
-    qint32 x1,y1,x2,y2;
-    qint32 X1,Y1;
-    qint32 X2,Y2;
-    qint32 x1Resize,x2Resize,y1Resize,y2Resize;
-    void clearCoords();
-    void clearResize();
-    bool checkCoords();
+//Functions:
 
-    Ui::SettingCaptureFrame *ui;
-//init
+        static void myMouseCallback( int event, int x, int y, int flags, void* param);
+        void myMouseCallbackDelegated( int event, int x, int y, int flags, void* param);
 
-    void initialize();
-    void initSetting();
-    void initialConnections();
+        //init
+        void initialize();
+        void initSetting();
+        void initialConnections();
+        //work with ini
+        void readSetting();
+        void writeSetting();
 
 
-    void startingResize();
-    void startingCalculateDistance();
-    void hideBoxes();
-    void showBoxes();
-
-    void readSetting();
-    void writeSetting();
-    void backSetting();
-
-    void hideAllBoxes();
-
-
-
-
-
-    //QTimer *timerCapture;
-    qint32 timerPeriod;
-    QString nameCaptureFrame;
-
-    bool startResize;
-    bool startCalculateDistance;
-    bool enabledResize;
-
-
-
-     IplImage* frame;
-    IplImage* resize;
-    qint32 captureNumber;
-
-
-    CvCapture* capture;
-
-
-
+// function to call:
+        //gui
+        void hideBoxes();
+        void hideAllBoxes();
+        void showBoxes();
+        //else
+        void setROI();
+        void setDistance();
+        void restartTrySet();
+        void sizeApply();
+         //aditional
+        void clearCoords();
+        bool checkCoords();
+        bool calculateDistanceInPixels();
 
 private slots:
-    void stopWork();
-    void toolTipMm();
-    void validMmAndSet();
-    void on_defRect_clicked();
+        void imageGetting(IplImage *img);
+       // buttons: Apply - cans- def
+        void on_SettingCansel_clicked();
+        void on_SettingStandart_clicked();
+        void on_SettingApply_clicked();
+        // buttoms slots
+        void on_buttonRestartTrySet_clicked();
+        void on_buttonSizeApply_clicked();
+        void on_buttonSetROI_clicked();
+        void on_buttonSetDistance_clicked();
+        //aditional
+        void toolTipMm();
+        void validMmAndSet();
 
-
-
-    void on_defDistInPixels_clicked();
-
-    void on_pushButton_7_clicked();
-
-    void on_pushButton_8_clicked();
-
-
-
-    void on_SettingCansel_clicked();
-    void on_SettingStandart_clicked();
-
-    void on_SettingApply_clicked();
-    void on_pushButtonStart_clicked();
-
-
-
-
-    void on_pushButtonOk_clicked();
-
-public slots:
-      void imageGetting(IplImage *img);
-      void imageCalculatingGetting(IplImage *img);
 
 
 };

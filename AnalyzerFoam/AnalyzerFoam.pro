@@ -20,7 +20,6 @@ SOURCES += main.cpp\
     configinformation.cpp \
     openglgraph.cpp \
     imageprocessing.cpp \
-    converter.cpp \
     canal_contur.cpp
 
 HEADERS  += mainwindow.h \
@@ -31,7 +30,6 @@ HEADERS  += mainwindow.h \
     configinformation.h \
     openglgraph.h \
     imageprocessing.h \
-    converter.h \
     canal_contur.h
 
 FORMS    += mainwindow.ui \

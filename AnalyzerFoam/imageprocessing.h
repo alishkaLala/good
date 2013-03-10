@@ -20,10 +20,9 @@ class ImageProcessing : public QThread
 public:
         explicit ImageProcessing(QObject *parent = 0);
 
-        void setChoisedCpture(int value);
+        bool isRealyWork();
 
 signals:
-        void test();
         void imageIsReady( IplImage *img);
         void imageCalculateReady( IplImage *img);
         void infoIsReady(double count, double diametr);
@@ -36,20 +35,27 @@ public slots:
         void setK1(double value);
         void setK2(double value);
         void setWindowSize(int value);
-        void setEnabledResize(bool,int x1,int y1,int widthResize,int heigthResize);
+        void setEnabledResize(bool,int x1,int y1,int widthROI,int heigthROI);
+        void setChoisedCpture(int value);
 
-        private:
+
+
+
+private:
+        //values
+
+        bool realyWork;
         bool isWorking;
         bool calculateImage;
         bool enabledResize;
         unsigned long int  kadrProssesd;
         int choisedCapture;
         double k1,k2;
-        int x  ,y ;
+        int width,heigth ;
         int captureWidth,captureHeight;
         CvCapture* capture;
-       qint32 x1,y1,widthResize,heigthResize;
-       int delay;
+        qint32 x1,y1,widthROI,heigthROI;
+        int delay;
 
 
 };

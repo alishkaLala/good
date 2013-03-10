@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Wed 6. Mar 23:20:47 2013
+** Created: Sun 10. Mar 11:01:27 2013
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -25,13 +25,12 @@
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
+#include <QtGui/QProgressBar>
 #include <QtGui/QPushButton>
 #include <QtGui/QSlider>
-#include <QtGui/QSpacerItem>
 #include <QtGui/QSpinBox>
 #include <QtGui/QStatusBar>
 #include <QtGui/QToolBar>
-#include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -54,30 +53,30 @@ public:
     QAction *actionShow_capture;
     QAction *actionShowFile;
     QWidget *centralWidget;
-    QGridLayout *gridLayout_2;
-    QLabel *capturePicture;
-    QGroupBox *groupBox_2;
-    QVBoxLayout *verticalLayout;
+    QGridLayout *gridLayout_4;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
     QLabel *label;
     QLabel *label_2;
     QLabel *label_4;
-    QLabel *label_5;
     QLabel *label_3;
-    QSlider *horizontalSlider;
+    QLabel *label_5;
+    QLabel *capturePicture;
+    QGroupBox *groupBox_2;
+    QGridLayout *gridLayout_3;
     QHBoxLayout *horizontalLayout_2;
-    QFrame *frame;
-    QHBoxLayout *horizontalLayout;
-    QPushButton *startCalculation;
+    QSlider *horizontalSlider;
     QSpinBox *spinBox;
-    QCheckBox *processingImageShow;
-    QCheckBox *checkBox;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_6;
     QComboBox *comboBox;
-    QPushButton *pushButton;
-    QSpacerItem *verticalSpacer;
+    QPushButton *buttonCaptureStart;
+    QCheckBox *processingImageShow;
+    QFrame *frame;
+    QGridLayout *gridLayout_2;
+    QPushButton *buttonAnalizStop;
+    QProgressBar *progressBar;
+    QPushButton *buttonAnalizStart;
     QMenuBar *menuBar;
     QMenu *menuExport;
     QMenu *menuCapture;
@@ -91,7 +90,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(735, 464);
+        MainWindow->resize(678, 471);
         actionHelper = new QAction(MainWindow);
         actionHelper->setObjectName(QString::fromUtf8("actionHelper"));
         actionDisable_capture = new QAction(MainWindow);
@@ -122,29 +121,11 @@ public:
         actionShowFile->setObjectName(QString::fromUtf8("actionShowFile"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        gridLayout_2 = new QGridLayout(centralWidget);
-        gridLayout_2->setSpacing(1);
-        gridLayout_2->setContentsMargins(11, 11, 11, 11);
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        gridLayout_2->setSizeConstraint(QLayout::SetMinAndMaxSize);
-        gridLayout_2->setContentsMargins(4, 2, 2, -1);
-        capturePicture = new QLabel(centralWidget);
-        capturePicture->setObjectName(QString::fromUtf8("capturePicture"));
-        capturePicture->setMinimumSize(QSize(400, 400));
-        capturePicture->setMaximumSize(QSize(2000, 16777215));
-        capturePicture->setFrameShape(QFrame::WinPanel);
-        capturePicture->setScaledContents(true);
-
-        gridLayout_2->addWidget(capturePicture, 0, 2, 1, 1);
-
-        groupBox_2 = new QGroupBox(centralWidget);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setMaximumSize(QSize(500, 16777215));
-        verticalLayout = new QVBoxLayout(groupBox_2);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        groupBox = new QGroupBox(groupBox_2);
+        gridLayout_4 = new QGridLayout(centralWidget);
+        gridLayout_4->setSpacing(6);
+        gridLayout_4->setContentsMargins(11, 11, 11, 11);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         QFont font;
         font.setPointSize(10);
@@ -171,62 +152,46 @@ public:
 
         gridLayout->addWidget(label_4, 2, 0, 1, 1);
 
-        label_5 = new QLabel(groupBox);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
-        label_5->setFont(font);
-
-        gridLayout->addWidget(label_5, 3, 0, 1, 1);
-
         label_3 = new QLabel(groupBox);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setFont(font);
 
-        gridLayout->addWidget(label_3, 4, 0, 1, 1);
+        gridLayout->addWidget(label_3, 5, 0, 1, 1);
+
+        label_5 = new QLabel(groupBox);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setFont(font);
+
+        gridLayout->addWidget(label_5, 4, 0, 1, 1);
 
 
-        verticalLayout->addWidget(groupBox);
+        gridLayout_4->addWidget(groupBox, 0, 0, 1, 1);
 
+        capturePicture = new QLabel(centralWidget);
+        capturePicture->setObjectName(QString::fromUtf8("capturePicture"));
+        capturePicture->setMinimumSize(QSize(0, 0));
+        capturePicture->setMaximumSize(QSize(16777215, 16777215));
+        capturePicture->setFrameShape(QFrame::WinPanel);
+        capturePicture->setScaledContents(true);
+
+        gridLayout_4->addWidget(capturePicture, 0, 1, 4, 1);
+
+        groupBox_2 = new QGroupBox(centralWidget);
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        groupBox_2->setMaximumSize(QSize(500, 16777215));
+        groupBox_2->setFlat(false);
+        gridLayout_3 = new QGridLayout(groupBox_2);
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setContentsMargins(11, 11, 11, 11);
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalSlider = new QSlider(groupBox_2);
         horizontalSlider->setObjectName(QString::fromUtf8("horizontalSlider"));
         horizontalSlider->setOrientation(Qt::Horizontal);
 
-        verticalLayout->addWidget(horizontalSlider);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        frame = new QFrame(groupBox_2);
-        frame->setObjectName(QString::fromUtf8("frame"));
-        frame->setAutoFillBackground(true);
-        frame->setInputMethodHints(Qt::ImhUrlCharactersOnly);
-        frame->setFrameShape(QFrame::WinPanel);
-        frame->setFrameShadow(QFrame::Raised);
-        frame->setLineWidth(3);
-        frame->setMidLineWidth(3);
-        horizontalLayout = new QHBoxLayout(frame);
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        startCalculation = new QPushButton(frame);
-        startCalculation->setObjectName(QString::fromUtf8("startCalculation"));
-        QFont font1;
-        font1.setBold(true);
-        font1.setWeight(75);
-        font1.setStyleStrategy(QFont::PreferAntialias);
-        startCalculation->setFont(font1);
-        startCalculation->setCursor(QCursor(Qt::PointingHandCursor));
-        startCalculation->setCheckable(true);
-        startCalculation->setChecked(false);
-        startCalculation->setAutoRepeat(false);
-        startCalculation->setAutoExclusive(false);
-        startCalculation->setAutoDefault(false);
-        startCalculation->setDefault(false);
-        startCalculation->setFlat(true);
-
-        horizontalLayout->addWidget(startCalculation);
-
-
-        horizontalLayout_2->addWidget(frame);
+        horizontalLayout_2->addWidget(horizontalSlider);
 
         spinBox = new QSpinBox(groupBox_2);
         spinBox->setObjectName(QString::fromUtf8("spinBox"));
@@ -235,17 +200,7 @@ public:
         horizontalLayout_2->addWidget(spinBox);
 
 
-        verticalLayout->addLayout(horizontalLayout_2);
-
-        processingImageShow = new QCheckBox(groupBox_2);
-        processingImageShow->setObjectName(QString::fromUtf8("processingImageShow"));
-
-        verticalLayout->addWidget(processingImageShow);
-
-        checkBox = new QCheckBox(groupBox_2);
-        checkBox->setObjectName(QString::fromUtf8("checkBox"));
-
-        verticalLayout->addWidget(checkBox);
+        gridLayout_3->addLayout(horizontalLayout_2, 2, 0, 1, 1);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
@@ -260,25 +215,54 @@ public:
 
         horizontalLayout_3->addWidget(comboBox);
 
-        pushButton = new QPushButton(groupBox_2);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        buttonCaptureStart = new QPushButton(groupBox_2);
+        buttonCaptureStart->setObjectName(QString::fromUtf8("buttonCaptureStart"));
 
-        horizontalLayout_3->addWidget(pushButton);
-
-
-        verticalLayout->addLayout(horizontalLayout_3);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout->addItem(verticalSpacer);
+        horizontalLayout_3->addWidget(buttonCaptureStart);
 
 
-        gridLayout_2->addWidget(groupBox_2, 0, 1, 1, 1);
+        gridLayout_3->addLayout(horizontalLayout_3, 3, 0, 1, 1);
+
+
+        gridLayout_4->addWidget(groupBox_2, 1, 0, 1, 1);
+
+        processingImageShow = new QCheckBox(centralWidget);
+        processingImageShow->setObjectName(QString::fromUtf8("processingImageShow"));
+
+        gridLayout_4->addWidget(processingImageShow, 2, 0, 1, 1);
+
+        frame = new QFrame(centralWidget);
+        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setEnabled(false);
+        frame->setFrameShape(QFrame::WinPanel);
+        frame->setFrameShadow(QFrame::Raised);
+        gridLayout_2 = new QGridLayout(frame);
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        buttonAnalizStop = new QPushButton(frame);
+        buttonAnalizStop->setObjectName(QString::fromUtf8("buttonAnalizStop"));
+
+        gridLayout_2->addWidget(buttonAnalizStop, 0, 1, 1, 1);
+
+        progressBar = new QProgressBar(frame);
+        progressBar->setObjectName(QString::fromUtf8("progressBar"));
+        progressBar->setValue(100);
+
+        gridLayout_2->addWidget(progressBar, 1, 0, 1, 2);
+
+        buttonAnalizStart = new QPushButton(frame);
+        buttonAnalizStart->setObjectName(QString::fromUtf8("buttonAnalizStart"));
+
+        gridLayout_2->addWidget(buttonAnalizStart, 0, 0, 1, 1);
+
+
+        gridLayout_4->addWidget(frame, 3, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 735, 21));
+        menuBar->setGeometry(QRect(0, 0, 678, 21));
         menuExport = new QMenu(menuBar);
         menuExport->setObjectName(QString::fromUtf8("menuExport"));
         menuCapture = new QMenu(menuBar);
@@ -343,19 +327,19 @@ public:
         actionHide_capture->setText(QApplication::translate("MainWindow", "Hide capture", 0, QApplication::UnicodeUTF8));
         actionShow_capture->setText(QApplication::translate("MainWindow", "Show capture", 0, QApplication::UnicodeUTF8));
         actionShowFile->setText(QApplication::translate("MainWindow", "\320\277\320\276\320\272\320\260\320\267\320\260\321\202\320\270 \321\204\320\260\320\271\320\273", 0, QApplication::UnicodeUTF8));
-        capturePicture->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QString());
         groupBox->setTitle(QApplication::translate("MainWindow", "Information", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        startCalculation->setText(QApplication::translate("MainWindow", "\321\200\320\276\320\267\320\277\320\276\321\207\320\260\321\202\320\270", 0, QApplication::UnicodeUTF8));
-        processingImageShow->setText(QApplication::translate("MainWindow", "\320\262\320\270\320\262\320\276\320\264\320\270  \320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\275\321\217, \321\211\320\276 \320\276\320\261\321\200\320\276\320\261\320\273\321\217\321\224\321\202\321\214\321\201\321\217", 0, QApplication::UnicodeUTF8));
-        checkBox->setText(QApplication::translate("MainWindow", "\320\276\320\264\321\200\320\260\320\267\321\203 \321\200\320\276\320\267\320\277\320\276\321\207\320\260\321\202\320\270 \321\215\320\272\321\201\320\277\320\276\321\200\321\202 \321\203 \321\204\320\260\320\271\320\273", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
+        capturePicture->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
+        groupBox_2->setTitle(QString());
         label_6->setText(QApplication::translate("MainWindow", "\320\272\320\260\320\274\320\265\321\200\320\260 \342\204\226", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("MainWindow", "\320\267\320\260\320\277\321\203\321\201\321\202\320\270\321\202\320\270 \321\202\320\260 \320\277\320\265\321\200\320\265\320\262\321\226\321\200\320\270\321\202\320\270 \320\272\320\260\320\274\320\265\321\200\321\203", 0, QApplication::UnicodeUTF8));
+        buttonCaptureStart->setText(QApplication::translate("MainWindow", "\320\267\320\260\320\277\321\203\321\201\321\202\320\270\321\202\320\270 \321\202\320\260 \320\277\320\265\321\200\320\265\320\262\321\226\321\200\320\270\321\202\320\270 \320\272\320\260\320\274\320\265\321\200\321\203", 0, QApplication::UnicodeUTF8));
+        processingImageShow->setText(QApplication::translate("MainWindow", "\320\262\320\270\320\262\320\276\320\264\320\270  \320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\275\321\217, \321\211\320\276 \320\276\320\261\321\200\320\276\320\261\320\273\321\217\321\224\321\202\321\214\321\201\321\217", 0, QApplication::UnicodeUTF8));
+        buttonAnalizStop->setText(QApplication::translate("MainWindow", "\320\267\321\203\320\277\320\270\320\275\320\270\321\202\320\270 \320\260\320\275\320\260\320\273\321\226\320\267", 0, QApplication::UnicodeUTF8));
+        buttonAnalizStart->setText(QApplication::translate("MainWindow", "\321\200\320\276\320\267\320\277\320\276\321\207\320\260\321\202\320\270 \320\260\320\275\320\260\320\273\321\226\320\267", 0, QApplication::UnicodeUTF8));
         menuExport->setTitle(QApplication::translate("MainWindow", "Export", 0, QApplication::UnicodeUTF8));
         menuCapture->setTitle(QApplication::translate("MainWindow", "Capture", 0, QApplication::UnicodeUTF8));
         menuChoise_capture->setTitle(QApplication::translate("MainWindow", "\320\241\320\277\320\270\321\201\320\276\320\272 \320\277\321\226\320\264\320\272\321\216\321\207\320\265\320\275\320\270\321\205 \320\272\320\260\320\274\320\265\321\200", 0, QApplication::UnicodeUTF8));

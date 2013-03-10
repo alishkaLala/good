@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'settingmainframes.h'
 **
-** Created: Wed 6. Mar 23:21:12 2013
+** Created: Sun 10. Mar 09:25:23 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!

@@ -5,163 +5,41 @@ MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::MainWindow)
 {
-
         ui->setupUi(this);
-
         this->initValues();
-           this->initialConnections();
+        this->initialConnections();
         this->elementHide();
-         worker->start();
+        worker->start(); // start exec()
         this->createWindows();
-
-
-
-        connect(this->worker,SIGNAL(infoIsReady(double,double)),this,SLOT(infoGetting(double,double)));
-
-
-        //this->menuAbout->addAction("&About QT",this,SLOT (this->aboutProgram()));
 }
-
+MainWindow::~MainWindow()
+{
+        this->infoFrame->destroyThis();
+        this->setSartStopImegeGetting(false);
+        this->worker->working (false);
+        delete ui;
+}
+// events
 void MainWindow::showEvent(QShowEvent *event){
-        this->setPalette(configInformation::getpalleteAllWindows());
-        this->setFont(configInformation::getfont());
-        this->repaint();
+        this->initPalette ();
         this->readSettingCaprure();
-
-        if(ui->processingImageShow->isChecked ())
+        if(ui->processingImageShow->isChecked ()) // show capture frame
                 {
                         this->setSartStopImegeGetting (true);
                 }
 
 }
-
 void MainWindow::closeEvent(QCloseEvent *event= NULL){
 
         this->worker->setCalculation (false);
-       this->worker->working(false);
-       this->setSartStopImegeGetting(false);
+        this->worker->working(false);
+        this->setSartStopImegeGetting(false);
 
 
 
 
 }
-void MainWindow::readSettingCaprure(){
-        this->enabledResize = configInformation::getEnabledResize();
-        this->x1Resize=configInformation::getX1Resize();
-        this->y1Resize=configInformation::getY1Resize();
-        this->frameWidth=configInformation::getframeWidth();
-        this->frameHight=configInformation::getframeHight();
-        this->frameWidthResize=configInformation::getframeWidthResize();
-        this->frameHightResize=configInformation::getframeHightResize();
-        this->coefficient = configInformation::getcoefficient();
-        this->coefficientResize = configInformation::getcoefficientResize();
-        this->choisedCaptureNumber = 0; // ini read !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-}
-// init
-void MainWindow::initialMenuCapture()
-{
-        this->numberOfCapture = this->findCapture();
-        this->ui->menuChoise_capture->clear();
-
-        for (int i=0 ;i<this->numberOfCapture;i++){
-                this->menuCaptureArray.append( new QAction (QString::number(i+1), this->ui->menuChoise_capture));
-                ui->comboBox->addItem (QString::number (i+1));
-
-        }
-
-        ui->menuChoise_capture->addActions(this->menuCaptureArray);
-
-}
-void MainWindow::initialConnections()
-{
-
-        connect(ui->spinBox,SIGNAL(valueChanged(int)),ui->horizontalSlider,SLOT(setValue(int)));
-        connect(ui->horizontalSlider,SIGNAL(valueChanged(int)),ui->spinBox,SLOT(setValue(int)));
-        connect(ui->actionDisable_capture,SIGNAL(triggered()),this,SLOT (captureOff()));
-        connect(ui->actionHide_capture,SIGNAL(triggered()),this,SLOT(hideCapture()));
-        connect(ui->actionShow_capture,SIGNAL(triggered()),this,SLOT(showCapture()));
-        connect(ui->actionInformation,SIGNAL(triggered()),this,SLOT(showInfoFrame()));
-        connect(ui->actionConfiguration_of_program,SIGNAL(triggered()),this ,SLOT(showSettingFrame()));
-        connect(ui->actionConfiguration_of_capture,SIGNAL(triggered()),this,SLOT(showSettingCapture()));
-        connect (ui->actionTo_graphik,SIGNAL(triggered()),SLOT (showOpenGLGraph()));
-        connect( ui->processingImageShow,SIGNAL(toggled(bool)),this,SLOT(setSartStopImegeGetting(bool)));
- //       connect(ui->startCalculation,SIGNAL(toggled(bool)), this->worker,SLOT(setCalculation(bool)));
-        connect (ui->pushButton, SIGNAL(clicked()), this->worker,SLOT(getImage()));
-
-
-
-
-
-
-}
-void MainWindow::createWindows(){
-        this-> gr = new OpenglGraph(this->worker);
-        this->infoFrame=new InfoFrame(this);
-        this->settingMainFrames = new SettingMainFrames(this);
-        this->settingCaptureFrame = new SettingCaptureFrame(this->worker, this);
-}
-void MainWindow::initValues()
-{
-        this->worker = new ImageProcessing();
-        this->timeToWork = 100;
-        //this->timerPeriod = 100;
-        ui->spinBox->setRange(1,this->timeToWork);
-        ui->horizontalSlider->setRange(1,this->timeToWork);
-        this->initialMenuCapture();
-        //this->timerCapture = new QTimer(this);
-        this->showImage();
-
-
-
-
-}
-
-
-// menu capture
-void MainWindow::captureOff()
-{
-        this->worker->working (false);
-}
-void MainWindow::captureChoised(int value)
-{
-   //     worker->setChoisedCpture (value);
-        qDebug ()<<value;
-
-}
-
-// Cheking capture !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-void MainWindow::on_pushButton_clicked()
-{
-        this->worker->setChoisedCpture (this->ui->comboBox->currentIndex ());
-        this->worker->setCalculation (true);
-        this->worker->working(true);
-}
-bool MainWindow::okToContinue(QString Msg){
-        qint32 answer = QMessageBox::warning(this,tr("Увага!"),Msg.toLocal8Bit().constData(),
-                                             QMessageBox::Yes,QMessageBox::No);
-        if (answer== QMessageBox::Yes) return true;
-        return false;
-}
-
-//start/stop analiz.
-void MainWindow::on_buttonStart_clicked()
-{
-
-
-
-}
-void MainWindow::on_buttonStop_clicked()
-{
-
-        if (this->okToContinue(tr("Ви впевнені, що хочете завершити аналіз?")))
-                {
-
-
-                }
-
-}
-
-
+//signal getting
 void MainWindow::imageGetting(IplImage *img)
 {
         uchar* data = NULL;
@@ -182,6 +60,71 @@ void MainWindow::infoGetting(double count, double diametr){
 
 }
 
+// init
+void MainWindow::initValues()
+{
+        this->worker = new ImageProcessing();
+        this->timeToWork = 100;
+        ui->spinBox->setRange(1,this->timeToWork);
+        ui->horizontalSlider->setRange(1,this->timeToWork);
+        this->initialMenuCapture();
+        this->showImage();
+
+}
+void MainWindow::initialMenuCapture()
+{
+        this->numberOfCapture = this->findCapture();
+        this->ui->menuChoise_capture->clear();
+        for (int i=0 ;i<this->numberOfCapture;i++){
+                this->menuCaptureArray.append( new QAction (QString::number(i+1), this->ui->menuChoise_capture));
+                ui->comboBox->addItem (QString::number (i+1));
+        }
+        ui->menuChoise_capture->addActions(this->menuCaptureArray);
+}
+void MainWindow::initialConnections()
+{
+        connect(ui->spinBox,SIGNAL(valueChanged(int)),ui->horizontalSlider,SLOT(setValue(int))); // spinBox => slider
+        connect(ui->horizontalSlider,SIGNAL(valueChanged(int)),ui->spinBox,SLOT(setValue(int)));//slider =>spinBoox
+        connect(ui->actionDisable_capture,SIGNAL(triggered()),this,SLOT (captureStop())); // menu =>disable capture
+        connect(ui->actionHide_capture,SIGNAL(triggered()),this,SLOT(hideCapture()));//menu => hide capture
+        connect(ui->actionShow_capture,SIGNAL(triggered()),this,SLOT(showCapture()));// menu =>show capture
+        connect( ui->processingImageShow,SIGNAL(toggled(bool)),this,SLOT(setSartStopImegeGetting(bool))); // show/hide capture
+        connect(ui->actionInformation,SIGNAL(triggered()),this,SLOT(showInfoFrame()));// ??????????????????????????????????????????????????????????
+        connect(ui->actionConfiguration_of_program,SIGNAL(triggered()),this ,SLOT(showSettingFrame()));// menu => setting Frame
+        connect(ui->actionConfiguration_of_capture,SIGNAL(triggered()),this,SLOT(showSettingCapture()));//menu capture Frame
+        connect (ui->actionTo_graphik,SIGNAL(triggered()),SLOT (showOpenGLGraph()));//menu =? OpenGL
+        connect(ui->buttonCaptureStart,SIGNAL(clicked()),this,SLOT(captureStart()));
+        connect (ui->buttonCaptureStart, SIGNAL(clicked()), this->worker,SLOT(getImage())); // starting getting capture frame
+        connect(this->ui->comboBox,SIGNAL(currentIndexChanged(int)),this->worker,SLOT(setChoisedCpture(int)));//set choised capture in worker
+        connect (ui->buttonAnalizStart,SIGNAL(clicked()),this,SLOT(calculateImagesStart())); //start analiz=> (set no gui)
+        connect (ui->buttonAnalizStop,SIGNAL(clicked()),this,SLOT(calculateImageStop()));//stop analiz =>(set no gui)
+}
+void MainWindow::initPalette ()
+{
+        this->setPalette(configInformation::getpalleteAllWindows());
+        this->setFont(configInformation::getfont());
+        this->repaint();
+}
+void MainWindow::createWindows(){
+        this-> gr = new OpenglGraph(this->worker);
+        this->infoFrame=new InfoFrame(this);
+        this->settingMainFrames = new SettingMainFrames(this);
+        this->settingCaptureFrame = new SettingCaptureFrame(this->worker, this);
+}
+
+void MainWindow::readSettingCaprure(){
+        /* this->enabledResize = configInformation::getEnabledResize();
+        this->x1Resize=configInformation::getX1Resize();
+        this->y1Resize=configInformation::getY1Resize();
+        this->frameWidth=configInformation::getframeWidth();
+        this->frameHight=configInformation::getframeHight();
+        this->frameWidthResize=configInformation::getframeWidthResize();
+        this->frameHightResize=configInformation::getframeHightResize();
+        this->coefficient = configInformation::getcoefficient();
+        this->coefficientResize = configInformation::getcoefficientResize();
+*/
+}
+
 //first hide/show element
 void MainWindow::elementHide()
 {
@@ -194,20 +137,17 @@ void MainWindow::elemetShow(){
         ui->menuExport->setVisible(true);
 }
 
-//timer + show on frame
-qint8 MainWindow::findCapture(){
-        CvCapture *cap_temp;
-        int   tmpNumberOfCapture  =0;
-        while (1)
-                {
-                        cap_temp=cvCreateCameraCapture(tmpNumberOfCapture++);
-                        if (cap_temp==NULL) break;
-                        cvReleaseCapture(&cap_temp);
-                }
-        tmpNumberOfCapture--;
-        return tmpNumberOfCapture;
+// function to call
+void MainWindow::showCapture()//  show captureframe
+{
+
+        this->ui->processingImageShow->setChecked (true);
 }
-void MainWindow::setSartStopImegeGetting(bool enabled)
+void MainWindow::hideCapture() //hide capture frame
+{
+        ui->processingImageShow->setChecked (false);
+}
+void MainWindow::setSartStopImegeGetting(bool enabled)//calling function
 {
         if (enabled){
                 qDebug ()<<"enable gettin image";
@@ -215,24 +155,56 @@ void MainWindow::setSartStopImegeGetting(bool enabled)
 
         }
         else {
-                 qDebug ()<<"disable gettin image";
+                qDebug ()<<"disable gettin image";
                 disconnect(this->worker,SIGNAL(imageIsReady( IplImage*)),this,SLOT(imageGetting( IplImage*)));
                 this->showImage();
         }
 }
-
-void MainWindow::showCapture()// ????????????????????????
+void MainWindow::showImage()//show image from resourse
 {
-        this->showImageJpg=false;
-}
-void MainWindow::hideCapture()
-{
-        this->showImageJpg= true;
-        this->showImage();
-}
-void MainWindow::showImage(){
         ui->capturePicture->setPixmap(QPixmap(":/image/4x.jpg"));
+}
+void MainWindow::captureStop()
+{
+        this->worker->working (false);
+}
+void MainWindow::captureStart ()
+{
+        this->worker->working(true);
+        this->worker->setCalculation (false);
 
+}
+void MainWindow::calculateImagesStart ()
+{
+
+        this->workingTime= 1000*60*ui->spinBox->value ();
+        this->workingTimeDelta = qCeil (this->workingTime/100.0);
+        this->worker->setCalculation (true);
+        connect(this->worker,SIGNAL(infoIsReady(double,double)),this,SLOT(infoGetting(double,double)));
+        QTimer::singleShot (this->workingTimeDelta,this,SLOT(progressBarChange()));
+
+}
+void MainWindow::calculateImageStop ()
+{
+        this->captureStop ();
+
+}
+void MainWindow::progressBarChange ()
+{
+        this->workingTime-=this->workingTimeDelta;
+        qDebug ()<<this->workingTime;
+        if ( this->workingTime>this->workingTimeDelta)
+                {
+                        ui->progressBar->setValue (ui->progressBar->value ()-1);
+                        QTimer::singleShot (this->workingTimeDelta,this,SLOT(progressBarChange()));
+
+                }
+        else
+                {
+                        ui->progressBar->setValue (0);
+                        this-> calculateImageStop();
+                        this->on_buttonAnalizStop_clicked ();
+                }
 }
 
 //frames
@@ -264,24 +236,25 @@ void MainWindow::showOpenGLGraph(){
 
 }
 
-void MainWindow::showing()
-{
-
-        this->show();
-}
-
-
-MainWindow::~MainWindow()
-{
-       this->infoFrame->destroyThis();
-        this->setSartStopImegeGetting(false);
-        this->worker->working (false);
-        //delete frame;
-        delete ui;
-}
-
 // aditional function
-
+qint8 MainWindow::findCapture(){
+        CvCapture *cap_temp;
+        int   tmpNumberOfCapture  =0;
+        while (1)
+                {
+                        cap_temp=cvCreateCameraCapture(tmpNumberOfCapture++);
+                        if (cap_temp==NULL) break;
+                        cvReleaseCapture(&cap_temp);
+                }
+        tmpNumberOfCapture--;
+        return tmpNumberOfCapture;
+}
+bool MainWindow::okToContinue(QString Msg){
+        qint32 answer = QMessageBox::warning(this,tr("Увага!"),Msg.toLocal8Bit().constData(),
+                                             QMessageBox::Yes,QMessageBox::No);
+        if (answer== QMessageBox::Yes) return true;
+        return false;
+}
 IplImage* MainWindow::QImageToIplImage(const QImage * qImage)
 {
         int width = qImage->width();
@@ -479,25 +452,18 @@ QImage* MainWindow::IplImageToQImage(const IplImage * iplImage, uchar **data,
         return qImage;
 }
 
-
-void MainWindow::on_pushButton_2_clicked()
-{
-        this->worker->working(false);
-}
-
 void MainWindow::on_startCalculation_clicked()
 {
-        if (ui->startCalculation->isChecked ())
+        if (true)
                 {
                         this->worker->working (true);
 
                         ui->menuSetting->setEnabled(false);
                         ui->menuCapture->setEnabled(false);
-                        ui->checkBox->setEnabled(false);
-                        ui->spinBox->setEnabled (false);
-                        ui->startCalculation->setText ("Зупинити аналіз");
+
+                        //    ui->startCalculation->setText ("Зупинити аналіз");
                         this->worker->getImage ();
-                       /*  QTimer::singleShot (this->ui->spinBox->value (),this,SLOT(on_startCalculation_clicked));*/
+                        /*  QTimer::singleShot (this->ui->spinBox->value (),this,SLOT(on_startCalculation_clicked));*/
 
                         this->workingPeriod->start ();
 
@@ -506,20 +472,34 @@ void MainWindow::on_startCalculation_clicked()
         else{
                 this->worker->setCalculation (false);
                 this->worker->working(false);
-                 this->setSartStopImegeGetting(false);
+                this->setSartStopImegeGetting(false);
                 ui->menuSetting->setEnabled(true);
                 ui->menuCapture->setEnabled(true);
-                ui->checkBox->setEnabled(true);
-                ui->spinBox->setEnabled (true);
-                ui->startCalculation->setText ("Розпочати аналіз");
+
+                //  ui->startCalculation->setText ("Розпочати аналіз");
 
         }
 
 
 }
 
+// button click f.
+void MainWindow::on_buttonAnalizStart_clicked()
+{
+        ui->buttonAnalizStop->setEnabled (true);
+        ui->buttonAnalizStart->setEnabled (false);
 
-void MainWindow::end()
+
+}
+void MainWindow::on_buttonAnalizStop_clicked()
+{
+        ui->frame->setEnabled (false);
+        ui->progressBar->setValue (100);
+}
+void MainWindow::on_buttonCaptureStart_clicked()
 {
 
+        ui->frame->setEnabled (true);
+        ui->buttonAnalizStart->setEnabled (true);
+        this->ui->buttonAnalizStop->setEnabled (false);
 }

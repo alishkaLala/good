@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'settingcaptureframe.ui'
 **
-** Created: Wed 6. Mar 23:20:47 2013
+** Created: Sun 10. Mar 09:24:58 2013
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -41,7 +41,7 @@ public:
     QSpinBox *spinBox;
     QGroupBox *groupBox;
     QVBoxLayout *verticalLayout;
-    QPushButton *defRect;
+    QPushButton *buttonSetROI;
     QGroupBox *groupBox_6;
     QGridLayout *gridLayout;
     QLabel *labelX1;
@@ -50,15 +50,15 @@ public:
     QLabel *labelX2;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_2;
-    QPushButton *defDistInPixels;
+    QPushButton *buttonSetDistance;
     QLabel *label_4;
     QLabel *pixels;
     QGroupBox *groupBox_3;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_5;
     QSpinBox *widthCaptureWindow;
-    QPushButton *pushButtonOk;
-    QPushButton *pushButtonStart;
+    QPushButton *buttonSizeApply;
+    QPushButton *buttonRestartTrySet;
     QGroupBox *groupBox_4;
     QVBoxLayout *verticalLayout_2;
     QPushButton *SettingApply;
@@ -109,10 +109,10 @@ public:
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         verticalLayout = new QVBoxLayout(groupBox);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        defRect = new QPushButton(groupBox);
-        defRect->setObjectName(QString::fromUtf8("defRect"));
+        buttonSetROI = new QPushButton(groupBox);
+        buttonSetROI->setObjectName(QString::fromUtf8("buttonSetROI"));
 
-        verticalLayout->addWidget(defRect);
+        verticalLayout->addWidget(buttonSetROI);
 
 
         gridLayout_4->addWidget(groupBox, 1, 0, 1, 1);
@@ -148,10 +148,10 @@ public:
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         gridLayout_2 = new QGridLayout(groupBox_2);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        defDistInPixels = new QPushButton(groupBox_2);
-        defDistInPixels->setObjectName(QString::fromUtf8("defDistInPixels"));
+        buttonSetDistance = new QPushButton(groupBox_2);
+        buttonSetDistance->setObjectName(QString::fromUtf8("buttonSetDistance"));
 
-        gridLayout_2->addWidget(defDistInPixels, 0, 0, 1, 2);
+        gridLayout_2->addWidget(buttonSetDistance, 0, 0, 1, 2);
 
         label_4 = new QLabel(groupBox_2);
         label_4->setObjectName(QString::fromUtf8("label_4"));
@@ -180,18 +180,18 @@ public:
 
         horizontalLayout_3->addWidget(widthCaptureWindow);
 
-        pushButtonOk = new QPushButton(groupBox_3);
-        pushButtonOk->setObjectName(QString::fromUtf8("pushButtonOk"));
+        buttonSizeApply = new QPushButton(groupBox_3);
+        buttonSizeApply->setObjectName(QString::fromUtf8("buttonSizeApply"));
 
-        horizontalLayout_3->addWidget(pushButtonOk);
+        horizontalLayout_3->addWidget(buttonSizeApply);
 
 
         gridLayout_4->addWidget(groupBox_3, 4, 0, 1, 1);
 
-        pushButtonStart = new QPushButton(SettingCaptureFrame);
-        pushButtonStart->setObjectName(QString::fromUtf8("pushButtonStart"));
+        buttonRestartTrySet = new QPushButton(SettingCaptureFrame);
+        buttonRestartTrySet->setObjectName(QString::fromUtf8("buttonRestartTrySet"));
 
-        gridLayout_4->addWidget(pushButtonStart, 6, 0, 1, 1);
+        gridLayout_4->addWidget(buttonRestartTrySet, 6, 0, 1, 1);
 
         groupBox_4 = new QGroupBox(SettingCaptureFrame);
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
@@ -263,22 +263,22 @@ public:
         SettingCaptureFrame->setWindowTitle(QApplication::translate("SettingCaptureFrame", "Form", 0, QApplication::UnicodeUTF8));
         groupBox_5->setTitle(QString());
         label_2->setText(QApplication::translate("SettingCaptureFrame", "\320\272\321\226\320\273\321\214\320\272\321\226\321\201\321\202\321\214 \320\274\321\226\320\273\321\226\320\274\320\265\321\202\321\200\321\226\320\262", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("SettingCaptureFrame", "\320\277\320\265\321\200\321\226\320\276\320\264 \320\262\320\267\321\217\321\202\321\202\321\217 \320\272\320\260\320\264\321\200\321\203", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("SettingCaptureFrame", "\320\267\320\260\321\202\321\200\320\274\320\272\320\260 \320\267\320\260\321\205\320\276\320\277\320\273\320\265\320\275\320\275 \320\272\320\260\320\264\321\200\321\203", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QString());
-        defRect->setText(QApplication::translate("SettingCaptureFrame", "\320\262\320\270\320\267\320\275\320\260\321\207\320\270\321\202\320\270 \320\275\320\265\320\276\320\261\321\205\321\226\320\264\320\275\321\203 \320\276\320\261\320\273\320\260\321\201\321\202\321\214 \320\272\320\260\320\274\320\265\321\200\320\270", 0, QApplication::UnicodeUTF8));
+        buttonSetROI->setText(QApplication::translate("SettingCaptureFrame", "\320\262\320\270\320\267\320\275\320\260\321\207\320\270\321\202\320\270 \320\275\320\265\320\276\320\261\321\205\321\226\320\264\320\275\321\203 \320\276\320\261\320\273\320\260\321\201\321\202\321\214 \320\272\320\260\320\274\320\265\321\200\320\270", 0, QApplication::UnicodeUTF8));
         groupBox_6->setTitle(QApplication::translate("SettingCaptureFrame", "\320\272\320\276\320\276\321\200\320\264\320\270\320\275\320\260\321\202\320\270", 0, QApplication::UnicodeUTF8));
         labelX1->setText(QApplication::translate("SettingCaptureFrame", "x1=", 0, QApplication::UnicodeUTF8));
         labelY1->setText(QApplication::translate("SettingCaptureFrame", "y1=", 0, QApplication::UnicodeUTF8));
         labelY2->setText(QApplication::translate("SettingCaptureFrame", "y2=", 0, QApplication::UnicodeUTF8));
         labelX2->setText(QApplication::translate("SettingCaptureFrame", "x2=", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QString());
-        defDistInPixels->setText(QApplication::translate("SettingCaptureFrame", "\320\262\320\270\320\267\320\275\320\260\321\207\320\270\321\202\320\270 \320\272\321\226\320\273\321\214\320\272\321\226\321\201\321\202\321\214 \320\277\321\226\320\272\321\201\320\265\320\273\321\226\320\262", 0, QApplication::UnicodeUTF8));
+        buttonSetDistance->setText(QApplication::translate("SettingCaptureFrame", "\320\262\320\270\320\267\320\275\320\260\321\207\320\270\321\202\320\270 \320\272\321\226\320\273\321\214\320\272\321\226\321\201\321\202\321\214 \320\277\321\226\320\272\321\201\320\265\320\273\321\226\320\262", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("SettingCaptureFrame", "\320\272\321\226\320\273\321\214\320\272\321\226\321\201\321\202\321\214 \320\277\321\226\320\272\321\201\320\265\320\273\321\226\320\262 ", 0, QApplication::UnicodeUTF8));
         pixels->setText(QApplication::translate("SettingCaptureFrame", "53748757", 0, QApplication::UnicodeUTF8));
         groupBox_3->setTitle(QApplication::translate("SettingCaptureFrame", "\320\261\320\260\320\266\320\260\320\275\320\270\320\271 \321\200\320\276\320\267\320\274\321\226\321\200 \320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\275\321\217", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("SettingCaptureFrame", "\320\234\320\260\321\201\321\210\321\202\320\260\320\261", 0, QApplication::UnicodeUTF8));
-        pushButtonOk->setText(QApplication::translate("SettingCaptureFrame", "\320\267\320\260\321\201\321\202\320\276\321\201\321\203\320\262\320\260\321\202\320\270", 0, QApplication::UnicodeUTF8));
-        pushButtonStart->setText(QApplication::translate("SettingCaptureFrame", "\321\201\320\277\320\276\321\207\320\260\321\202\320\272\321\203", 0, QApplication::UnicodeUTF8));
+        buttonSizeApply->setText(QApplication::translate("SettingCaptureFrame", "\320\267\320\260\321\201\321\202\320\276\321\201\321\203\320\262\320\260\321\202\320\270", 0, QApplication::UnicodeUTF8));
+        buttonRestartTrySet->setText(QApplication::translate("SettingCaptureFrame", "\321\201\320\277\320\276\321\207\320\260\321\202\320\272\321\203", 0, QApplication::UnicodeUTF8));
         groupBox_4->setTitle(QString());
         SettingApply->setText(QApplication::translate("SettingCaptureFrame", "\320\267\320\260\321\201\321\202\320\276\321\201\321\203\320\262\320\260\321\202\320\270 \320\275\320\260\320\273\320\260\321\210\321\202\321\203\320\262\320\260\320\275\320\275\321\217", 0, QApplication::UnicodeUTF8));
         SettingCansel->setText(QApplication::translate("SettingCaptureFrame", "\320\262\321\226\320\264\320\274\321\226\320\275\320\270\321\202\320\270 \320\275\320\260\320\273\320\260\321\210\321\202\321\203\320\262\320\260\320\275\320\275\321\217", 0, QApplication::UnicodeUTF8));

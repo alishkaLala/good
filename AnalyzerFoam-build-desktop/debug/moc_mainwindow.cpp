@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Wed 6. Mar 23:21:08 2013
+** Created: Sun 10. Mar 11:43:48 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      18,   14, // methods
+      19,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -31,41 +31,42 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      12,   11,   11,   11, 0x08,
-      32,   11,   11,   11, 0x08,
-      56,   11,   11,   11, 0x08,
+      16,   12,   11,   11, 0x08,
+      54,   40,   11,   11, 0x08,
       81,   11,   11,   11, 0x08,
-     105,   11,   11,   11, 0x08,
-     118,   11,   11,   11, 0x08,
-     132,   11,   11,   11, 0x08,
-     146,   11,   11,   11, 0x08,
-     165,   11,   11,   11, 0x08,
-     181,   11,   11,   11, 0x08,
-     200,   11,   11,   11, 0x08,
-     221,   11,   11,   11, 0x08,
-     243,  239,   11,   11, 0x08,
-     275,  267,   11,   11, 0x08,
-     319,  305,   11,   11, 0x08,
-     346,   11,   11,   11, 0x08,
-     372,   11,   11,   11, 0x08,
-     402,   11,   11,   11, 0x08,
+      95,   11,   11,   11, 0x08,
+     109,   11,   11,   11, 0x08,
+     131,  123,   11,   11, 0x08,
+     161,   11,   11,   11, 0x08,
+     176,   11,   11,   11, 0x08,
+     199,   11,   11,   11, 0x08,
+     220,   11,   11,   11, 0x08,
+     240,   11,   11,   11, 0x08,
+     259,   11,   11,   11, 0x08,
+     275,   11,   11,   11, 0x08,
+     294,   11,   11,   11, 0x08,
+     315,   11,   11,   11, 0x08,
+     333,   11,   11,   11, 0x08,
+     363,   11,   11,   11, 0x08,
+     394,   11,   11,   11, 0x08,
+     424,   11,   11,   11, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_MainWindow[] = {
-    "MainWindow\0\0captureChoised(int)\0"
-    "on_pushButton_clicked()\0"
-    "on_buttonStart_clicked()\0"
-    "on_buttonStop_clicked()\0captureOff()\0"
-    "hideCapture()\0showCapture()\0"
+    "MainWindow\0\0img\0imageGetting(IplImage*)\0"
+    "count,diametr\0infoGetting(double,double)\0"
+    "captureStop()\0hideCapture()\0showCapture()\0"
+    "enabled\0setSartStopImegeGetting(bool)\0"
+    "captureStart()\0calculateImagesStart()\0"
+    "calculateImageStop()\0progressBarChange()\0"
     "showAboutProgram()\0showInfoFrame()\0"
     "showSettingFrame()\0showSettingCapture()\0"
-    "showOpenGLGraph()\0img\0imageGetting(IplImage*)\0"
-    "enabled\0setSartStopImegeGetting(bool)\0"
-    "count,diametr\0infoGetting(double,double)\0"
-    "on_pushButton_2_clicked()\0"
-    "on_startCalculation_clicked()\0end()\0"
+    "showOpenGLGraph()\0on_startCalculation_clicked()\0"
+    "on_buttonAnalizStart_clicked()\0"
+    "on_buttonAnalizStop_clicked()\0"
+    "on_buttonCaptureStart_clicked()\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -97,27 +98,28 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: captureChoised((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 1: on_pushButton_clicked(); break;
-        case 2: on_buttonStart_clicked(); break;
-        case 3: on_buttonStop_clicked(); break;
-        case 4: captureOff(); break;
-        case 5: hideCapture(); break;
-        case 6: showCapture(); break;
-        case 7: showAboutProgram(); break;
-        case 8: showInfoFrame(); break;
-        case 9: showSettingFrame(); break;
-        case 10: showSettingCapture(); break;
-        case 11: showOpenGLGraph(); break;
-        case 12: imageGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
-        case 13: setSartStopImegeGetting((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 14: infoGetting((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;
-        case 15: on_pushButton_2_clicked(); break;
-        case 16: on_startCalculation_clicked(); break;
-        case 17: end(); break;
+        case 0: imageGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
+        case 1: infoGetting((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;
+        case 2: captureStop(); break;
+        case 3: hideCapture(); break;
+        case 4: showCapture(); break;
+        case 5: setSartStopImegeGetting((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 6: captureStart(); break;
+        case 7: calculateImagesStart(); break;
+        case 8: calculateImageStop(); break;
+        case 9: progressBarChange(); break;
+        case 10: showAboutProgram(); break;
+        case 11: showInfoFrame(); break;
+        case 12: showSettingFrame(); break;
+        case 13: showSettingCapture(); break;
+        case 14: showOpenGLGraph(); break;
+        case 15: on_startCalculation_clicked(); break;
+        case 16: on_buttonAnalizStart_clicked(); break;
+        case 17: on_buttonAnalizStop_clicked(); break;
+        case 18: on_buttonCaptureStart_clicked(); break;
         default: ;
         }
-        _id -= 18;
+        _id -= 19;
     }
     return _id;
 }

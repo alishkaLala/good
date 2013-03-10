@@ -53,7 +53,7 @@ private:
         void translate_up();   // транслировать сцену вверх
         void defaultScene();   // наблюдение сцены по умолчанию
         void drawAxis();
-        void draw();
+
 
         GLfloat zTra; // переменна€ хранит величину трансл€ции оси Z
         GLfloat nSca; // переменна€ отвечает за масштабирование обьекта

@@ -5,68 +5,54 @@ ImageProcessing::ImageProcessing(QObject *parent) :
 {
         this->choisedCapture= 0;
         this->isWorking=false;
-       // this->calculateImage= false;
+        this->calculateImage= false;
         this->kadrProssesd = 0;
         k1= 0.027;
         k2 = 0.65;
-        x = 389,y = 292;
-        this->widthResize= 100;
-        this->heigthResize= 100;
-        this->delay= 1000;
+        width = 389,heigth = 292;
+        this->widthROI= 100;
+        this->heigthROI= 100;
+        this->delay= 1;
 }
 
-void ImageProcessing::setCalculation (bool value)
-{
-        this->calculateImage= value;
-        this->kadrProssesd = 0;
-        qDebug ()<<"get Signal to calculate :  "<<value;
-}
-void ImageProcessing::setChoisedCpture (int value)
-{
-        this->choisedCapture =  value;
-}
 void ImageProcessing::run()
 {
         exec();
 }
+
+//main working funktion
 void ImageProcessing::getImage()
 {
-        int number = this->choisedCapture;
         IplImage* frame =0;
-        char filename[512];
-        capture = cvCreateCameraCapture(number);
+        capture = cvCreateCameraCapture (this->choisedCapture);
         cvNamedWindow("capture", CV_WINDOW_AUTOSIZE);
-        frame = cvLoadImage("4.jpg",CV_LOAD_IMAGE_COLOR);
+        this->realyWork= true;
+        // frame = cvLoadImage("4.jpg",CV_LOAD_IMAGE_COLOR);
         this->captureWidth=  cvGetCaptureProperty (this->capture,3);
         this->captureHeight= cvGetCaptureProperty (this->capture,4);
         qDebug ()<< "capture size : "<< this->captureWidth<<"*"<<this->captureHeight;
-        unsigned long int k=0;
+        this->kadrProssesd =0;
         while(isWorking){
                 frame = cvQueryFrame( capture );
-                //frame = cvLoadImage("4.jpg",CV_LOAD_IMAGE_COLOR);
                 if (frame ==NULL)
                         {
                                 qDebug ()<<" capture broken";
                                 this->isWorking = false;
                                 break;
                         }
-                IplImage *src = cvCreateImage(cvSize(x,y),frame->depth,frame->nChannels);
+                IplImage *src = cvCreateImage(cvSize(width,heigth),frame->depth,frame->nChannels);
                 cvResize(frame,src,CV_INTER_LINEAR);
                 if (this->enabledResize)
                         {
                                 cvSetImageROI (src,
-                                               cvRect(x1,y1,this->widthResize,this->heigthResize)
+                                               cvRect(x1,y1,this->widthROI,this->heigthROI)
                                                );
-                                cvCopyImage(src, src);
                         }
                 cvShowImage("capture", src);
-                //if (this->calculateImage)
-                if (true)
+                if (this->calculateImage)
                         {
-
                                 int countBell=0;
                                 double averageDiametr =0;
-                                IplImage* hsv = cvCreateImage( cvGetSize(src), 8, 3 );// зображенн€ в формат≥ HSV
                                 IplImage* h_plane = cvCreateImage( cvGetSize(src), 8, 1 );// канал H
                                 IplImage* s_plane = cvCreateImage( cvGetSize(src), 8, 1 );// канал S
                                 IplImage* v_plane = cvCreateImage( cvGetSize(src), 8, 1 );// канал V
@@ -74,36 +60,39 @@ void ImageProcessing::getImage()
                                 IplImage* s_can = cvCreateImage( cvGetSize(src), 8, 1 ); // п≥ксел≥ границ
                                 IplImage* v_can = cvCreateImage( cvGetSize(src), 8, 1 ); // п≥ксел≥ границ
                                 IplImage* sum_can = cvCreateImage( cvGetSize(src), 8, 1 ); // п≥ксел≥ границ
-                                IplImage* s = cvCreateImage( cvGetSize(src), 8, 1 ); // п≥ксел≥ границ
                                 int b=0,a=0;
                                 cvCvtPixToPlane( src, h_plane, s_plane, v_plane, 0 ); //RGB  канали
-                                k++;
-                                qDebug ()<<"kadr :"<<k<<"CAPURE SIZE :"<<x<<"*"<<y<< " use k1= "<<k1 <<"k2 =  "<<k2 << "with delay: "<<this->delay;
+                                this->kadrProssesd++;
+                                qDebug ()<<"kadr :"<<this->kadrProssesd<<"CAPURE SIZE :"<<width<<"*"<<heigth<< " use k1= "<<k1 <<"k2 =  "<<k2 << "with delay: "<<this->delay;
                                 Canal_contur * pr1 = new Canal_contur(v_plane,v_can,11,a,b,k1,k2);//запускати окремими потоками
                                 Canal_contur * pr2 = new Canal_contur(h_plane,h_can,11,a,b,k1,k2);//запускати окремими потоками
                                 Canal_contur *pr3 = new Canal_contur(s_plane,s_can,11,a,b,k1,k2);//запускати окремими потоками
                                 pr1->wait();
                                 pr2->wait();
                                 pr3->wait();
-                                sum_can=v_can;
-                                cvOr(sum_can,v_can,sum_can);cvOr(sum_can,h_can,sum_can);cvOr(sum_can,s_can,sum_can);
+                                cvReleaseImage(&h_plane);cvReleaseImage(&s_plane);cvReleaseImage(&v_plane);
+                                cvOr(v_can,h_can,sum_can);
+                                cvOr(sum_can,s_can,sum_can);
+                                cvReleaseImage(&h_can);cvReleaseImage(&s_can);cvReleaseImage(&v_can);
                                 cvShowImage("summa_first",sum_can);
                                 CvMemStorage* storage = cvCreateMemStorage(0);CvSeq* contours=0;
                                 cvFindContours( sum_can, storage,&contours,sizeof(CvContour),CV_RETR_EXTERNAL,CV_CHAIN_APPROX_SIMPLE,cvPoint(0,0));
-                                for(CvSeq* seq0 = contours;seq0!=0;seq0 = seq0->h_next){
-                                        int count = seq0->total; if( count < 10 ) continue;
-                                        cvDrawContours(sum_can, seq0, cvScalar(255), cvScalar(255), 0, CV_FILLED, 8); // рисуем контур
-                                }
+                                for(CvSeq* seq0 = contours;seq0!=0;seq0 = seq0->h_next)
+                                        {
+                                                int count = seq0->total; if( count < 10 ) continue;
+                                                cvDrawContours(sum_can, seq0, cvScalar(255), cvScalar(255), 0, CV_FILLED, 8); // рисуем контур
+                                        }
+                                cvReleaseMemStorage( &storage );//в прикладах контур contours не зв≥льн€ють????
                                 cvShowImage("summa_x",sum_can);
                                 int radius = 1,iterations=1;
                                 IplConvKernel* Kern = cvCreateStructuringElementEx(radius*2+1, radius*2+1, radius, radius, CV_SHAPE_ELLIPSE);
                                 cvErode(sum_can, sum_can, Kern, iterations);
                                 cvDilate(sum_can, sum_can, Kern, iterations);
+                                cvReleaseStructuringElement(&Kern);//---------
                                 cvShowImage("summa_s",sum_can);
                                 storage = cvCreateMemStorage(0); contours=0;
                                 cvFindContours( sum_can, storage,&contours,sizeof(CvContour),CV_RETR_EXTERNAL,CV_CHAIN_APPROX_SIMPLE,cvPoint(0,0));
                                 for(CvSeq* seq0 = contours;seq0!=0;seq0 = seq0->h_next){
-
                                         int count = seq0->total;
                                         CvPoint center;CvSize size;CvBox2D box;
                                         if( count < 10 ) continue;
@@ -122,11 +111,12 @@ void ImageProcessing::getImage()
                                         cvReleaseMat(&points_f);
                                 }
                                 cvShowImage("7kontur",src);
-
                                 emit this->imageCalculateReady (src);
                                 delete  pr1;
                                 delete  pr2;
                                 delete  pr3;
+                                cvReleaseImage(&sum_can);
+                                cvReleaseMemStorage( &storage );
                                 emit infoIsReady (countBell*0.1,2.0 *averageDiametr/countBell);
                                 qDebug ()<<"count Bell "<< countBell<<"average diametr = " <<3*averageDiametr/countBell;
                                 /*
@@ -140,23 +130,42 @@ void ImageProcessing::getImage()
                                         1 average diametr - 2
                                 */
 
-                   }
-
-                   emit imageIsReady(src);
+                        }
+                emit imageIsReady(src);
                 //emit infoIsReady (qrand ()%40,qrand ()%40);
                 cvWaitKey(delay);
                 cvReleaseImage(&src);
         }
-
-        cvReleaseImage(&frame);  cvReleaseCapture(&capture);
+        realyWork= false;
+        cvReleaseCapture(&capture);
+        cvReleaseImage(&frame);
 }
 
+//status of working
+bool ImageProcessing::isRealyWork ()
+{
+        return realyWork;
+}
+
+// setting capture pref.
+//working:
 void ImageProcessing::working(bool setting){
 
         this->isWorking = setting;
         qDebug ()<<"set value working "<<setting;
 }
-void ImageProcessing:: setK1 (double value)
+void ImageProcessing::setCalculation (bool value)
+{
+        this->calculateImage= value;
+        this->kadrProssesd = 0;
+        qDebug ()<<"get Signal to calculate :  "<<value;
+}
+// set values
+void ImageProcessing::setChoisedCpture (int value)
+{
+        this->choisedCapture =  value;
+}
+void ImageProcessing::setK1 (double value)
 {
 
         k1= value;
@@ -174,9 +183,9 @@ void ImageProcessing::setWindowSize (int value)
                 {
                         k = qMin( value*1.0/this->captureWidth, value *1.0/ captureHeight);
                 }
-        this->x = this->captureWidth*k;
-        this->y= this->captureHeight*k;
-        qDebug ()<<"resize to "<<x <<"*"<<y ;
+        this->width = this->captureWidth*k;
+        this->heigth= this->captureHeight*k;
+        qDebug ()<<"resize to "<<width <<"*"<<heigth ;
 
 
 }
@@ -185,6 +194,6 @@ void ImageProcessing::setEnabledResize (bool value, int x1=0, int y1=0, int x2=0
         this->enabledResize= value;
         this->x1= x1;
         this->y1 = y1;
-        this->widthResize = qAbs(x2-x1);
-        this->heigthResize =qAbs(y2-y1);
+        this->widthROI = qAbs(x2-x1);
+        this->heigthROI =qAbs(y2-y1);
 }

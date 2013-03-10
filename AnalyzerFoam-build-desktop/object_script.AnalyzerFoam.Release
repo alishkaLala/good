@@ -8,7 +8,6 @@ INPUT(
 ./release\configinformation.o
 ./release\openglgraph.o
 ./release\imageprocessing.o
-./release\converter.o
 ./release\canal_contur.o
 ./release\moc_mainwindow.o
 ./release\moc_infoframe.o
@@ -16,7 +15,6 @@ INPUT(
 ./release\moc_settingcaptureframe.o
 ./release\moc_configinformation.o
 ./release\moc_imageprocessing.o
-./release\moc_converter.o
 ./release\moc_canal_contur.o
 ./release\qrc_resourses.o
 );

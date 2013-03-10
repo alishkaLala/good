@@ -10,9 +10,6 @@ SettingMainFrames::SettingMainFrames(QWidget *parent) :
     this->father = parent;
     this->apply();
     this->setGui();
-
-
-
 }
 void SettingMainFrames::apply()
 {
@@ -26,19 +23,16 @@ void SettingMainFrames::setGui(){
     ui->checkBox->setChecked(configInformation::getrewrite());
     ui->checkBox_2->setChecked(configInformation::getfirstWriteDate());
 }
-
 SettingMainFrames::~SettingMainFrames()
 {
     delete ui;
 }
-
 void SettingMainFrames::readSetting(){
     this->palletFrames=configInformation::getpalleteAllWindows();
     this->fontFrame= configInformation::getfont();
     this->fileName = configInformation::getnameFile();
 
     }
-
 void SettingMainFrames::writeSetting(){
     configInformation::setpalleteAllWindows(this->palletFrames);
     configInformation::setfont(this->fontFrame);
@@ -46,21 +40,12 @@ void SettingMainFrames::writeSetting(){
     configInformation::setrewrite(ui->checkBox->isChecked());
     configInformation::setfirstWriteDate(ui->checkBox_2->isChecked());
 }
-
 void SettingMainFrames::on_pushButton_4_clicked()
 {
       QColor ColorFrame = QColorDialog::getColor();
       palletFrames.setColor(QPalette::Base,ColorFrame);
-      //this->setBackgroundRole(c);
       this->setPalette(palletFrames);
-
-
 }
-
-
-
-
-
 void SettingMainFrames::on_pushButton_5_clicked()
 {
     QColor ColorFrame = QColorDialog::getColor();
@@ -68,11 +53,9 @@ void SettingMainFrames::on_pushButton_5_clicked()
     palletFrames.setColor(QPalette::Text,ColorFrame);
     palletFrames.setColor(QPalette::BrightText,ColorFrame);
     palletFrames.setColor(QPalette::HighlightedText,ColorFrame);
-    //c.setColor(QPalette::Background,ColorFrame);
     this->setPalette(palletFrames);
 
 }
-
 void SettingMainFrames::on_pushButton_6_clicked()
 {
     QColor ColorFrame = QColorDialog::getColor();
@@ -80,23 +63,18 @@ void SettingMainFrames::on_pushButton_6_clicked()
     this->setPalette(palletFrames);
 
 }
-
 void SettingMainFrames::on_pushButton_7_clicked()
 {
     QColor ColorFrame = QColorDialog::getColor();
     palletFrames.setColor(QPalette::Button,ColorFrame);
     this->setPalette(palletFrames);
 }
-
 void SettingMainFrames::on_pushButton_8_clicked()
 {
     QColor ColorFrame = QColorDialog::getColor();
     palletFrames.setColor(QPalette::ButtonText,ColorFrame);
     this->setPalette(palletFrames);
 }
-
-
-
 void SettingMainFrames::on_pushButton_9_clicked()// ????????????????????????????????????????????????????????
 {
 
@@ -108,14 +86,12 @@ void SettingMainFrames::on_pushButton_9_clicked()// ????????????????????????????
     this->repaint();
 
 }
-
 void SettingMainFrames::on_pushButton_3_clicked()
 {
     this->fileName=QFileDialog::getOpenFileName(this,tr("Open"));
     ui->lineEdit_2->setText(this->fileName);
 
 }
-
 void SettingMainFrames::on_pushButton_10_clicked()
 {
     bool ok;
@@ -133,7 +109,6 @@ void SettingMainFrames::on_pushButton_11_clicked()
     this->fileName=QFileDialog::getSaveFileName(this,tr("Create"),tr(""));
     ui->lineEdit_2->setText(this->fileName);
 }
-
 void SettingMainFrames::on_SaveSetting_clicked()
 {
     if (ui->lineEdit_2->text().trimmed()!="")
@@ -153,15 +128,12 @@ void SettingMainFrames::on_CanselSetting_clicked()
 {
      this->close();
 }
-
 void SettingMainFrames::closeEvent(QCloseEvent *event=NULL){
      this->hide();
-
     this->father->show();
     this->father->setVisible(true);
 
 }
-
 void SettingMainFrames::on_Standart_clicked()
 {
     this->palletFrames = QApplication::palette();
