@@ -11,6 +11,7 @@
 #include "infoframe.h"
 #include "openglgraph.h"
 #include "imageprocessing.h"
+#include "testingframe.h"
 
 
 #include <cv.h>
@@ -59,13 +60,12 @@ private slots:
         void showSettingFrame();
         void showSettingCapture();
         void showOpenGLGraph();
-
+        void showTestingFrame();
 
         //buttons (gui)
         void on_startCalculation_clicked();
         void on_buttonAnalizStart_clicked();
         void on_buttonAnalizStop_clicked();
-
         void on_buttonCaptureStart_clicked();
 
 private:

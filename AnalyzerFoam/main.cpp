@@ -3,7 +3,7 @@
 #include <settingmainframes.h>
 #include "settingcaptureframe.h"
 #include <configinformation.h>
-#include <calculation.h>
+
 
 
 

@@ -90,6 +90,7 @@ void MainWindow::initialConnections()
         connect(ui->actionShow_capture,SIGNAL(triggered()),this,SLOT(showCapture()));// menu =>show capture
         connect( ui->processingImageShow,SIGNAL(toggled(bool)),this,SLOT(setSartStopImegeGetting(bool))); // show/hide capture
         connect(ui->actionInformation,SIGNAL(triggered()),this,SLOT(showInfoFrame()));// ??????????????????????????????????????????????????????????
+        connect(ui->actionStart_testing,SIGNAL(triggered()),this,SLOT(showTestingFrame()));
         connect(ui->actionConfiguration_of_program,SIGNAL(triggered()),this ,SLOT(showSettingFrame()));// menu => setting Frame
         connect(ui->actionConfiguration_of_capture,SIGNAL(triggered()),this,SLOT(showSettingCapture()));//menu capture Frame
         connect (ui->actionTo_graphik,SIGNAL(triggered()),SLOT (showOpenGLGraph()));//menu =? OpenGL
@@ -233,6 +234,10 @@ void MainWindow::showOpenGLGraph(){
 
         gr->setWindowTitle("3d");
         gr->show();
+
+}
+void MainWindow::showTestingFrame ()
+{
 
 }
 
