@@ -308,7 +308,7 @@ qint32 configInformation::getframeHightResize(){
     return frameHightResize;
 }
 qint32 configInformation::getX1Resize(){
-    return X1Resize;
+    return  X1Resize;
 }
 qint32 configInformation::getY1Resize(){
     return Y1Resize;

@@ -34,8 +34,8 @@ void ImageProcessing::getImage()
 
         if (this->testing)
                 {
-                       emit captureProp (this->captureWidth,this->captureHeight,this->fps);
-                       this->setWindowSize (this->captureWidth/2);
+                        emit captureProp (this->captureWidth,this->captureHeight,this->fps);
+                        this->setWindowSize (this->captureWidth/2);
 
 
                 }
@@ -52,6 +52,12 @@ void ImageProcessing::getImage()
                         k1= configInformation::getK1 ();
                         k2= configInformation::getK2 ();
                         this->setWindowSize (configInformation::getSizeWindowCapture ());
+                        this->delay=configInformation::getperiodCapture ();
+                        this->setEnabledResize (configInformation::getEnabledResize (),
+                                                configInformation::getX1Resize (),configInformation::getY1Resize(),
+                                                configInformation::getX1Resize ()+configInformation::getframeWidthResize(),
+                                                configInformation::getY1Resize ()+configInformation::getframeHightResize()
+                                                );
                 }
         qDebug ()<< "capture size : "<< this->captureWidth<<"*"<<this->captureHeight;
         this->kadrProssesd =0;
@@ -167,7 +173,7 @@ void ImageProcessing::getImage()
 //status of working
 bool ImageProcessing::isRealyWork ()
 {
-        return realyWork;
+        return  this->isWorking;
 }
 bool ImageProcessing::checkCapture ()
 {

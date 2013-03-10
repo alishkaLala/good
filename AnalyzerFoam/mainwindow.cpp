@@ -101,6 +101,8 @@ void MainWindow::initialConnections()
         connect(this->ui->comboBox,SIGNAL(currentIndexChanged(int)),this->worker,SLOT(setChoisedCpture(int)));//set choised capture in worker
         connect (ui->buttonAnalizStart,SIGNAL(clicked()),this,SLOT(calculateImagesStart())); //start analiz=> (set no gui)
         connect (ui->buttonAnalizStop,SIGNAL(clicked()),this,SLOT(calculateImageStop()));//stop analiz =>(set no gui)
+
+
 }
 void MainWindow::initPalette ()
 {

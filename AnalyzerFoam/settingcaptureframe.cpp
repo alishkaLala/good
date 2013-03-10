@@ -21,8 +21,16 @@ SettingCaptureFrame::~SettingCaptureFrame()
 //Events
 void SettingCaptureFrame::showEvent(QShowEvent *event){
         connect (this->worker,SIGNAL(imageIsReady( IplImage*)),this,SLOT(imageGetting( IplImage*)));
-        this->worker->working (true);
         this->worker->setCalculation (true);
+        if(this->worker->isRealyWork ())
+                {
+                        ui->pushButton->setEnabled (false);
+                }
+        else
+                {
+                        ui->pushButton->setEnabled (true);
+                }
+        this->worker->working (true);
         this->setPalette(configInformation::getpalleteAllWindows());
         this->setFont(configInformation::getfont());
         this->repaint();
@@ -32,8 +40,10 @@ void SettingCaptureFrame::showEvent(QShowEvent *event){
         this->enabledResize = false;
         this->startCalculateDistance = false;
         this->startResize=false;
-
-
+        this->resizeX=0;
+        this->resizeY=0;
+        this->resizeW=0;
+        this->resizeH=0;
 
 }
 void SettingCaptureFrame::closeEvent(QCloseEvent *event = NULL)
@@ -42,6 +52,7 @@ void SettingCaptureFrame::closeEvent(QCloseEvent *event = NULL)
         disconnect (this->worker,SIGNAL(imageIsReady( IplImage*)),this,SLOT(imageGetting( IplImage*)));
         disconnect(this->worker,SIGNAL(imageCalculateReady(IplImage*)),this,SLOT(imageCalculatingGetting(IplImage*)));
         this->worker->setCalculation (false);
+        this->worker->working (false);
         cvDestroyWindow(this->nameCaptureFrame.toAscii().constData());
 
 
@@ -65,7 +76,8 @@ void SettingCaptureFrame::initialize()
 void SettingCaptureFrame::initSetting()
 {
         this->readSetting();
-        ui->spinBox->setRange(10,100);
+             ui->spinBox->setRange(1,100);
+
         ui->widthCaptureWindow->setRange(300,1000);
         ui->widthCaptureWindow->setValue(configInformation::getSizeWindowCapture());
         ui->spinBox->setValue(configInformation::getperiodCapture());
@@ -78,11 +90,9 @@ void SettingCaptureFrame::initialConnections()
         connect(ui->doubleSpinBox,SIGNAL(valueChanged(double)), this->worker,SLOT(setK1(double)));
         connect(ui->doubleSpinBox_2,SIGNAL(valueChanged(double)), this->worker,SLOT(setK2(double)));
         connect(ui->widthCaptureWindow,SIGNAL(valueChanged(int)), this->worker,SLOT(setWindowSize(int)));
-        //connect(ui->widthCaptureWindow,SIGNAL(valueChanged(int)),this,SLOT(calculateCaptureSizeFrame(int)))  ;
         cvSetMouseCallback( this->nameCaptureFrame.toAscii().constData(),myMouseCallback, (void*)this->frame);
-
         connect (this,SIGNAL(resizing(bool,int,int,int,int)),this->worker,SLOT(setEnabledResize(bool,int,int,int,int)));
-
+        connect(ui->pushButton,SIGNAL(clicked()),this->worker,SLOT(getImage()));//menu capture Frame
 }
 
 //Callback to work with mouse&capture frame
@@ -126,6 +136,12 @@ void SettingCaptureFrame::myMouseCallbackDelegated( int event, int x, int y, int
                                         this->hideAllBoxes();
                                         this->ui->groupBox_2->setEnabled(true);
                                         emit resizing(true, this->X1,this->Y1,this->X2,this->Y2);
+                                        resizeX= this->X1;
+                                        resizeY= this->Y1;
+                                        resizeW= qAbs(this->X2- this->X1);
+                                        resizeH=qAbs(this->Y2-this->Y1);
+                                        resizeEnabled= true;
+
                                 }
 
 
@@ -176,12 +192,11 @@ void SettingCaptureFrame::readSetting()
 
         this->distanceInMM=configInformation::getdistanceInMm();
         this->distanceInPixels=configInformation::getdistanceInPixels();
-
         this->enabledResize = configInformation::getEnabledResize();
         this->X1=configInformation::getX1Resize();
         this->Y1=configInformation::getY1Resize();
-        //this->frameWidth=configInformation::getframeWidth();
-        //    this->frameHight=configInformation::getframeHight();
+ //       ui->spinBox->setRange(configInformation::getf,100);
+
 
 
 }
@@ -192,10 +207,10 @@ void SettingCaptureFrame::writeSetting()
         configInformation::setperiodCapture(ui->spinBox->value());
         configInformation::setdistanceInMm(this->distanceInMM);
         configInformation::setdistanceInPixels(this->distanceInPixels);
-        configInformation::setEnabledResize(this->enabledResize);
-        configInformation::setX1ResizeCoord(this->X1,this->Y1);
+        configInformation::setX1ResizeCoord(this->resizeX,resizeY);
+        configInformation::setEnabledResize (this->resizeEnabled);
+        configInformation::setframeWidthResizeAndframeHightResize (this->resizeW,this->resizeH);
         configInformation::setK1K2 (this->ui->doubleSpinBox->value (),this->ui->doubleSpinBox_2->value ());
-        qDebug ()<<"K!1k2==="<<this->ui->doubleSpinBox->value ()<<" "<<this->ui->doubleSpinBox_2->value ();
         configInformation::writeToFile();
 
 
@@ -239,11 +254,14 @@ void SettingCaptureFrame::on_buttonSizeApply_clicked() // button function - Appl
 }
 void SettingCaptureFrame::on_buttonSetROI_clicked()//button function - start set roi
 {
+        this->worker->setEnabledResize (false,0,0,0,0);
         this->setROI ();
+
+
 }
 void SettingCaptureFrame::on_buttonSetDistance_clicked()
 {
-       this->setDistance();
+        this->setDistance();
 }
 
 // function that calls on batton click
@@ -347,5 +365,17 @@ bool SettingCaptureFrame::calculateDistanceInPixels()
 
 
 }
+void SettingCaptureFrame::workerStart ()
+{
+
+}
 
 
+void SettingCaptureFrame::on_pushButton_clicked()
+{
+    ui->pushButton->setEnabled (false);
+}
+void SettingCaptureFrame::on_widthCaptureWindow_valueChanged(int )
+{
+    this->worker->setEnabledResize (false,0,0,0,0);
+}

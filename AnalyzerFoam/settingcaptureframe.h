@@ -37,6 +37,8 @@ public:
 
 signals:
         void resizing(bool value, int x1, int y1, int x2, int y2);
+        void needStart();
+
 private:
  // values:
          Ui::SettingCaptureFrame *ui;
@@ -52,6 +54,8 @@ private:
         qint32 x1,y1,x2,y2;
         qint32 X1,Y1;
         qint32 X2,Y2;
+        qint32 resizeX,resizeY,resizeW,resizeH;
+        bool resizeEnabled;
 
 
 //Functions:
@@ -97,9 +101,12 @@ private slots:
         //aditional
         void toolTipMm();
         void validMmAndSet();
+        void workerStart();
 
 
 
+        void on_pushButton_clicked();
+        void on_widthCaptureWindow_valueChanged(int );
 };
 
 #endif // SETTINGCAPTUREFRAME_H
