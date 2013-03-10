@@ -198,6 +198,10 @@ void MainWindow::calculateImageStop ()
 }
 void MainWindow::progressBarChange ()
 {
+        if (this->workingTime==-1)
+                {
+                        return;
+                }
         this->workingTime-=this->workingTimeDelta;
         qDebug ()<<this->workingTime;
         if ( this->workingTime>this->workingTimeDelta)
@@ -506,6 +510,7 @@ void MainWindow::on_buttonAnalizStop_clicked()
 {
         ui->frame->setEnabled (false);
         ui->progressBar->setValue (100);
+        this->workingTime = -1;
 }
 void MainWindow::on_buttonCaptureStart_clicked()
 {

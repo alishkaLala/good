@@ -193,10 +193,11 @@ void SettingCaptureFrame::writeSetting()
         configInformation::setdistanceInMm(this->distanceInMM);
         configInformation::setdistanceInPixels(this->distanceInPixels);
         configInformation::setEnabledResize(this->enabledResize);
-        //configInformation::setframeWidthAndFrameHight(this->frameWidth,this->frameHight);
- //       configInformation::setframeWidthResizeAndframeHightResize(this->frameWidthResize,this->frameHightResize);
         configInformation::setX1ResizeCoord(this->X1,this->Y1);
+        configInformation::setK1K2 (this->ui->doubleSpinBox->value (),this->ui->doubleSpinBox_2->value ());
+        qDebug ()<<"K!1k2==="<<this->ui->doubleSpinBox->value ()<<" "<<this->ui->doubleSpinBox_2->value ();
         configInformation::writeToFile();
+
 
 }
 

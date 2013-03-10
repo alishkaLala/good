@@ -22,6 +22,7 @@ public:
     static bool readFromFile();
 
 
+
     explicit configInformation(QObject *parent = 0);
 
 
@@ -64,6 +65,9 @@ public:
     static bool getEnabledResize();
     static bool setEnabledResize(bool e);
 
+    static void setK1K2(double k1,double k2);
+    static double  getK1();
+    static double getK2();
 
     static QPalette getpalleteAllWindows();
     static bool setpalleteAllWindows(QPalette pallete);
@@ -85,7 +89,7 @@ public:
 
 
 private:
-
+    static double k1,k2;
 
     static qint32 sizeWindowCaptureMinimum;
     static qint32 sizeWindowCaptureMaximum;

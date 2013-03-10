@@ -45,6 +45,8 @@ void configInformation::setStandardPreferenceCapture()
    X1Resize=0,Y1Resize=0;
    coefficient=1;
    coefficientResize =1;
+   k1= 0.027;
+   k2 = 0.65;
 
 
 
@@ -93,6 +95,8 @@ bool configInformation::writeToFile()
     file->setValue("Y1Resize",Y1Resize);
     file->setValue("coefficient",coefficient);
     file->setValue("coefficientResize",coefficientResize);
+    file->setValue("k1",k1);
+    file->setValue("k2",k2);
     file->endGroup();
     file->sync();
 
@@ -163,6 +167,8 @@ bool configInformation::readFromFile()
     frameHightResize=file->value("frameHightResize").toInt();
     coefficient=file->value("coefficient").toDouble();
     coefficientResize=file->value("coefficientResize").toDouble();
+   k1= file->value("k1").toDouble ();
+   k2= file->value("k2").toDouble ();
     file->endGroup();
     file->sync();
 
@@ -357,6 +363,18 @@ bool configInformation::setdistanceInMm(double mm){
  bool configInformation::setEnabledResize(bool e){
     configInformation::enabledResize = e;
 }
+  void configInformation::setK1K2(double k11,double k22){
+          configInformation::k1 =k11;
+          configInformation::k2= k22;
+
+  }
+  double  configInformation::getK1(){
+         return configInformation::k1;
+ }
+ double configInformation::getK2()
+ {
+         return configInformation::k2;
+ }
 
 
 QPalette configInformation::getpalleteAllWindows(){
@@ -439,6 +457,8 @@ qint32 configInformation::X1Resize,configInformation::Y1Resize;
 double configInformation::coefficient;
 double configInformation::coefficientResize;
 
+double configInformation::k1;
+double configInformation::k2;
 
 qint32 configInformation::distanceInPixels;
 double configInformation::distanceInMmNow;

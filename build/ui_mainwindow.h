@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sun 10. Mar 13:49:44 2013
+** Created: Sun 10. Mar 19:21:35 2013
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -90,7 +90,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(678, 471);
+        MainWindow->resize(652, 391);
         actionHelper = new QAction(MainWindow);
         actionHelper->setObjectName(QString::fromUtf8("actionHelper"));
         actionDisable_capture = new QAction(MainWindow);
@@ -169,7 +169,12 @@ public:
 
         capturePicture = new QLabel(centralWidget);
         capturePicture->setObjectName(QString::fromUtf8("capturePicture"));
-        capturePicture->setMinimumSize(QSize(0, 0));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(50);
+        sizePolicy.setVerticalStretch(100);
+        sizePolicy.setHeightForWidth(capturePicture->sizePolicy().hasHeightForWidth());
+        capturePicture->setSizePolicy(sizePolicy);
+        capturePicture->setMinimumSize(QSize(300, 300));
         capturePicture->setMaximumSize(QSize(16777215, 16777215));
         capturePicture->setFrameShape(QFrame::WinPanel);
         capturePicture->setScaledContents(true);
@@ -262,7 +267,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 678, 21));
+        menuBar->setGeometry(QRect(0, 0, 652, 21));
         menuExport = new QMenu(menuBar);
         menuExport->setObjectName(QString::fromUtf8("menuExport"));
         menuCapture = new QMenu(menuBar);

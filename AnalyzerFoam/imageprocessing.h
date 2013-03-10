@@ -13,6 +13,7 @@
 
 
 #include "canal_contur.h"
+#include "configinformation.h"
 class ImageProcessing : public QThread
 {
         Q_OBJECT
@@ -61,6 +62,9 @@ private:
         qint32 x1,y1,widthROI,heigthROI;
         int delay;
         int fps;
+
+
+        bool checkCapture();
 
 
 };

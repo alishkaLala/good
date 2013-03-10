@@ -39,6 +39,20 @@ void ImageProcessing::getImage()
 
 
                 }
+        if (!this->checkCapture ())
+                {
+
+                        qDebug ()<<" Setting for enother capture";
+                        QMessageBox::about (new QWidget(), tr ("Помилка"),tr("Налаштування буди зроблені для іншої камери" ));
+                        working (false);
+
+                }
+        else
+                {
+                        k1= configInformation::getK1 ();
+                        k2= configInformation::getK2 ();
+                        this->setWindowSize (configInformation::getSizeWindowCapture ());
+                }
         qDebug ()<< "capture size : "<< this->captureWidth<<"*"<<this->captureHeight;
         this->kadrProssesd =0;
         while(isWorking){
@@ -154,6 +168,13 @@ void ImageProcessing::getImage()
 bool ImageProcessing::isRealyWork ()
 {
         return realyWork;
+}
+bool ImageProcessing::checkCapture ()
+{
+        if (     this->captureWidth !=  configInformation::getframeWidth () ||
+                        this->captureHeight != configInformation::getframeHight ())
+                return false;
+        return true;
 }
 
 // setting capture pref.

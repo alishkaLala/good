@@ -107,19 +107,9 @@ void testingFrame::progressBarChange ()
                         this->worker->setCalculation (false);
                         ui->progressBar->setValue (100);
                         this->applySetting ();
-                        if  (QMessageBox::warning(this,tr("Увага!"),"було зконфігоровано роботу програми, бажаєте внести додадкові налаштування?",
-                                                  QMessageBox::Yes,QMessageBox::No) == QMessageBox::Yes)
-                                {
-
-                                }
-                        else
-                                {
-
-                                }
+                        QMessageBox::warning(this,tr("Увага!"),"було зконфігоровано роботу програми",
+                                                                          QMessageBox::Yes);
                         this->close ();
-
-
-
                 }
 }
 void testingFrame::applySetting ()
