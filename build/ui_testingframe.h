@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'testingframe.ui'
 **
-** Created: Sun 10. Mar 13:49:44 2013
+** Created: Sun 10. Mar 15:34:51 2013
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,6 +14,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QCheckBox>
 #include <QtGui/QComboBox>
 #include <QtGui/QFrame>
 #include <QtGui/QGridLayout>
@@ -39,10 +40,10 @@ public:
     QLabel *label;
     QComboBox *comboBox;
     QHBoxLayout *horizontalLayout_2;
-    QLabel *label_2;
     QLabel *label_3;
     QLabel *label_4;
     QSpinBox *spinBox;
+    QCheckBox *checkBox;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout_3;
     QProgressBar *progressBar;
@@ -53,7 +54,7 @@ public:
     {
         if (testingFrame->objectName().isEmpty())
             testingFrame->setObjectName(QString::fromUtf8("testingFrame"));
-        testingFrame->resize(541, 318);
+        testingFrame->resize(582, 318);
         gridLayout = new QGridLayout(testingFrame);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         frame = new QFrame(testingFrame);
@@ -82,12 +83,6 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        label_2 = new QLabel(frame);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setFont(font);
-
-        horizontalLayout_2->addWidget(label_2);
-
         label_3 = new QLabel(frame);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setFont(font);
@@ -101,11 +96,18 @@ public:
 
         spinBox = new QSpinBox(frame);
         spinBox->setObjectName(QString::fromUtf8("spinBox"));
+        spinBox->setMinimum(4);
 
         horizontalLayout_2->addWidget(spinBox);
 
 
         verticalLayout->addLayout(horizontalLayout_2);
+
+        checkBox = new QCheckBox(frame);
+        checkBox->setObjectName(QString::fromUtf8("checkBox"));
+        checkBox->setFont(font);
+
+        verticalLayout->addWidget(checkBox);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -115,7 +117,7 @@ public:
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         progressBar = new QProgressBar(frame);
         progressBar->setObjectName(QString::fromUtf8("progressBar"));
-        progressBar->setValue(24);
+        progressBar->setValue(100);
 
         horizontalLayout_3->addWidget(progressBar);
 
@@ -133,6 +135,13 @@ public:
         label_5 = new QLabel(testingFrame);
         label_5->setObjectName(QString::fromUtf8("label_5"));
         label_5->setMinimumSize(QSize(300, 300));
+        label_5->setFrameShape(QFrame::Box);
+        label_5->setFrameShadow(QFrame::Sunken);
+        label_5->setLineWidth(4);
+        label_5->setMidLineWidth(4);
+        label_5->setText(QString::fromUtf8(""));
+        label_5->setPixmap(QPixmap(QString::fromUtf8(":/image/4x.jpg")));
+        label_5->setScaledContents(true);
 
         gridLayout->addWidget(label_5, 0, 1, 1, 1);
 
@@ -146,11 +155,10 @@ public:
     {
         testingFrame->setWindowTitle(QApplication::translate("testingFrame", "Form", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("testingFrame", "\342\204\226 \320\272\320\260\320\274\320\265\321\200\320\270", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QString());
         label_3->setText(QApplication::translate("testingFrame", "\320\247\320\260\321\201 \321\202\320\265\321\201\321\202\321\203\320\262\320\260\320\275\320\275\321\217", 0, QApplication::UnicodeUTF8));
         label_4->setText(QString());
+        checkBox->setText(QApplication::translate("testingFrame", "\320\262\320\275\320\265\321\201\321\202\320\270 \321\201\320\262\320\276\321\227 \320\272\320\276\321\200\320\265\320\272\321\202\320\270\320\262\320\270 ", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("testingFrame", "\321\200\320\276\320\267\320\277\320\276\321\207\320\260\321\202\320\270", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("testingFrame", "TextLabel", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

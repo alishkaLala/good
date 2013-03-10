@@ -26,6 +26,7 @@ signals:
         void imageIsReady( IplImage *img);
         void imageCalculateReady( IplImage *img);
         void infoIsReady(double count, double diametr);
+        void captureProp(int ,int ,int);
 
 public slots:
 
@@ -37,7 +38,7 @@ public slots:
         void setWindowSize(int value);
         void setEnabledResize(bool,int x1,int y1,int widthROI,int heigthROI);
         void setChoisedCpture(int value);
-
+        void setTesting(bool value);
 
 
 
@@ -48,6 +49,7 @@ private:
         bool isWorking;
         bool calculateImage;
         bool enabledResize;
+        bool testing;
         unsigned long int  kadrProssesd;
         int choisedCapture;
         double k1,k2;
@@ -56,6 +58,7 @@ private:
         CvCapture* capture;
         qint32 x1,y1,widthROI,heigthROI;
         int delay;
+        int fps;
 
 
 };

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'imageprocessing.h'
 **
-** Created: Sun 10. Mar 13:53:12 2013
+** Created: Sun 10. Mar 16:01:52 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,27 +23,29 @@ static const uint qt_meta_data_ImageProcessing[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       3,       // signalCount
+       4,       // signalCount
 
  // signals: signature, parameters, type, tag, flags
       21,   17,   16,   16, 0x05,
       45,   17,   16,   16, 0x05,
       90,   76,   16,   16, 0x05,
+     120,  117,   16,   16, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-     117,   16,   16,   16, 0x0a,
-     131,   16,   16,   16, 0x0a,
-     142,   16,   16,   16, 0x0a,
-     169,  163,   16,   16, 0x0a,
-     183,  163,   16,   16, 0x0a,
-     197,  163,   16,   16, 0x0a,
-     242,  216,   16,   16, 0x0a,
-     281,  163,   16,   16, 0x0a,
+     145,   16,   16,   16, 0x0a,
+     159,   16,   16,   16, 0x0a,
+     170,   16,   16,   16, 0x0a,
+     197,  191,   16,   16, 0x0a,
+     211,  191,   16,   16, 0x0a,
+     225,  191,   16,   16, 0x0a,
+     270,  244,   16,   16, 0x0a,
+     309,  191,   16,   16, 0x0a,
+     331,  191,   16,   16, 0x0a,
 
        0        // eod
 };
@@ -52,11 +54,12 @@ static const char qt_meta_stringdata_ImageProcessing[] = {
     "ImageProcessing\0\0img\0imageIsReady(IplImage*)\0"
     "imageCalculateReady(IplImage*)\0"
     "count,diametr\0infoIsReady(double,double)\0"
-    "working(bool)\0getImage()\0setCalculation(bool)\0"
-    "value\0setK1(double)\0setK2(double)\0"
+    ",,\0captureProp(int,int,int)\0working(bool)\0"
+    "getImage()\0setCalculation(bool)\0value\0"
+    "setK1(double)\0setK2(double)\0"
     "setWindowSize(int)\0,x1,y1,widthROI,heigthROI\0"
     "setEnabledResize(bool,int,int,int,int)\0"
-    "setChoisedCpture(int)\0"
+    "setChoisedCpture(int)\0setTesting(bool)\0"
 };
 
 const QMetaObject ImageProcessing::staticMetaObject = {
@@ -91,17 +94,19 @@ int ImageProcessing::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 0: imageIsReady((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
         case 1: imageCalculateReady((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
         case 2: infoIsReady((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;
-        case 3: working((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 4: getImage(); break;
-        case 5: setCalculation((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 6: setK1((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 7: setK2((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 8: setWindowSize((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 9: setEnabledResize((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5]))); break;
-        case 10: setChoisedCpture((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: captureProp((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 4: working((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 5: getImage(); break;
+        case 6: setCalculation((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 7: setK1((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 8: setK2((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 9: setWindowSize((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 10: setEnabledResize((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5]))); break;
+        case 11: setChoisedCpture((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 12: setTesting((*reinterpret_cast< bool(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 11;
+        _id -= 13;
     }
     return _id;
 }
@@ -125,5 +130,12 @@ void ImageProcessing::infoIsReady(double _t1, double _t2)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
+}
+
+// SIGNAL 3
+void ImageProcessing::captureProp(int _t1, int _t2, int _t3)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)) };
+    QMetaObject::activate(this, &staticMetaObject, 3, _a);
 }
 QT_END_MOC_NAMESPACE

@@ -7,10 +7,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
         ui->setupUi(this);
         this->initValues();
+        this->createWindows();
         this->initialConnections();
         this->elementHide();
         worker->start(); // start exec()
-        this->createWindows();
+
 }
 MainWindow::~MainWindow()
 {
@@ -67,14 +68,15 @@ void MainWindow::initValues()
         this->timeToWork = 100;
         ui->spinBox->setRange(1,this->timeToWork);
         ui->horizontalSlider->setRange(1,this->timeToWork);
-        this->initialMenuCapture();
         this->showImage();
 
 }
 void MainWindow::initialMenuCapture()
 {
         this->numberOfCapture = this->findCapture();
+        this->testFrame->setNumberCapture (this->numberOfCapture);
         this->ui->menuChoise_capture->clear();
+
         for (int i=0 ;i<this->numberOfCapture;i++){
                 this->menuCaptureArray.append( new QAction (QString::number(i+1), this->ui->menuChoise_capture));
                 ui->comboBox->addItem (QString::number (i+1));
@@ -106,11 +108,14 @@ void MainWindow::initPalette ()
         this->setFont(configInformation::getfont());
         this->repaint();
 }
-void MainWindow::createWindows(){
-        this-> gr = new OpenglGraph(this->worker);
+void MainWindow::createWindows()//create windows  + menu capture
+{
+        this->testFrame = new testingFrame(this->worker, this);
+                this-> gr = new OpenglGraph(this->worker);
         this->infoFrame=new InfoFrame(this);
         this->settingMainFrames = new SettingMainFrames(this);
         this->settingCaptureFrame = new SettingCaptureFrame(this->worker, this);
+          this->initialMenuCapture();
 }
 
 void MainWindow::readSettingCaprure(){
@@ -238,6 +243,7 @@ void MainWindow::showOpenGLGraph(){
 }
 void MainWindow::showTestingFrame ()
 {
+        this->testFrame->show ();
 
 }
 
@@ -470,7 +476,6 @@ void MainWindow::on_startCalculation_clicked()
                         this->worker->getImage ();
                         /*  QTimer::singleShot (this->ui->spinBox->value (),this,SLOT(on_startCalculation_clicked));*/
 
-                        this->workingPeriod->start ();
 
 
                 }

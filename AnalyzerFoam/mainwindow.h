@@ -12,13 +12,12 @@
 #include "openglgraph.h"
 #include "imageprocessing.h"
 #include "testingframe.h"
+#include <settingmainframes.h>
+#include <settingcaptureframe.h>
 
 
 #include <cv.h>
 #include <highgui.h>
-#include <settingmainframes.h>
-#include <settingcaptureframe.h>
-
 
 #include <algorithm>
 #include <iostream>
@@ -71,14 +70,15 @@ private slots:
 private:
         qint64 workingTime;
         qint64 workingTimeDelta;
+
         //windows
         InfoFrame *infoFrame;
         SettingMainFrames *settingMainFrames;
         SettingCaptureFrame *settingCaptureFrame;
         OpenglGraph *gr ;
+        testingFrame *testFrame;
 
-        ImageProcessing *worker; //working thread
-        QTimer *workingPeriod; //timer to calculation
+        ImageProcessing *worker; //working thread for capture
         Ui::MainWindow *ui;
         QList<QAction*>  menuCaptureArray;
         qint8 numberOfCapture;   // кількість  підключенних камер
