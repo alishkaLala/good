@@ -211,3 +211,7 @@ void ImageProcessing::setTesting (bool value)
 {
         this->testing=value;
 }
+void ImageProcessing::setDelay (int value)
+{
+        this->delay=value;
+}

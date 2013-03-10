@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'testingframe.ui'
 **
-** Created: Sun 10. Mar 18:01:47 2013
+** Created: Sun 10. Mar 18:23:14 2013
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -95,7 +95,7 @@ public:
 
         spinBox = new QSpinBox(frame);
         spinBox->setObjectName(QString::fromUtf8("spinBox"));
-        spinBox->setMinimum(1);
+        spinBox->setMinimum(0);
         spinBox->setValue(1);
 
         horizontalLayout_2->addWidget(spinBox);

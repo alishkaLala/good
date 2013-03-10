@@ -259,6 +259,18 @@ bool configInformation::setframeWidthResizeAndframeHightResize(qint32 w,qint32 h
     frameWidthResize=w;
     frameHightResize=h;
 }
+bool configInformation::setWindowCaptureMinMax (qint32 min, qint32 max)
+{
+
+   sizeWindowCaptureMinimum= min;
+   sizeWindowCaptureMaximum= max;
+}
+bool configInformation::setPeriodCaptureMinMax (qint32 min, qint32 max)
+{
+
+   periodCaptureMinimum= min;
+   periodCaptureMaximum= max;
+}
 bool configInformation::setX1ResizeCoord(qint32 x,qint32 y){
     if (x>0 && y>0){
         configInformation::X1Resize=x;

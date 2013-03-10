@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'imageprocessing.h'
 **
-** Created: Sun 10. Mar 17:56:11 2013
+** Created: Sun 10. Mar 18:09:19 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_ImageProcessing[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+      14,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -46,6 +46,7 @@ static const uint qt_meta_data_ImageProcessing[] = {
      270,  244,   16,   16, 0x0a,
      309,  191,   16,   16, 0x0a,
      331,  191,   16,   16, 0x0a,
+     348,  191,   16,   16, 0x0a,
 
        0        // eod
 };
@@ -60,6 +61,7 @@ static const char qt_meta_stringdata_ImageProcessing[] = {
     "setWindowSize(int)\0,x1,y1,widthROI,heigthROI\0"
     "setEnabledResize(bool,int,int,int,int)\0"
     "setChoisedCpture(int)\0setTesting(bool)\0"
+    "setDelay(int)\0"
 };
 
 const QMetaObject ImageProcessing::staticMetaObject = {
@@ -104,9 +106,10 @@ int ImageProcessing::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 10: setEnabledResize((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5]))); break;
         case 11: setChoisedCpture((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 12: setTesting((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 13: setDelay((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 13;
+        _id -= 14;
     }
     return _id;
 }

@@ -40,6 +40,8 @@ public:
 
     static bool setframeWidthAndFrameHight(qint32 w,qint32 h);
     static bool setframeWidthResizeAndframeHightResize(qint32 w,qint32 h);
+    static bool setWindowCaptureMinMax(qint32 min, qint32 max);
+    static bool setPeriodCaptureMinMax (qint32 min, qint32 max);
     static bool setX1ResizeCoord(qint32 x,qint32 y);
     static bool setcoefficient(double k );
     static bool setcoefficientResize(double k);

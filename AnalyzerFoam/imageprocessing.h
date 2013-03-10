@@ -40,6 +40,7 @@ public slots:
         void setEnabledResize(bool,int x1,int y1,int widthROI,int heigthROI);
         void setChoisedCpture(int value);
         void setTesting(bool value);
+        void setDelay(int value);
 
 
 

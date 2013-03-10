@@ -26,6 +26,7 @@ void testingFrame::showEvent(QShowEvent *event){
         this->father->close ();
         this->worker->setTesting (true);
         this->worker->setEnabledResize (false,0,0,0,0);
+        this->worker->setDelay (1);
         ui->comboBox->setEnabled (true);
         ui->pushButton->setEnabled (true);
         ui->pushButton_2->setEnabled (false);
@@ -105,7 +106,7 @@ void testingFrame::progressBarChange ()
                         this->worker->working (false);
                         this->worker->setCalculation (false);
                         ui->progressBar->setValue (100);
-                          this->applySetting ();
+                        this->applySetting ();
                         if  (QMessageBox::warning(this,tr("Увага!"),"було зконфігоровано роботу програми, бажаєте внести додадкові налаштування?",
                                                   QMessageBox::Yes,QMessageBox::No) == QMessageBox::Yes)
                                 {
@@ -124,8 +125,10 @@ void testingFrame::progressBarChange ()
 void testingFrame::applySetting ()
 {
         configInformation::setCaptureNumber (this->ui->comboBox->currentIndex ());
+        configInformation::setPeriodCaptureMinMax (this->timedelta/2,300000);
         configInformation::setEnabledResize (false);
         configInformation::setframeWidthAndFrameHight (this->w,this->h);
+        configInformation::setWindowCaptureMinMax (50,this->w);
         configInformation::setperiodCapture (this->timedelta);
         configInformation::setSizeWindowCapture (this->worker->wishWindowsize);
         configInformation::writeToFile ();

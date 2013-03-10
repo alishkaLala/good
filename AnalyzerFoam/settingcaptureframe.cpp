@@ -188,6 +188,7 @@ void SettingCaptureFrame::readSetting()
 void SettingCaptureFrame::writeSetting()
 {
         configInformation::setSizeWindowCapture(ui->widthCaptureWindow->value());
+
         configInformation::setperiodCapture(ui->spinBox->value());
         configInformation::setdistanceInMm(this->distanceInMM);
         configInformation::setdistanceInPixels(this->distanceInPixels);

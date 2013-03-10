@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'configinformation.h'
 **
-** Created: Sun 10. Mar 13:53:07 2013
+** Created: Sun 10. Mar 18:22:26 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
