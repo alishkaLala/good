@@ -21,6 +21,7 @@ public:
         explicit ImageProcessing(QObject *parent = 0);
 
         bool isRealyWork();
+        int wishWindowsize;
 
 signals:
         void imageIsReady( IplImage *img);

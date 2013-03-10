@@ -25,6 +25,7 @@ void testingFrame::showEvent(QShowEvent *event){
         connect (this->ui->comboBox,SIGNAL(currentIndexChanged(int)),this->worker,SLOT(setChoisedCpture(int)));
         this->father->close ();
         this->worker->setTesting (true);
+        this->worker->setEnabledResize (false,0,0,0,0);
         ui->comboBox->setEnabled (true);
         ui->pushButton->setEnabled (true);
         ui->pushButton_2->setEnabled (false);
@@ -41,8 +42,24 @@ void testingFrame::closeEvent(QCloseEvent *event= NULL){
 
 
 }
+void testingFrame::imageGetting(IplImage *img)
+{
+
+        this->timedelta=(timedelta+ t.elapsed ())/2;
+        t.restart ();
+        qDebug ()<<"fps with calculate :"<<timedelta;
+        uchar* data = NULL;
+        delete this->dataToDelete;
+        QImage* qt_img = IplImageToQImage(img, &data, 0.0, 0.0);
+        ui->label_5->setPixmap(QPixmap::fromImage(*qt_img));
+        delete qt_img;
+        this->dataToDelete= data;
 
 
+}
+
+
+// set values
 void testingFrame::setChoisedCapture (int value)
 {
         this->choisedCapture = value;
@@ -63,23 +80,8 @@ void testingFrame::setCaptureProp (int w, int h , int fps)
         qDebug ()<<"get capture prop. :" <<w<<" "<<h<<" "<<fps;
 
 }
-void testingFrame::imageGetting(IplImage *img)
-{
 
-        this->timedelta=(timedelta+ t.elapsed ())/2;
-        t.restart ();
-        qDebug ()<<"fps with calculate :"<<timedelta;
-        uchar* data = NULL;
-        delete this->dataToDelete;
-        QImage* qt_img = IplImageToQImage(img, &data, 0.0, 0.0);
-        ui->label_5->setPixmap(QPixmap::fromImage(*qt_img));
-        delete qt_img;
-        this->dataToDelete= data;
-
-
-}
-
-
+// call.f
 void testingFrame::progressBarChange ()
 {
         if(workingTime==-1)
@@ -100,46 +102,48 @@ void testingFrame::progressBarChange ()
 
                 {
 
-                                         this->worker->working (false);
-                                        this->worker->setCalculation (false);
+                        this->worker->working (false);
+                        this->worker->setCalculation (false);
+                        ui->progressBar->setValue (100);
+                          this->applySetting ();
+                        if  (QMessageBox::warning(this,tr("Увага!"),"було зконфігоровано роботу програми, бажаєте внести додадкові налаштування?",
+                                                  QMessageBox::Yes,QMessageBox::No) == QMessageBox::Yes)
+                                {
 
-                                         ui->progressBar->setValue (100);
-                                        if  (QMessageBox::warning(this,tr("Увага!"),"було зконфігоровано роботу програми, бажаєте внести додадкові налаштування?",
-                                                                  QMessageBox::Yes,QMessageBox::No) == QMessageBox::Yes)
-                                                {
+                                }
+                        else
+                                {
 
-                                                }
-                                        else
-                                                {
-
-                                                }
-                                        this->close ();
+                                }
+                        this->close ();
 
 
 
                 }
 }
+void testingFrame::applySetting ()
+{
+        configInformation::setCaptureNumber (this->ui->comboBox->currentIndex ());
+        configInformation::setEnabledResize (false);
+        configInformation::setframeWidthAndFrameHight (this->w,this->h);
+        configInformation::setperiodCapture (this->timedelta);
+        configInformation::setSizeWindowCapture (this->worker->wishWindowsize);
+        configInformation::writeToFile ();
+}
 
-
+//ad. f
 QImage* testingFrame::IplImageToQImage(const IplImage * iplImage, uchar **data,
                                        double mini, double maxi)
 {
         uchar *qImageBuffer = NULL;
         int width = iplImage->width;
-
-        // Note here that OpenCV image is stored so that each lined is
-        // 32-bits aligned thus * explaining the necessity to "skip"
-        // the few last bytes of each line of OpenCV image buffer.
         int widthStep = iplImage->widthStep;
         int height = iplImage->height;
-
         switch (iplImage->depth)
                 {
         case IPL_DEPTH_8U:
                         if (iplImage->nChannels == 1)
                                 {
-                                        // IplImage is stored with one byte grey pixel.
-                                        // We convert it to an 8 bit depth QImage.
                                         qImageBuffer = (uchar *) malloc(width*height*sizeof(uchar));
                                         uchar *QImagePtr = qImageBuffer;
                                         const uchar *iplImagePtr = (const uchar *)iplImage->imageData;
@@ -153,8 +157,6 @@ QImage* testingFrame::IplImageToQImage(const IplImage * iplImage, uchar **data,
                                 }
                         else if (iplImage->nChannels == 3)
                                 {
-                                        // IplImage is stored with 3 byte color pixels (3 channels).
-                                        // We convert it to a 32 bit depth QImage.
                                         qImageBuffer = (uchar *) malloc(width*height*4*sizeof(uchar));
                                         uchar *QImagePtr = qImageBuffer;
                                         const uchar *iplImagePtr = (const uchar *) iplImage->imageData;
@@ -185,8 +187,6 @@ QImage* testingFrame::IplImageToQImage(const IplImage * iplImage, uchar **data,
                 case IPL_DEPTH_16U:
                         if (iplImage->nChannels == 1)
                                 {
-                                        // IplImage is stored with 2 bytes grey pixel.
-                                        // We convert it to an 8 bit depth QImage.
                                         qImageBuffer = (uchar *) malloc(width*height*sizeof(uchar));
                                         uchar *QImagePtr = qImageBuffer;
                                         const uint16_t *iplImagePtr = (const uint16_t *)iplImage->imageData;
@@ -195,8 +195,6 @@ QImage* testingFrame::IplImageToQImage(const IplImage * iplImage, uchar **data,
                                                 {
                                                         for (int x = 0; x < width; x++)
                                                                 {
-                                                                        // We take only the highest part of the 16 bit value.
-                                                                        // It is similar to dividing by 256.
                                                                         *QImagePtr++ = ((*iplImagePtr++) >> 8);
                                                                 }
                                                         iplImagePtr += widthStep/sizeof(uint16_t)-width;
@@ -212,8 +210,7 @@ QImage* testingFrame::IplImageToQImage(const IplImage * iplImage, uchar **data,
                 case IPL_DEPTH_32F:
                         if (iplImage->nChannels == 1)
                                 {
-                                        // IplImage is stored with float (4 bytes) grey pixel.
-                                        // We convert it to an 8 bit depth QImage.
+
                                         qImageBuffer = (uchar *) malloc(width*height*sizeof(uchar));
                                         uchar *QImagePtr = qImageBuffer;
                                         const float *iplImagePtr = (const float *) iplImage->imageData;
@@ -244,8 +241,6 @@ QImage* testingFrame::IplImageToQImage(const IplImage * iplImage, uchar **data,
                 case IPL_DEPTH_64F:
                         if (iplImage->nChannels == 1)
                                 {
-                                        // OpenCV image is stored with double (8 bytes) grey pixel.
-                                        // We convert it to an 8 bit depth QImage.
                                         qImageBuffer = (uchar *) malloc(width*height*sizeof(uchar));
                                         uchar *QImagePtr = qImageBuffer;
                                         const double *iplImagePtr = (const double *) iplImage->imageData;
@@ -297,10 +292,12 @@ QImage* testingFrame::IplImageToQImage(const IplImage * iplImage, uchar **data,
 
         return qImage;
 }
+
+//buttons
 void testingFrame::on_pushButton_clicked()
 {
-    ui->pushButton->setEnabled (false);
-    ui->pushButton_2->setEnabled (true);
+        ui->pushButton->setEnabled (false);
+        ui->pushButton_2->setEnabled (true);
         ui->comboBox->setEnabled (false);
         this->timedelta=1;
         t.restart ();
@@ -312,11 +309,10 @@ void testingFrame::on_pushButton_clicked()
         QTimer::singleShot (this->workingTimeDelta,this,SLOT(progressBarChange()));
         worker->getImage ();
 }
-
 void testingFrame::on_pushButton_2_clicked()
 {
-         ui->pushButton->setEnabled (true);
-         ui->pushButton_2->setEnabled (false);
+        ui->pushButton->setEnabled (true);
+        ui->pushButton_2->setEnabled (false);
         ui->comboBox->setEnabled (true);
         this->workingTime=-1;
         worker->working (false);

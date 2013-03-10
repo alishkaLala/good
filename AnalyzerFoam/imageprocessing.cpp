@@ -34,8 +34,8 @@ void ImageProcessing::getImage()
 
         if (this->testing)
                 {
-                        emit captureProp (this->captureWidth,this->captureHeight,this->fps);
-                      qDebug ()<<"really fps "<<cvGetCaptureProperty (this->capture,5);;
+                       emit captureProp (this->captureWidth,this->captureHeight,this->fps);
+                       this->setWindowSize (this->captureWidth/2);
 
 
                 }
@@ -187,6 +187,7 @@ void ImageProcessing::setK2(double value)
 }
 void ImageProcessing::setWindowSize (int value)
 {
+        this->wishWindowsize= value;
         double k;
         if (this ->captureWidth!=0&& this ->captureHeight!=0)
                 {

@@ -10,6 +10,7 @@
 #include <qmath.h>
 
 #include "imageprocessing.h"
+#include "configinformation.h"
 
 namespace Ui {
 class testingFrame;
@@ -31,7 +32,11 @@ protected:
         void closeEvent(QCloseEvent *event);
 
 
+
 private:
+         void  applySetting();
+
+
         qint16 numberCaptures;
         qint16 choisedCapture;
         Ui::testingFrame *ui;

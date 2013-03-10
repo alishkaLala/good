@@ -15,8 +15,6 @@ SettingCaptureFrame::SettingCaptureFrame(ImageProcessing *worker, QWidget *paren
 }
 SettingCaptureFrame::~SettingCaptureFrame()
 {
-
-
         cvDestroyWindow(this->nameCaptureFrame.toAscii().constData());
         delete ui;
 }
@@ -25,13 +23,6 @@ void SettingCaptureFrame::showEvent(QShowEvent *event){
         connect (this->worker,SIGNAL(imageIsReady( IplImage*)),this,SLOT(imageGetting( IplImage*)));
         this->worker->working (true);
         this->worker->setCalculation (true);
-      /*  if (!worker->isRealyWork ())
-                {
-                        this->worker->getImage ();
-                }
-
-
-*/
         this->setPalette(configInformation::getpalleteAllWindows());
         this->setFont(configInformation::getfont());
         this->repaint();
@@ -55,7 +46,6 @@ void SettingCaptureFrame::closeEvent(QCloseEvent *event = NULL)
 
 
 }
-
 //Initialize
 void SettingCaptureFrame::initialize()
 {
