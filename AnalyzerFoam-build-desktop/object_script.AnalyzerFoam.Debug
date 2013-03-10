@@ -9,6 +9,7 @@ INPUT(
 ./debug\openglgraph.o
 ./debug\imageprocessing.o
 ./debug\canal_contur.o
+./debug\testingframe.o
 ./debug\moc_mainwindow.o
 ./debug\moc_infoframe.o
 ./debug\moc_settingmainframes.o
@@ -16,5 +17,6 @@ INPUT(
 ./debug\moc_configinformation.o
 ./debug\moc_imageprocessing.o
 ./debug\moc_canal_contur.o
+./debug\moc_testingframe.o
 ./debug\qrc_resourses.o
 );

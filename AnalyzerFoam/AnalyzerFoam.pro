@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     configinformation.cpp \
     openglgraph.cpp \
     imageprocessing.cpp \
-    canal_contur.cpp
+    canal_contur.cpp \
+    testingframe.cpp
 
 HEADERS  += mainwindow.h \
     filewriteread.h \
@@ -30,12 +31,14 @@ HEADERS  += mainwindow.h \
     configinformation.h \
     openglgraph.h \
     imageprocessing.h \
-    canal_contur.h
+    canal_contur.h \
+    testingframe.h
 
 FORMS    += mainwindow.ui \
     infoframe.ui \
     settingmainframes.ui \
-    settingcaptureframe.ui
+    settingcaptureframe.ui \
+    testingframe.ui
 
 INCLUDEPATH += "C:\OpenCV2.0\include\opencv"
 
