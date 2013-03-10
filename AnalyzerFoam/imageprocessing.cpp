@@ -30,25 +30,18 @@ void ImageProcessing::getImage()
         // frame = cvLoadImage("4.jpg",CV_LOAD_IMAGE_COLOR);
         this->captureWidth=  cvGetCaptureProperty (this->capture,3);
         this->captureHeight= cvGetCaptureProperty (this->capture,4);
-        this->fps= cvGetCaptureProperty (this->capture,5);
+        this->fps= cvGetCaptureProperty (this->capture,CV_CAP_PROP_FPS);
 
         if (this->testing)
                 {
                         emit captureProp (this->captureWidth,this->captureHeight,this->fps);
+                      qDebug ()<<"really fps "<<cvGetCaptureProperty (this->capture,5);;
 
 
                 }
         qDebug ()<< "capture size : "<< this->captureWidth<<"*"<<this->captureHeight;
         this->kadrProssesd =0;
         while(isWorking){
-                this->fps= cvGetCaptureProperty (this->capture,5);
-
-                if (this->testing)
-                        {
-                                emit captureProp (this->captureWidth,this->captureHeight,this->fps);
-
-
-                        }
                 frame = cvQueryFrame( capture );
                 if (frame ==NULL)
                         {

@@ -22,8 +22,12 @@ testingFrame::~testingFrame()
 void testingFrame::showEvent(QShowEvent *event){
         connect (this->worker,SIGNAL(imageCalculateReady(IplImage*)),this,SLOT(imageGetting(IplImage*)));
         connect (this->worker,SIGNAL(captureProp(int,int,int)),this,SLOT(setCaptureProp(int,int,int)));
+        connect (this->ui->comboBox,SIGNAL(currentIndexChanged(int)),this->worker,SLOT(setChoisedCpture(int)));
         this->father->close ();
         this->worker->setTesting (true);
+        ui->comboBox->setEnabled (true);
+        ui->pushButton->setEnabled (true);
+        ui->pushButton_2->setEnabled (false);
 
 
 }
@@ -62,6 +66,9 @@ void testingFrame::setCaptureProp (int w, int h , int fps)
 void testingFrame::imageGetting(IplImage *img)
 {
 
+        this->timedelta=(timedelta+ t.elapsed ())/2;
+        t.restart ();
+        qDebug ()<<"fps with calculate :"<<timedelta;
         uchar* data = NULL;
         delete this->dataToDelete;
         QImage* qt_img = IplImageToQImage(img, &data, 0.0, 0.0);
@@ -71,6 +78,49 @@ void testingFrame::imageGetting(IplImage *img)
 
 
 }
+
+
+void testingFrame::progressBarChange ()
+{
+        if(workingTime==-1)
+                {
+                        ui->progressBar->setValue (100);
+                        return;
+                }
+        this->workingTime-=this->workingTimeDelta;
+        qDebug ()<<this->workingTime;
+
+        if ( this->workingTime>this->workingTimeDelta)
+                {
+                        ui->progressBar->setValue (ui->progressBar->value ()-1);
+                        QTimer::singleShot (this->workingTimeDelta,this,SLOT(progressBarChange()));
+
+                }
+        else
+
+                {
+
+                                         this->worker->working (false);
+                                        this->worker->setCalculation (false);
+
+                                         ui->progressBar->setValue (100);
+                                        if  (QMessageBox::warning(this,tr("Увага!"),"було зконфігоровано роботу програми, бажаєте внести додадкові налаштування?",
+                                                                  QMessageBox::Yes,QMessageBox::No) == QMessageBox::Yes)
+                                                {
+
+                                                }
+                                        else
+                                                {
+
+                                                }
+                                        this->close ();
+
+
+
+                }
+}
+
+
 QImage* testingFrame::IplImageToQImage(const IplImage * iplImage, uchar **data,
                                        double mini, double maxi)
 {
@@ -249,7 +299,25 @@ QImage* testingFrame::IplImageToQImage(const IplImage * iplImage, uchar **data,
 }
 void testingFrame::on_pushButton_clicked()
 {
+    ui->pushButton->setEnabled (false);
+    ui->pushButton_2->setEnabled (true);
+        ui->comboBox->setEnabled (false);
+        this->timedelta=1;
+        t.restart ();
         worker->setCalculation (true);
         worker->working (true);
+
+        this->workingTime= 1000*60*ui->spinBox->value ();
+        this->workingTimeDelta = qCeil (this->workingTime/100.0);
+        QTimer::singleShot (this->workingTimeDelta,this,SLOT(progressBarChange()));
         worker->getImage ();
+}
+
+void testingFrame::on_pushButton_2_clicked()
+{
+         ui->pushButton->setEnabled (true);
+         ui->pushButton_2->setEnabled (false);
+        ui->comboBox->setEnabled (true);
+        this->workingTime=-1;
+        worker->working (false);
 }

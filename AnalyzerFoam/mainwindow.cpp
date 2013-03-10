@@ -131,6 +131,7 @@ void MainWindow::readSettingCaprure(){
 */
 }
 
+
 //first hide/show element
 void MainWindow::elementHide()
 {

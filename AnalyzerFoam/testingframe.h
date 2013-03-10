@@ -5,6 +5,9 @@
 #include <QEvent>
 #include <QTime>
 #include <QDebug>
+#include <QTimer>
+#include <QMessageBox>
+#include <qmath.h>
 
 #include "imageprocessing.h"
 
@@ -38,11 +41,15 @@ private:
         QImage* IplImageToQImage(const IplImage * iplImage, uchar **data,
                                  double mini, double maxi);
         int w,h,fps; //capture width,heigth,fps
-        int timedelta,time1,time2;
+        int   workingTime,workingTimeDelta;
+       qint64 timedelta;
+       QTime t;
 private slots:
         void imageGetting( IplImage *img);
         void on_pushButton_clicked();
         void setCaptureProp(int,int,int);
+        void progressBarChange ();
+        void on_pushButton_2_clicked();
 };
 
 #endif // TESTINGFRAME_H

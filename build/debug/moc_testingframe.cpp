@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'testingframe.h'
 **
-** Created: Sun 10. Mar 16:06:52 2013
+** Created: Sun 10. Mar 17:15:09 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_testingFrame[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -35,6 +35,8 @@ static const uint qt_meta_data_testingFrame[] = {
       47,   43,   13,   13, 0x08,
       71,   13,   13,   13, 0x08,
       98,   95,   13,   13, 0x08,
+     126,   13,   13,   13, 0x08,
+     146,   13,   13,   13, 0x08,
 
        0        // eod
 };
@@ -44,6 +46,7 @@ static const char qt_meta_stringdata_testingFrame[] = {
     "img\0imageGetting(IplImage*)\0"
     "on_pushButton_clicked()\0,,\0"
     "setCaptureProp(int,int,int)\0"
+    "progressBarChange()\0on_pushButton_2_clicked()\0"
 };
 
 const QMetaObject testingFrame::staticMetaObject = {
@@ -79,9 +82,11 @@ int testingFrame::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 1: imageGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
         case 2: on_pushButton_clicked(); break;
         case 3: setCaptureProp((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 4: progressBarChange(); break;
+        case 5: on_pushButton_2_clicked(); break;
         default: ;
         }
-        _id -= 4;
+        _id -= 6;
     }
     return _id;
 }

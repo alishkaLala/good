@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'testingframe.ui'
 **
-** Created: Sun 10. Mar 15:34:51 2013
+** Created: Sun 10. Mar 17:27:36 2013
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,7 +14,6 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
-#include <QtGui/QCheckBox>
 #include <QtGui/QComboBox>
 #include <QtGui/QFrame>
 #include <QtGui/QGridLayout>
@@ -43,7 +42,7 @@ public:
     QLabel *label_3;
     QLabel *label_4;
     QSpinBox *spinBox;
-    QCheckBox *checkBox;
+    QPushButton *pushButton_2;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout_3;
     QProgressBar *progressBar;
@@ -96,18 +95,18 @@ public:
 
         spinBox = new QSpinBox(frame);
         spinBox->setObjectName(QString::fromUtf8("spinBox"));
-        spinBox->setMinimum(4);
+        spinBox->setMinimum(2);
 
         horizontalLayout_2->addWidget(spinBox);
 
 
         verticalLayout->addLayout(horizontalLayout_2);
 
-        checkBox = new QCheckBox(frame);
-        checkBox->setObjectName(QString::fromUtf8("checkBox"));
-        checkBox->setFont(font);
+        pushButton_2 = new QPushButton(frame);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setEnabled(false);
 
-        verticalLayout->addWidget(checkBox);
+        verticalLayout->addWidget(pushButton_2);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -157,7 +156,7 @@ public:
         label->setText(QApplication::translate("testingFrame", "\342\204\226 \320\272\320\260\320\274\320\265\321\200\320\270", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("testingFrame", "\320\247\320\260\321\201 \321\202\320\265\321\201\321\202\321\203\320\262\320\260\320\275\320\275\321\217", 0, QApplication::UnicodeUTF8));
         label_4->setText(QString());
-        checkBox->setText(QApplication::translate("testingFrame", "\320\262\320\275\320\265\321\201\321\202\320\270 \321\201\320\262\320\276\321\227 \320\272\320\276\321\200\320\265\320\272\321\202\320\270\320\262\320\270 ", 0, QApplication::UnicodeUTF8));
+        pushButton_2->setText(QApplication::translate("testingFrame", "\320\267\321\203\320\277\320\270\320\275\320\270\321\202\320\270(\320\261\320\265\320\267 \320\267\320\261\320\265\321\200\320\265\320\266\320\265\320\275\320\275\321\217 \320\267\320\274\321\226\320\275)", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("testingFrame", "\321\200\320\276\320\267\320\277\320\276\321\207\320\260\321\202\320\270", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
