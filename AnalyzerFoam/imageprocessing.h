@@ -2,6 +2,7 @@
 #define IMAGEPROCESSING_H
 
 #include <QThread>
+#include <QTime>
 #include <QMessageBox>
 #include <QDebug>
 
@@ -14,6 +15,7 @@
 
 #include "canal_contur.h"
 #include "configinformation.h"
+#include "filewriteread.h"
 class ImageProcessing : public QThread
 {
         Q_OBJECT
@@ -66,6 +68,8 @@ private:
         int delay;
         int fps;
 
+        FileWriteRead *file;
+        QTime *time;
 
         bool checkCapture();
 

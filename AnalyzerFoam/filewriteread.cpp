@@ -26,6 +26,10 @@ void FileWriteRead::run ()
 
 }
 
+  void FileWriteRead:: test()
+  {
+          qDebug ()<<"get signal from getter";
+  }
 
 bool FileWriteRead::isFileOpen()
 {
@@ -48,10 +52,10 @@ bool FileWriteRead::tryOpen(QString kode)
             this->fileStream->open(QIODevice::Append);
         }
         this->textStream = new QTextStream (this->fileStream);
-        this->textStream->setFieldWidth(10);
+         /*this->textStream->setFieldWidth(10);
         this->textStream->setFieldAlignment(QTextStream::AlignCenter);
-        this->code=kode;
-        this->textStream->setCodec(this->code.toUtf8().constData());
+       this->code=kode;
+        this->textStream->setCodec(this->code.toUtf8().constData());*/
 
 
 
@@ -60,14 +64,15 @@ bool FileWriteRead::tryOpen(QString kode)
     return this->fileopen;
 
 }
-bool FileWriteRead::write( QString *data )
+bool FileWriteRead::write( QString data )
 {
     if (!this->fileopen){
         return false;
 
     }
     else{
-        *this->textStream << *data;
+        *this->textStream << data;
+            *this->textStream<<"\n";
         return true;
 
     }

@@ -6,7 +6,8 @@ InfoFrame::InfoFrame(QWidget *parent) :
     ui(new Ui::InfoFrame)
 {
     ui->setupUi(this);
-    connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(hide()));
+    connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(close()));
+    p= parent;
 
 }
 
@@ -16,4 +17,18 @@ InfoFrame::~InfoFrame()
 }
 void InfoFrame::destroyThis(){
     destroy();
+}
+void InfoFrame::showEvent(QShowEvent *event)
+{
+
+}
+
+void InfoFrame::closeEvent(QCloseEvent *event)
+{
+        p->show ();
+}
+
+void InfoFrame::on_pushButton_clicked()
+{
+
 }

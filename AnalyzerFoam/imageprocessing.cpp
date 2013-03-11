@@ -15,6 +15,7 @@ ImageProcessing::ImageProcessing
         this->heigthROI= 100;
         this->delay= 1;
         this->testing = false;
+        this->time =new QTime();
 }
 
 void ImageProcessing::run()
@@ -89,6 +90,14 @@ void ImageProcessing::getImage()
                 cvShowImage("capture", src);
                 if (this->calculateImage)
                         {
+                                qint32 deltaTime = this->time->elapsed ();
+                                qint32 arrayDiam[5];//0-20-40-60-80<..
+                                for (int i=0;i<5;i++)
+                                        {
+                                                arrayDiam[i]=0;
+                                        }
+
+                                time->restart ();
                                 int countBell=0;
                                 double averageDiametr =0;
                                 IplImage* h_plane = cvCreateImage( cvGetSize(src), 8, 1 );// канал H
@@ -144,10 +153,44 @@ void ImageProcessing::getImage()
                                         size.height = cvRound(box.size.height*0.5);
                                         cvCircle(src,center,(size.width+size.height)/2,CV_RGB(0,0,255),1, CV_AA, 0);
                                         double diametr = size.width+size.height;
+                                        if (diametr<20)
+                                                {
+                                                        arrayDiam[0]++;
+                                                }
+                                        else
+                                                {
+                                                        if(diametr<40)
+                                                                {
+                                                                        arrayDiam[1]++;
+
+                                                                }
+                                                        else
+                                                                {
+                                                                        if (diametr<60)
+                                                                                {
+                                                                                        arrayDiam[2]++;
+
+                                                                                }
+                                                                        else
+                                                                                {
+                                                                                        if(diametr<80)
+                                                                                        {
+                                                                                                arrayDiam[3]++;
+                                                                                        }
+                                                                                        else
+                                                                                                {
+                                                                                                        arrayDiam[4]++;
+                                                                                                }
+                                                                                }
+                                                                }
+
+                                                }
+
                                         averageDiametr+=diametr;
                                         countBell++;
                                         cvReleaseMat(&points_f);
                                 }
+
                                 cvShowImage("7kontur",src);
                                 emit this->imageCalculateReady (src);
                                 delete  pr1;
@@ -155,7 +198,23 @@ void ImageProcessing::getImage()
                                 delete  pr3;
                                 cvReleaseImage(&sum_can);
                                 cvReleaseMemStorage( &storage );
+
+                                QString str = "Проміжок часу: " ;
+                                 str.append (QString::number (deltaTime));
+                                 this->file->write (str);
+                                str.clear ();
+                                 for (int i=0;i<5;i++)
+                                        {
+                                      str.append (tr("проміжок діаметру : ")+QString::number (i)+ tr(",кількість  " )+ QString::number (arrayDiam[i])+ " ;");
+
+                                        }
+                                qDebug ()<<str;
+                                this->file->write (str);
+
                                 emit infoIsReady (countBell*0.1,2.0 *averageDiametr/countBell);
+                                this->file->write ("Усього бульбашок : "+   QString::number (countBell)+ ",  середній діаметр:" +QString::number (averageDiametr/countBell));
+
+
                                 qDebug ()<<"count Bell "<< countBell<<"average diametr = " <<3*averageDiametr/countBell;
                                 /*
                                                 max value 40*40
@@ -201,6 +260,27 @@ void ImageProcessing::working(bool setting){
 }
 void ImageProcessing::setCalculation (bool value)
 {
+        if (value)
+                {
+                        this->time->restart ();
+                        this->file = new FileWriteRead(configInformation::getnameFile (),configInformation::getrewrite ());
+                         if (!this->file->tryOpen (""))
+                                 {
+                                         QMessageBox::about (new QWidget(), tr ("Помилка"),tr("Неможливо відкрити файл статистики" ));
+                                 }
+                }
+        else
+                {
+                        if (file!=NULL)
+                                {
+                                        this->file->closeAndSave ();
+                                       // this->file->deleteLater ();
+                                        this->file=NULL;
+
+
+                                }
+
+                }
         this->calculateImage= value;
         this->kadrProssesd = 0;
         qDebug ()<<"get Signal to calculate :  "<<value;

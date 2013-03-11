@@ -22,6 +22,7 @@ MainWindow::~MainWindow()
 }
 // events
 void MainWindow::showEvent(QShowEvent *event){
+        ui->label->setText ("Камера вимкнена");
         this->initPalette ();
         this->readSettingCaprure();
         if(ui->processingImageShow->isChecked ()) // show capture frame
@@ -113,11 +114,11 @@ void MainWindow::initPalette ()
 void MainWindow::createWindows()//create windows  + menu capture
 {
         this->testFrame = new testingFrame(this->worker, this);
-                this-> gr = new OpenglGraph(this->worker);
+        this-> gr = new OpenglGraph(this->worker);
         this->infoFrame=new InfoFrame(this);
         this->settingMainFrames = new SettingMainFrames(this);
         this->settingCaptureFrame = new SettingCaptureFrame(this->worker, this);
-          this->initialMenuCapture();
+        this->initialMenuCapture();
 }
 
 void MainWindow::readSettingCaprure(){
@@ -176,6 +177,7 @@ void MainWindow::showImage()//show image from resourse
 void MainWindow::captureStop()
 {
         this->worker->working (false);
+         ui->label->setText ("Було вимкнено камеру");
 }
 void MainWindow::captureStart ()
 {
@@ -505,6 +507,8 @@ void MainWindow::on_buttonAnalizStart_clicked()
 {
         ui->buttonAnalizStop->setEnabled (true);
         ui->buttonAnalizStart->setEnabled (false);
+        ui->label->setText ("Було увімкнено аналіз зображення");
+        ui->buttonCaptureStart->setEnabled (false);
 
 
 }
@@ -513,6 +517,8 @@ void MainWindow::on_buttonAnalizStop_clicked()
         ui->frame->setEnabled (false);
         ui->progressBar->setValue (100);
         this->workingTime = -1;
+        ui->label->setText ("Було вимкнено камеру");
+          ui->buttonCaptureStart->setEnabled (true);
 }
 void MainWindow::on_buttonCaptureStart_clicked()
 {
@@ -520,4 +526,5 @@ void MainWindow::on_buttonCaptureStart_clicked()
         ui->frame->setEnabled (true);
         ui->buttonAnalizStart->setEnabled (true);
         this->ui->buttonAnalizStop->setEnabled (false);
+        ui->label->setText ("Було увімкнено камеру");
 }

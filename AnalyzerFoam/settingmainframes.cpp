@@ -36,9 +36,10 @@ void SettingMainFrames::readSetting(){
 void SettingMainFrames::writeSetting(){
     configInformation::setpalleteAllWindows(this->palletFrames);
     configInformation::setfont(this->fontFrame);
-    configInformation::writeToFile();
+   configInformation::setnameFile (this->fileName);
     configInformation::setrewrite(ui->checkBox->isChecked());
     configInformation::setfirstWriteDate(ui->checkBox_2->isChecked());
+    configInformation::writeToFile();
 }
 void SettingMainFrames::on_pushButton_4_clicked()
 {

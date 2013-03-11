@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Mon 11. Mar 22:13:33 2013
+** Created: Tue 12. Mar 01:13:18 2013
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -54,13 +54,6 @@ public:
     QAction *actionShowFile;
     QWidget *centralWidget;
     QGridLayout *gridLayout_4;
-    QGroupBox *groupBox;
-    QGridLayout *gridLayout;
-    QLabel *label;
-    QLabel *label_2;
-    QLabel *label_4;
-    QLabel *label_3;
-    QLabel *label_5;
     QLabel *capturePicture;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_3;
@@ -77,6 +70,9 @@ public:
     QPushButton *buttonAnalizStop;
     QProgressBar *progressBar;
     QPushButton *buttonAnalizStart;
+    QGroupBox *groupBox;
+    QGridLayout *gridLayout;
+    QLabel *label;
     QMenuBar *menuBar;
     QMenu *menuExport;
     QMenu *menuCapture;
@@ -125,48 +121,6 @@ public:
         gridLayout_4->setSpacing(6);
         gridLayout_4->setContentsMargins(11, 11, 11, 11);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        groupBox = new QGroupBox(centralWidget);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        QFont font;
-        font.setPointSize(10);
-        groupBox->setFont(font);
-        gridLayout = new QGridLayout(groupBox);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        label = new QLabel(groupBox);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setFont(font);
-
-        gridLayout->addWidget(label, 0, 0, 1, 1);
-
-        label_2 = new QLabel(groupBox);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setFont(font);
-
-        gridLayout->addWidget(label_2, 1, 0, 1, 1);
-
-        label_4 = new QLabel(groupBox);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setFont(font);
-
-        gridLayout->addWidget(label_4, 2, 0, 1, 1);
-
-        label_3 = new QLabel(groupBox);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setFont(font);
-
-        gridLayout->addWidget(label_3, 5, 0, 1, 1);
-
-        label_5 = new QLabel(groupBox);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
-        label_5->setFont(font);
-
-        gridLayout->addWidget(label_5, 4, 0, 1, 1);
-
-
-        gridLayout_4->addWidget(groupBox, 0, 0, 1, 1);
-
         capturePicture = new QLabel(centralWidget);
         capturePicture->setObjectName(QString::fromUtf8("capturePicture"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
@@ -264,6 +218,24 @@ public:
 
         gridLayout_4->addWidget(frame, 3, 0, 1, 1);
 
+        groupBox = new QGroupBox(centralWidget);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        QFont font;
+        font.setPointSize(10);
+        groupBox->setFont(font);
+        gridLayout = new QGridLayout(groupBox);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        label = new QLabel(groupBox);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setFont(font);
+
+        gridLayout->addWidget(label, 0, 0, 1, 1);
+
+
+        gridLayout_4->addWidget(groupBox, 0, 0, 1, 1);
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -332,12 +304,6 @@ public:
         actionHide_capture->setText(QApplication::translate("MainWindow", "Hide capture", 0, QApplication::UnicodeUTF8));
         actionShow_capture->setText(QApplication::translate("MainWindow", "Show capture", 0, QApplication::UnicodeUTF8));
         actionShowFile->setText(QApplication::translate("MainWindow", "\320\277\320\276\320\272\320\260\320\267\320\260\321\202\320\270 \321\204\320\260\320\271\320\273", 0, QApplication::UnicodeUTF8));
-        groupBox->setTitle(QApplication::translate("MainWindow", "Information", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
         capturePicture->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QString());
         label_6->setText(QApplication::translate("MainWindow", "\320\272\320\260\320\274\320\265\321\200\320\260 \342\204\226", 0, QApplication::UnicodeUTF8));
@@ -345,6 +311,8 @@ public:
         processingImageShow->setText(QApplication::translate("MainWindow", "\320\262\320\270\320\262\320\276\320\264\320\270  \320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\275\321\217, \321\211\320\276 \320\276\320\261\321\200\320\276\320\261\320\273\321\217\321\224\321\202\321\214\321\201\321\217", 0, QApplication::UnicodeUTF8));
         buttonAnalizStop->setText(QApplication::translate("MainWindow", "\320\267\321\203\320\277\320\270\320\275\320\270\321\202\320\270 \320\260\320\275\320\260\320\273\321\226\320\267", 0, QApplication::UnicodeUTF8));
         buttonAnalizStart->setText(QApplication::translate("MainWindow", "\321\200\320\276\320\267\320\277\320\276\321\207\320\260\321\202\320\270 \320\260\320\275\320\260\320\273\321\226\320\267", 0, QApplication::UnicodeUTF8));
+        groupBox->setTitle(QApplication::translate("MainWindow", "\320\206\320\275\321\204\320\276\321\200\320\274\320\260\321\206\321\226\321\217", 0, QApplication::UnicodeUTF8));
+        label->setText(QString());
         menuExport->setTitle(QApplication::translate("MainWindow", "Export", 0, QApplication::UnicodeUTF8));
         menuCapture->setTitle(QApplication::translate("MainWindow", "Capture", 0, QApplication::UnicodeUTF8));
         menuChoise_capture->setTitle(QApplication::translate("MainWindow", "\320\241\320\277\320\270\321\201\320\276\320\272 \320\277\321\226\320\264\320\272\321\216\321\207\320\265\320\275\320\270\321\205 \320\272\320\260\320\274\320\265\321\200", 0, QApplication::UnicodeUTF8));
