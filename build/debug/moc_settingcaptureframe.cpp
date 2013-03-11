@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'settingcaptureframe.h'
 **
-** Created: Sun 10. Mar 22:50:31 2013
+** Created: Mon 11. Mar 22:14:06 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_SettingCaptureFrame[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+      16,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -48,6 +48,7 @@ static const uint qt_meta_data_SettingCaptureFrame[] = {
      339,   20,   20,   20, 0x08,
      353,   20,   20,   20, 0x08,
      377,   20,   20,   20, 0x08,
+     417,   20,   20,   20, 0x08,
 
        0        // eod
 };
@@ -66,6 +67,7 @@ static const char qt_meta_stringdata_SettingCaptureFrame[] = {
     "toolTipMm()\0validMmAndSet()\0workerStart()\0"
     "on_pushButton_clicked()\0"
     "on_widthCaptureWindow_valueChanged(int)\0"
+    "on_pushButton_2_clicked()\0"
 };
 
 const QMetaObject SettingCaptureFrame::staticMetaObject = {
@@ -112,9 +114,10 @@ int SettingCaptureFrame::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 12: workerStart(); break;
         case 13: on_pushButton_clicked(); break;
         case 14: on_widthCaptureWindow_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 15: on_pushButton_2_clicked(); break;
         default: ;
         }
-        _id -= 15;
+        _id -= 16;
     }
     return _id;
 }

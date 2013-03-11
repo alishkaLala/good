@@ -1,14 +1,18 @@
 #ifndef FILEWRITEREAD_H
 #define FILEWRITEREAD_H
 
+#include <QThread>
 #include <QFile>
 #include <QTextStream>
 
-class FileWriteRead
+class FileWriteRead : public QThread
 {
+        Q_OBJECT
+        void run ();
 public:
-    FileWriteRead(QString fileName, bool rewrite);
-     FileWriteRead();
+    explicit FileWriteRead(QObject *parent = 0);
+      explicit FileWriteRead  (QString fileName, bool rewrite,QObject *parent = 0);
+  //  FileWriteRead();
 
     bool isFileOpen();
     bool tryOpen(QString kode);

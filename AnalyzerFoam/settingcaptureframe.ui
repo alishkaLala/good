@@ -152,14 +152,14 @@
      </layout>
     </widget>
    </item>
-   <item row="7" column="0">
+   <item row="8" column="0">
     <widget class="QPushButton" name="buttonRestartTrySet">
      <property name="text">
       <string>спочатку</string>
      </property>
     </widget>
    </item>
-   <item row="8" column="0">
+   <item row="9" column="0">
     <widget class="QGroupBox" name="groupBox_4">
      <property name="title">
       <string/>
@@ -251,6 +251,13 @@
     <widget class="QPushButton" name="pushButton">
      <property name="text">
       <string>ввімкнути камеру</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="text">
+      <string>вимкнути розмітку зображення</string>
      </property>
     </widget>
    </item>

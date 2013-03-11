@@ -115,12 +115,13 @@ void testingFrame::progressBarChange ()
 void testingFrame::applySetting ()
 {
         configInformation::setCaptureNumber (this->ui->comboBox->currentIndex ());
-        configInformation::setPeriodCaptureMinMax (this->timedelta/2,300000);
+        configInformation::setPeriodCaptureMinMax (this->timedelta/3,300000);
         configInformation::setEnabledResize (false);
         configInformation::setframeWidthAndFrameHight (this->w,this->h);
         configInformation::setWindowCaptureMinMax (50,this->w);
-        configInformation::setperiodCapture (this->timedelta);
-        configInformation::setSizeWindowCapture (this->worker->wishWindowsize);
+        configInformation::setperiodCapture (this->timedelta/2);
+      //  configInformation::setSizeWindowCapture (this->worker->wishWindowsize);
+        configInformation::setSizeWindowCapture (this->w/2);
         configInformation::writeToFile ();
 }
 

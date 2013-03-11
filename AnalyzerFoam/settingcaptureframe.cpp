@@ -30,6 +30,7 @@ void SettingCaptureFrame::showEvent(QShowEvent *event){
                 {
                         ui->pushButton->setEnabled (true);
                 }
+
         this->worker->working (true);
         this->setPalette(configInformation::getpalleteAllWindows());
         this->setFont(configInformation::getfont());
@@ -37,7 +38,7 @@ void SettingCaptureFrame::showEvent(QShowEvent *event){
         this->initialize();
         this->hideAllBoxes();
         this->ui->groupBox_3->setEnabled(true);
-        this->enabledResize = false;
+        this->enabledResize = configInformation::getEnabledResize ();
         this->startCalculateDistance = false;
         this->startResize=false;
         this->resizeX=0;
@@ -60,7 +61,7 @@ void SettingCaptureFrame::closeEvent(QCloseEvent *event = NULL)
 //Initialize
 void SettingCaptureFrame::initialize()
 {
-        this->initSetting();
+        this->initSetting(); //  порядок имеет значение  - сначала читаем настройки, потом заполняем гуи
 
         ui->lineEdit->setValidator(new QDoubleValidator(0.0,100.0,3,this));
         ui->lineEdit->setText(QString::number(this->distanceInMM));
@@ -76,9 +77,9 @@ void SettingCaptureFrame::initialize()
 void SettingCaptureFrame::initSetting()
 {
         this->readSetting();
-             ui->spinBox->setRange(1,100);
-
-        ui->widthCaptureWindow->setRange(300,1000);
+        ui->spinBox->setRange(configInformation::getperiodCaptureMinimum (),configInformation::getperiodCaptureMaximun ());
+        qDebug ()<<configInformation::getperiodCaptureMinimum ()<<" period "<<configInformation::getperiodCaptureMaximun ();
+        ui->widthCaptureWindow->setRange(configInformation::getSizeWindowCaptureMinimum (),configInformation::getSizeWindowCaptureMaximum ());
         ui->widthCaptureWindow->setValue(configInformation::getSizeWindowCapture());
         ui->spinBox->setValue(configInformation::getperiodCapture());
 }
@@ -192,18 +193,12 @@ void SettingCaptureFrame::readSetting()
 
         this->distanceInMM=configInformation::getdistanceInMm();
         this->distanceInPixels=configInformation::getdistanceInPixels();
-        this->enabledResize = configInformation::getEnabledResize();
-        this->X1=configInformation::getX1Resize();
-        this->Y1=configInformation::getY1Resize();
- //       ui->spinBox->setRange(configInformation::getf,100);
-
 
 
 }
 void SettingCaptureFrame::writeSetting()
 {
         configInformation::setSizeWindowCapture(ui->widthCaptureWindow->value());
-
         configInformation::setperiodCapture(ui->spinBox->value());
         configInformation::setdistanceInMm(this->distanceInMM);
         configInformation::setdistanceInPixels(this->distanceInPixels);
@@ -220,13 +215,13 @@ void SettingCaptureFrame::writeSetting()
 void SettingCaptureFrame::on_SettingApply_clicked()
 {
         if (ui->lineEdit->text().trimmed()=="")
-                if (QMessageBox::Yes == QMessageBox::warning(this,tr("MM not defined"),
-                                                             tr("Set dedault?"),
+                if (QMessageBox::Yes == QMessageBox::warning(this,tr("Кількість міліметрів  не визначена"),
+                                                             tr("Застосувати раніше встановлені налаштування?"),
                                                              QMessageBox::Yes,QMessageBox::No)){
                         ui->lineEdit->setText(QString::number(configInformation::getdistanceInMm()));
                 }
                 else {
-                        QMessageBox::information(this,tr (""),tr("then define it"), QMessageBox::Ok);
+                        QMessageBox::information(this,tr (""),tr("Визначте їх"), QMessageBox::Ok);
                         return;
                 }
         this->writeSetting();
@@ -378,4 +373,10 @@ void SettingCaptureFrame::on_pushButton_clicked()
 void SettingCaptureFrame::on_widthCaptureWindow_valueChanged(int )
 {
     this->worker->setEnabledResize (false,0,0,0,0);
+}
+
+void SettingCaptureFrame::on_pushButton_2_clicked()
+{
+    worker->setEnabledResize (false,0,0,0,0);
+    this->enabledResize= false;
 }

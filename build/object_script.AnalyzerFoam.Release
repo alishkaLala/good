@@ -11,6 +11,7 @@ INPUT(
 ./release\canal_contur.o
 ./release\testingframe.o
 ./release\moc_mainwindow.o
+./release\moc_filewriteread.o
 ./release\moc_infoframe.o
 ./release\moc_settingmainframes.o
 ./release\moc_settingcaptureframe.o

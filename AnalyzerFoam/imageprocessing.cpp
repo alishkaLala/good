@@ -1,6 +1,7 @@
 #include "imageprocessing.h"
 
-ImageProcessing::ImageProcessing(QObject *parent) :
+ImageProcessing::ImageProcessing
+(QObject *parent) :
         QThread(parent)
 {
         this->choisedCapture= 0;
@@ -13,6 +14,7 @@ ImageProcessing::ImageProcessing(QObject *parent) :
         this->widthROI= 100;
         this->heigthROI= 100;
         this->delay= 1;
+        this->testing = false;
 }
 
 void ImageProcessing::run()
@@ -35,30 +37,37 @@ void ImageProcessing::getImage()
         if (this->testing)
                 {
                         emit captureProp (this->captureWidth,this->captureHeight,this->fps);
-                        this->setWindowSize (this->captureWidth/2);
+                        this->setWindowSize (this->captureWidth);
+                        this->delay= 1;
 
-
-                }
-        if (!this->checkCapture ())
-                {
-
-                        qDebug ()<<" Setting for enother capture";
-                        QMessageBox::about (new QWidget(), tr ("Помилка"),tr("Налаштування буди зроблені для іншої камери" ));
-                        working (false);
 
                 }
         else
                 {
-                        k1= configInformation::getK1 ();
-                        k2= configInformation::getK2 ();
-                        this->setWindowSize (configInformation::getSizeWindowCapture ());
-                        this->delay=configInformation::getperiodCapture ();
-                        this->setEnabledResize (configInformation::getEnabledResize (),
-                                                configInformation::getX1Resize (),configInformation::getY1Resize(),
-                                                configInformation::getX1Resize ()+configInformation::getframeWidthResize(),
-                                                configInformation::getY1Resize ()+configInformation::getframeHightResize()
-                                                );
+                        if (!this->checkCapture ())
+                                {
+
+                                        qDebug ()<<" Setting for enother capture";
+                                        QMessageBox::about (new QWidget(), tr ("Помилка"),tr("Налаштування буди зроблені для іншої камери" ));
+                                        working (false);
+
+                                }
+                        else
+                                {
+                                        k1= configInformation::getK1 ();
+                                        k2= configInformation::getK2 ();
+                                        this->setWindowSize (configInformation::getSizeWindowCapture ());
+                                        this->delay=configInformation::getperiodCapture ();
+                                        this->setEnabledResize (configInformation::getEnabledResize (),
+                                                                configInformation::getX1Resize (),configInformation::getY1Resize(),
+                                                                configInformation::getX1Resize ()+configInformation::getframeWidthResize(),
+                                                                configInformation::getY1Resize ()+configInformation::getframeHightResize()
+                                                                );
+                                        qDebug ()<<"read setting  k1= " <<k1<<" k2 ="<<k2<<" delay"<<delay ;
+                                }
                 }
+
+
         qDebug ()<< "capture size : "<< this->captureWidth<<"*"<<this->captureHeight;
         this->kadrProssesd =0;
         while(isWorking){

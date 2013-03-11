@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'settingcaptureframe.ui'
 **
-** Created: Sun 10. Mar 22:26:02 2013
+** Created: Mon 11. Mar 22:13:33 2013
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -71,6 +71,7 @@ public:
     QDoubleSpinBox *doubleSpinBox_2;
     QLabel *label_6;
     QPushButton *pushButton;
+    QPushButton *pushButton_2;
 
     void setupUi(QWidget *SettingCaptureFrame)
     {
@@ -192,7 +193,7 @@ public:
         buttonRestartTrySet = new QPushButton(SettingCaptureFrame);
         buttonRestartTrySet->setObjectName(QString::fromUtf8("buttonRestartTrySet"));
 
-        gridLayout_4->addWidget(buttonRestartTrySet, 7, 0, 1, 1);
+        gridLayout_4->addWidget(buttonRestartTrySet, 8, 0, 1, 1);
 
         groupBox_4 = new QGroupBox(SettingCaptureFrame);
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
@@ -214,7 +215,7 @@ public:
         verticalLayout_2->addWidget(SettingStandart);
 
 
-        gridLayout_4->addWidget(groupBox_4, 8, 0, 1, 1);
+        gridLayout_4->addWidget(groupBox_4, 9, 0, 1, 1);
 
         frame = new QFrame(SettingCaptureFrame);
         frame->setObjectName(QString::fromUtf8("frame"));
@@ -258,6 +259,11 @@ public:
 
         gridLayout_4->addWidget(pushButton, 6, 0, 1, 1);
 
+        pushButton_2 = new QPushButton(SettingCaptureFrame);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+
+        gridLayout_4->addWidget(pushButton_2, 7, 0, 1, 1);
+
 
         retranslateUi(SettingCaptureFrame);
 
@@ -292,6 +298,7 @@ public:
         label_3->setText(QApplication::translate("SettingCaptureFrame", "k1=", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("SettingCaptureFrame", "k2=", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("SettingCaptureFrame", "\320\262\320\262\321\226\320\274\320\272\320\275\321\203\321\202\320\270 \320\272\320\260\320\274\320\265\321\200\321\203", 0, QApplication::UnicodeUTF8));
+        pushButton_2->setText(QApplication::translate("SettingCaptureFrame", "\320\262\320\270\320\274\320\272\320\275\321\203\321\202\320\270 \321\200\320\276\320\267\320\274\321\226\321\202\320\272\321\203 \320\267\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\275\321\217", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

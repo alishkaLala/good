@@ -107,6 +107,7 @@ private slots:
 
         void on_pushButton_clicked();
         void on_widthCaptureWindow_valueChanged(int );
+        void on_pushButton_2_clicked();
 };
 
 #endif // SETTINGCAPTUREFRAME_H

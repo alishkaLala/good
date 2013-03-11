@@ -11,6 +11,7 @@ INPUT(
 ./debug\canal_contur.o
 ./debug\testingframe.o
 ./debug\moc_mainwindow.o
+./debug\moc_filewriteread.o
 ./debug\moc_infoframe.o
 ./debug\moc_settingmainframes.o
 ./debug\moc_settingcaptureframe.o

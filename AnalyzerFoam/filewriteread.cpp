@@ -1,7 +1,18 @@
 #include "filewriteread.h"
 #include <iostream>
 
-FileWriteRead::FileWriteRead(QString fileNameTmp, bool rewriteTmp)
+FileWriteRead::FileWriteRead(QObject *parent) :
+        QThread(parent)
+{
+        this->fileopen = false;
+        this->fileName="default.txt";
+        this->rewrite=false;
+}
+
+
+
+FileWriteRead::FileWriteRead(QString fileNameTmp, bool rewriteTmp,QObject *parent):
+QThread(0)
 {
     this->fileopen = false;
     this->fileName=fileNameTmp;
@@ -10,13 +21,12 @@ FileWriteRead::FileWriteRead(QString fileNameTmp, bool rewriteTmp)
 
 }
 
-FileWriteRead::FileWriteRead()
+void FileWriteRead::run ()
 {
-    this->fileopen = false;
-    this->fileName="default.txt";
-    this->rewrite=false;
 
 }
+
+
 bool FileWriteRead::isFileOpen()
 {
     return this->fileopen;
