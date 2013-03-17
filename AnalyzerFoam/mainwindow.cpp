@@ -53,11 +53,12 @@ void MainWindow::imageGetting(IplImage *img)
 
 
 }
-void MainWindow::infoGetting(double count, double diametr){
+void MainWindow::infoGetting(double count, double diametr, double *arr)
+{
 
         if (gr->isVisible ())
                 {
-                        this->gr->genCoords(count,diametr);
+                        this->gr->genCoords(count,diametr,arr);
                 }
 
 }
@@ -191,7 +192,7 @@ void MainWindow::calculateImagesStart ()
         this->workingTime= 1000*60*ui->spinBox->value ();
         this->workingTimeDelta = qCeil (this->workingTime/100.0);
         this->worker->setCalculation (true);
-        connect(this->worker,SIGNAL(infoIsReady(double,double)),this,SLOT(infoGetting(double,double)));
+        connect(this->worker,SIGNAL(infoIsReady(double,double,double*)),this,SLOT(infoGetting(double,double,double*)));
         QTimer::singleShot (this->workingTimeDelta,this,SLOT(progressBarChange()));
 
 }

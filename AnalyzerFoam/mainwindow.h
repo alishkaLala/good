@@ -40,7 +40,7 @@ public:
 private slots:
         //signal getting :
         void imageGetting( IplImage *img);
-        void infoGetting(double count,double diametr);
+        void infoGetting(double count,double diametr,double  *arr);
 
         //connect/disconnect image getting
         void captureStop(); //disable capture

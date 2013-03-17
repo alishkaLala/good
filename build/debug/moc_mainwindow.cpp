@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Tue 12. Mar 01:31:28 2013
+** Created: Sun 17. Mar 11:12:31 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -32,32 +32,32 @@ static const uint qt_meta_data_MainWindow[] = {
 
  // slots: signature, parameters, type, tag, flags
       16,   12,   11,   11, 0x08,
-      54,   40,   11,   11, 0x08,
-      81,   11,   11,   11, 0x08,
-      95,   11,   11,   11, 0x08,
-     109,   11,   11,   11, 0x08,
-     131,  123,   11,   11, 0x08,
-     161,   11,   11,   11, 0x08,
-     176,   11,   11,   11, 0x08,
-     199,   11,   11,   11, 0x08,
-     220,   11,   11,   11, 0x08,
-     240,   11,   11,   11, 0x08,
-     259,   11,   11,   11, 0x08,
-     275,   11,   11,   11, 0x08,
-     294,   11,   11,   11, 0x08,
-     315,   11,   11,   11, 0x08,
-     333,   11,   11,   11, 0x08,
-     352,   11,   11,   11, 0x08,
-     382,   11,   11,   11, 0x08,
-     413,   11,   11,   11, 0x08,
-     443,   11,   11,   11, 0x08,
+      58,   40,   11,   11, 0x08,
+      93,   11,   11,   11, 0x08,
+     107,   11,   11,   11, 0x08,
+     121,   11,   11,   11, 0x08,
+     143,  135,   11,   11, 0x08,
+     173,   11,   11,   11, 0x08,
+     188,   11,   11,   11, 0x08,
+     211,   11,   11,   11, 0x08,
+     232,   11,   11,   11, 0x08,
+     252,   11,   11,   11, 0x08,
+     271,   11,   11,   11, 0x08,
+     287,   11,   11,   11, 0x08,
+     306,   11,   11,   11, 0x08,
+     327,   11,   11,   11, 0x08,
+     345,   11,   11,   11, 0x08,
+     364,   11,   11,   11, 0x08,
+     394,   11,   11,   11, 0x08,
+     425,   11,   11,   11, 0x08,
+     455,   11,   11,   11, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_MainWindow[] = {
     "MainWindow\0\0img\0imageGetting(IplImage*)\0"
-    "count,diametr\0infoGetting(double,double)\0"
+    "count,diametr,arr\0infoGetting(double,double,double*)\0"
     "captureStop()\0hideCapture()\0showCapture()\0"
     "enabled\0setSartStopImegeGetting(bool)\0"
     "captureStart()\0calculateImagesStart()\0"
@@ -101,7 +101,7 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: imageGetting((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
-        case 1: infoGetting((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;
+        case 1: infoGetting((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double*(*)>(_a[3]))); break;
         case 2: captureStop(); break;
         case 3: hideCapture(); break;
         case 4: showCapture(); break;

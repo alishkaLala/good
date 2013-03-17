@@ -29,7 +29,7 @@ public:
 signals:
         void imageIsReady( IplImage *img);
         void imageCalculateReady( IplImage *img);
-        void infoIsReady(double count, double diametr);
+        void infoIsReady(double count, double diametr,double *arr);
         void captureProp(int ,int ,int);
 
 public slots:

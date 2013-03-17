@@ -91,7 +91,7 @@ void ImageProcessing::getImage()
                 if (this->calculateImage)
                         {
                                 qint32 deltaTime = this->time->elapsed ();
-                                qint32 arrayDiam[5];//0-20-40-60-80<..
+                                double arrayDiam[10];//0-20-40-60-80<..
                                 for (int i=0;i<5;i++)
                                         {
                                                 arrayDiam[i]=0;
@@ -153,27 +153,29 @@ void ImageProcessing::getImage()
                                         size.height = cvRound(box.size.height*0.5);
                                         cvCircle(src,center,(size.width+size.height)/2,CV_RGB(0,0,255),1, CV_AA, 0);
                                         double diametr = size.width+size.height;
-                                        if (diametr<20)
+                                        if (diametr<10)
                                                 {
                                                         arrayDiam[0]++;
+                                                        arrayDiam[5]++;
                                                 }
                                         else
                                                 {
-                                                        if(diametr<40)
+                                                        if(diametr<20)
                                                                 {
                                                                         arrayDiam[1]++;
+                                                                         arrayDiam[6]++;
 
                                                                 }
                                                         else
                                                                 {
-                                                                        if (diametr<60)
+                                                                        if (diametr<30)
                                                                                 {
                                                                                         arrayDiam[2]++;
 
                                                                                 }
                                                                         else
                                                                                 {
-                                                                                        if(diametr<80)
+                                                                                        if(diametr<40)
                                                                                         {
                                                                                                 arrayDiam[3]++;
                                                                                         }
@@ -203,15 +205,17 @@ void ImageProcessing::getImage()
                                  str.append (QString::number (deltaTime));
                                  this->file->write (str);
                                 str.clear ();
-                                 for (int i=0;i<5;i++)
-                                        {
-                                      str.append (tr("пром≥жок д≥аметру : ")+QString::number (i)+ tr(",к≥льк≥сть  " )+ QString::number (arrayDiam[i])+ " ;");
 
-                                        }
-                                qDebug ()<<str;
-                                this->file->write (str);
 
-                                emit infoIsReady (countBell*0.1,2.0 *averageDiametr/countBell);
+                                for (int i=0;i<5;i++)
+                                       {
+                                     str.append (tr("пром≥жок д≥аметру : ")+QString::number (i)+ tr(",к≥льк≥сть  " )+ QString::number (arrayDiam[i])+ " ;");
+
+                                       }
+                               qDebug ()<<str;
+                               this->file->write (str);
+
+                                emit infoIsReady (countBell*0.1,2.0 *averageDiametr/countBell,arrayDiam);
                                 this->file->write ("”сього бульбашок : "+   QString::number (countBell)+ ",  середн≥й д≥аметр:" +QString::number (averageDiametr/countBell));
 
 

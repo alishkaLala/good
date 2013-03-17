@@ -19,6 +19,7 @@ OpenglGraph::OpenglGraph(ImageProcessing *worker, QWidget *parent): QGLWidget(pa
         for (int i = 0; i < max_cnt; i++) {
                 pol[i].x =40;
                 pol[i].y = 40;
+
         }
 
 }
@@ -29,6 +30,13 @@ void OpenglGraph::showEvent (QShowEvent *event)
         for (int i=0; i < max_cnt-1; i++) {
                 pol[i].x = 0.0;
                 pol[i].y = 0.0;
+                for (int j=0; j<10;j++)
+                {
+                    if(j%2==0)
+                    pol[i].k[j]=2;
+                    else
+                        pol[i].k[j]=5;
+                }
         }
 }
 
@@ -36,7 +44,7 @@ void OpenglGraph::initializeGL()
 {
         qglClearColor(Qt::black);
         glEnable(GL_DEPTH_TEST);
-        //glShadeModel(GL_FLAT);
+       glShadeModel(GL_FLAT);
       //  glEnable(GL_CULL_FACE) ;
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_COLOR_MATERIAL);
@@ -58,28 +66,17 @@ void OpenglGraph::resizeGL(int width, int height)
 void OpenglGraph::paintGL()
 {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        //glClear(GL_COLOR_BUFFER_BIT);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-
         glTranslatef(-5, zTra, -15);    // трансл€ци€
         glRotatef(xRot, 1.0f, 0.0f, 0.0f); // поворот вокруг оси X
         glRotatef(yRot, 0.0f, 1.0f, 0.0f); // поворот вокруг оси Y
         glRotatef(zRot, 0.0f, 0.0f, 1.0f); // поворот вокруг оси Z
         glScalef(nSca, nSca, nSca);        // масштабирование
-
-
-        //  glTranslatef(-5, -2, -15.0);
-        //    glRotatef(rotationX, 1.0, 0.0, 0.0);
-        //    glRotatef(rotationY, 0.0, 1.0, 0.0);
-        //   glRotatef(rotationZ, 0.0, 0.0, 1.0);
-        //  glScalef(nSca, nSca, nSca);        */
-
         glLineWidth(2.0);
         this->drawAxis ();
         glLineWidth(4.0);
 
-        //  draw();
 }
 
 void OpenglGraph::drawAxis ()
@@ -199,16 +196,30 @@ void OpenglGraph::drawAxis ()
         glEnd();
 
         glLineWidth(2.0);
+        //glColor4f(0.0, 0.7, 0.1, 0.75);
+
+
         for (int i=0; i < max_cnt-1; i++) {
+
+
+
+           for (int j =0; j<10-1;j++)
+            {
+                if(j%2==0)
+                glColor3f(50,0, 0);
+                else
+                    glColor3f(50,40, 50);
                 glBegin(GL_QUADS);
-                glColor4f(0.0, 0.7, 0.1, 0.75);
-                glVertex3f(i*0.1, pol[i].x*0.3, pol[i].y*0.3);
-                glVertex3f((i+1)*0.1, pol[i+1].x*0.3, pol[i+1].y*0.3);
-                glColor4f(0.69, 0.9, 0.0, 0.75);
-                glVertex3f((i+1)*0.1, pol[i+1].x*0.3, 0.0);
-                glVertex3f(i*0.1, pol[i].x*0.3, 0.0);
+                glVertex3f(i*0.1, pol[i].k[j], j);
+                glVertex3f(i*0.1, pol[i].k[j+1], j+1);
+                glVertex3f((i+1)*0.1,pol[i+1].k[j+1],j+1);
+                glVertex3f((i+1)*0.1,pol[i+1].k[j],j);
                 glEnd();
-        }
+            }
+
+
+   }
+
 }
 
 
@@ -292,13 +303,17 @@ int r(int max)
         return (int)(((float)max)*(rand()/(RAND_MAX+1.0)));
 }
 
-void OpenglGraph::genCoords(double k,double m)
+void OpenglGraph::genCoords(double k,double m,double *arr)
 {
         for (int i=max_cnt-1; i>0; i--) {
                 pol[i] = pol[i-1];
         }
         pol[0].x = k;
         pol[0].y = m;
+        for(int j=0;j<10;j++)
+        {
+            pol[0].k[j]=arr[j];
+        }
         updateGL();
 }
 

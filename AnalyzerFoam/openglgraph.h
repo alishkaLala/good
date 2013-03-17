@@ -16,6 +16,7 @@ const int max_cnt = 200;
 struct myPoints {
         double x;
         double y;
+        double k[10];
 };
 
 class OpenglGraph : public QGLWidget
@@ -62,7 +63,7 @@ private:
         QPoint lastPos;
 
 public slots:
-        void genCoords(double k,double m);
+        void genCoords(double k,double m,double *arr);
 };
 
 #endif // OPENGLGRAPH_H

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'imageprocessing.h'
 **
-** Created: Mon 11. Mar 23:50:58 2013
+** Created: Sun 17. Mar 11:12:38 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -33,20 +33,20 @@ static const uint qt_meta_data_ImageProcessing[] = {
  // signals: signature, parameters, type, tag, flags
       21,   17,   16,   16, 0x05,
       45,   17,   16,   16, 0x05,
-      90,   76,   16,   16, 0x05,
-     120,  117,   16,   16, 0x05,
+      94,   76,   16,   16, 0x05,
+     132,  129,   16,   16, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-     145,   16,   16,   16, 0x0a,
-     159,   16,   16,   16, 0x0a,
-     170,   16,   16,   16, 0x0a,
-     197,  191,   16,   16, 0x0a,
-     211,  191,   16,   16, 0x0a,
-     225,  191,   16,   16, 0x0a,
-     270,  244,   16,   16, 0x0a,
-     309,  191,   16,   16, 0x0a,
-     331,  191,   16,   16, 0x0a,
-     348,  191,   16,   16, 0x0a,
+     157,   16,   16,   16, 0x0a,
+     171,   16,   16,   16, 0x0a,
+     182,   16,   16,   16, 0x0a,
+     209,  203,   16,   16, 0x0a,
+     223,  203,   16,   16, 0x0a,
+     237,  203,   16,   16, 0x0a,
+     282,  256,   16,   16, 0x0a,
+     321,  203,   16,   16, 0x0a,
+     343,  203,   16,   16, 0x0a,
+     360,  203,   16,   16, 0x0a,
 
        0        // eod
 };
@@ -54,7 +54,7 @@ static const uint qt_meta_data_ImageProcessing[] = {
 static const char qt_meta_stringdata_ImageProcessing[] = {
     "ImageProcessing\0\0img\0imageIsReady(IplImage*)\0"
     "imageCalculateReady(IplImage*)\0"
-    "count,diametr\0infoIsReady(double,double)\0"
+    "count,diametr,arr\0infoIsReady(double,double,double*)\0"
     ",,\0captureProp(int,int,int)\0working(bool)\0"
     "getImage()\0setCalculation(bool)\0value\0"
     "setK1(double)\0setK2(double)\0"
@@ -95,7 +95,7 @@ int ImageProcessing::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         switch (_id) {
         case 0: imageIsReady((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
         case 1: imageCalculateReady((*reinterpret_cast< IplImage*(*)>(_a[1]))); break;
-        case 2: infoIsReady((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2]))); break;
+        case 2: infoIsReady((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double*(*)>(_a[3]))); break;
         case 3: captureProp((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
         case 4: working((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 5: getImage(); break;
@@ -129,9 +129,9 @@ void ImageProcessing::imageCalculateReady(IplImage * _t1)
 }
 
 // SIGNAL 2
-void ImageProcessing::infoIsReady(double _t1, double _t2)
+void ImageProcessing::infoIsReady(double _t1, double _t2, double * _t3)
 {
-    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 
