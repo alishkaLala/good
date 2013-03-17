@@ -171,6 +171,7 @@ void ImageProcessing::getImage()
                                                                         if (diametr<30)
                                                                                 {
                                                                                         arrayDiam[2]++;
+                                                                                         arrayDiam[7]++;
 
                                                                                 }
                                                                         else
@@ -178,10 +179,12 @@ void ImageProcessing::getImage()
                                                                                         if(diametr<40)
                                                                                         {
                                                                                                 arrayDiam[3]++;
+                                                                                                 arrayDiam[8]++;
                                                                                         }
                                                                                         else
                                                                                                 {
                                                                                                         arrayDiam[4]++;
+                                                                                                         arrayDiam[9]++;
                                                                                                 }
                                                                                 }
                                                                 }
@@ -214,6 +217,8 @@ void ImageProcessing::getImage()
                                        }
                                qDebug ()<<str;
                                this->file->write (str);
+                               for (int i=0;i<10;i++)
+                                   arrayDiam[i]=(int)arrayDiam[i]%10;
 
                                 emit infoIsReady (countBell*0.1,2.0 *averageDiametr/countBell,arrayDiam);
                                 this->file->write ("Усього бульбашок : "+   QString::number (countBell)+ ",  середній діаметр:" +QString::number (averageDiametr/countBell));
