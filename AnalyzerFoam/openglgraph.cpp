@@ -195,7 +195,7 @@ void OpenglGraph::drawAxis ()
         glVertex3f(0.2, 0.0, 11.8);
         glEnd();
 
-        glLineWidth(2.0);
+        glLineWidth(4.0);
         //glColor4f(0.0, 0.7, 0.1, 0.75);
 
 
@@ -208,13 +208,18 @@ void OpenglGraph::drawAxis ()
                 if(j%2==0)
                 glColor3f(50,0, 0);
                 else
-                    glColor3f(50,40, 50);
-                glBegin(GL_QUADS);
+                    glColor3f(255,255, 0);
+               /* glBegin(GL_QUADS);
                 glVertex3f(i*0.1, pol[i].k[j], j);
                 glVertex3f(i*0.1, pol[i].k[j+1], j+1);
                 glVertex3f((i+1)*0.1,pol[i+1].k[j+1],j+1);
                 glVertex3f((i+1)*0.1,pol[i+1].k[j],j);
-                glEnd();
+                glEnd();*/
+                glBegin(GL_LINES);
+                                glVertex3f(i*0.1, pol[i].k[j], j);
+                                glVertex3f((i+1)*0.1, pol[i+1].k[j], j);
+                                 glEnd();
+
             }
 
 
