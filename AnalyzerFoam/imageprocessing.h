@@ -73,6 +73,8 @@ private:
 
         bool checkCapture();
 
+        int intervals[10];
+
 
 };
 

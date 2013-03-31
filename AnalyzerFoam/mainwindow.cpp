@@ -33,9 +33,13 @@ void MainWindow::showEvent(QShowEvent *event){
 }
 void MainWindow::closeEvent(QCloseEvent *event= NULL){
 
-        this->worker->setCalculation (false);
-        this->worker->working(false);
-        this->setSartStopImegeGetting(false);
+         if(!this->showingSettingCapture)
+         {
+             this->worker->setCalculation (false);
+             this->worker->working(false);
+             this->setSartStopImegeGetting(false);
+
+         }
 
 
 
@@ -66,6 +70,7 @@ void MainWindow::infoGetting(double count, double diametr, double *arr)
 // init
 void MainWindow::initValues()
 {
+        this->showingSettingCapture = false;
         this->worker = new ImageProcessing();
         this->timeToWork = 100;
         ui->spinBox->setRange(1,this->timeToWork);
@@ -103,7 +108,6 @@ void MainWindow::initialConnections()
         connect(this->ui->comboBox,SIGNAL(currentIndexChanged(int)),this->worker,SLOT(setChoisedCpture(int)));//set choised capture in worker
         connect (ui->buttonAnalizStart,SIGNAL(clicked()),this,SLOT(calculateImagesStart())); //start analiz=> (set no gui)
         connect (ui->buttonAnalizStop,SIGNAL(clicked()),this,SLOT(calculateImageStop()));//stop analiz =>(set no gui)
-
 
 }
 void MainWindow::initPalette ()
@@ -177,6 +181,7 @@ void MainWindow::showImage()//show image from resourse
 }
 void MainWindow::captureStop()
 {
+      this->worker->setCalculation(false);
         this->worker->working (false);
          ui->label->setText ("Було вимкнено камеру");
 }
@@ -237,12 +242,18 @@ void MainWindow::showSettingFrame(){
         this->close();
 
 }
-void MainWindow::showSettingCapture(){
+void MainWindow::showSettingCapture()
+{
 
-        this->close();
-        this->setSartStopImegeGetting(false);
-        this->settingCaptureFrame->show();
+    if(!worker->isRealyWork())
+    {
+       QMessageBox::information(this,"Помилка","Увімкніть спочатку камеру");
+       return ;
 
+    }
+    this->showingSettingCapture= true;
+    this->settingCaptureFrame->show();
+     this->close();
 
 }
 void MainWindow::showOpenGLGraph(){
@@ -258,6 +269,7 @@ void MainWindow::showTestingFrame ()
 }
 
 // aditional function
+
 qint8 MainWindow::findCapture(){
         CvCapture *cap_temp;
         int   tmpNumberOfCapture  =0;
@@ -519,7 +531,7 @@ void MainWindow::on_buttonAnalizStop_clicked()
         ui->progressBar->setValue (100);
         this->workingTime = -1;
         ui->label->setText ("Було вимкнено камеру");
-          ui->buttonCaptureStart->setEnabled (true);
+        ui->buttonCaptureStart->setEnabled (true);
 }
 void MainWindow::on_buttonCaptureStart_clicked()
 {

@@ -16,6 +16,8 @@ ImageProcessing::ImageProcessing
         this->delay= 1;
         this->testing = false;
         this->time =new QTime();
+        for (int i = 1; i<= 10;i++)
+         this->intervals[i-1] = i*10;
 }
 
 void ImageProcessing::run()
@@ -91,8 +93,8 @@ void ImageProcessing::getImage()
                 if (this->calculateImage)
                         {
                                 qint32 deltaTime = this->time->elapsed ();
-                                double arrayDiam[10];//0-20-40-60-80<..
-                                for (int i=0;i<5;i++)
+                                double arrayDiam[10];
+                                for (int i=0;i<10;i++)
                                         {
                                                 arrayDiam[i]=0;
                                         }
@@ -121,7 +123,7 @@ void ImageProcessing::getImage()
                                 cvOr(v_can,h_can,sum_can);
                                 cvOr(sum_can,s_can,sum_can);
                                 cvReleaseImage(&h_can);cvReleaseImage(&s_can);cvReleaseImage(&v_can);
-                                cvShowImage("summa_first",sum_can);
+                                //cvShowImage("summa_first",sum_can);
                                 CvMemStorage* storage = cvCreateMemStorage(0);CvSeq* contours=0;
                                 cvFindContours( sum_can, storage,&contours,sizeof(CvContour),CV_RETR_EXTERNAL,CV_CHAIN_APPROX_SIMPLE,cvPoint(0,0));
                                 for(CvSeq* seq0 = contours;seq0!=0;seq0 = seq0->h_next)
@@ -130,13 +132,13 @@ void ImageProcessing::getImage()
                                                 cvDrawContours(sum_can, seq0, cvScalar(255), cvScalar(255), 0, CV_FILLED, 8); // рисуем контур
                                         }
                                 cvReleaseMemStorage( &storage );//в прикладах контур contours не звільняють????
-                                cvShowImage("summa_x",sum_can);
+                                //cvShowImage("summa_x",sum_can);
                                 int radius = 1,iterations=1;
                                 IplConvKernel* Kern = cvCreateStructuringElementEx(radius*2+1, radius*2+1, radius, radius, CV_SHAPE_ELLIPSE);
                                 cvErode(sum_can, sum_can, Kern, iterations);
                                 cvDilate(sum_can, sum_can, Kern, iterations);
                                 cvReleaseStructuringElement(&Kern);//---------
-                                cvShowImage("summa_s",sum_can);
+                               //cvShowImage("summa_s",sum_can);
                                 storage = cvCreateMemStorage(0); contours=0;
                                 cvFindContours( sum_can, storage,&contours,sizeof(CvContour),CV_RETR_EXTERNAL,CV_CHAIN_APPROX_SIMPLE,cvPoint(0,0));
                                 for(CvSeq* seq0 = contours;seq0!=0;seq0 = seq0->h_next){
@@ -152,44 +154,22 @@ void ImageProcessing::getImage()
                                         size.width = cvRound(box.size.width*0.5);
                                         size.height = cvRound(box.size.height*0.5);
                                         cvCircle(src,center,(size.width+size.height)/2,CV_RGB(0,0,255),1, CV_AA, 0);
-                                        double diametr = size.width+size.height;
-                                        if (diametr<10)
-                                                {
-                                                        arrayDiam[0]++;
-                                                        arrayDiam[5]++;
-                                                }
-                                        else
-                                                {
-                                                        if(diametr<20)
-                                                                {
-                                                                        arrayDiam[1]++;
-                                                                         arrayDiam[6]++;
+                                        const double diametr = size.width+size.height;
+                                        for (int i = 0; i< 10 ; i++)
+                                        {
+                                         if (diametr < intervals[i])
+                                            {
+                                              arrayDiam[i]++;
+                                              break;
+                                            }
+                                         if (i == 9 )
+                                         {
+                                            arrayDiam[i]++;
+                                         }
+                                        }
 
-                                                                }
-                                                        else
-                                                                {
-                                                                        if (diametr<30)
-                                                                                {
-                                                                                        arrayDiam[2]++;
-                                                                                         arrayDiam[7]++;
 
-                                                                                }
-                                                                        else
-                                                                                {
-                                                                                        if(diametr<40)
-                                                                                        {
-                                                                                                arrayDiam[3]++;
-                                                                                                 arrayDiam[8]++;
-                                                                                        }
-                                                                                        else
-                                                                                                {
-                                                                                                        arrayDiam[4]++;
-                                                                                                         arrayDiam[9]++;
-                                                                                                }
-                                                                                }
-                                                                }
 
-                                                }
 
                                         averageDiametr+=diametr;
                                         countBell++;
@@ -204,26 +184,20 @@ void ImageProcessing::getImage()
                                 cvReleaseImage(&sum_can);
                                 cvReleaseMemStorage( &storage );
 
-                                QString str = "Проміжок часу: " ;
-                                 str.append (QString::number (deltaTime));
-                                 this->file->write (str);
-                                str.clear ();
+                                QString str = "" ;
+                                 str.append (QString::number(deltaTime)+ ":");
 
 
-                                for (int i=0;i<5;i++)
+
+                                for (int i=0;i<10;i++)
                                        {
-                                     str.append (tr("проміжок діаметру : ")+QString::number (i)+ tr(",кількість  " )+ QString::number (arrayDiam[i])+ " ;");
+                                         str.append (QString::number (arrayDiam[i])+ ":");
 
                                        }
-                               qDebug ()<<str;
                                this->file->write (str);
                                for (int i=0;i<10;i++)
                                    arrayDiam[i]=(int)arrayDiam[i]%10;
-
                                 emit infoIsReady (countBell*0.1,2.0 *averageDiametr/countBell,arrayDiam);
-                                this->file->write ("Усього бульбашок : "+   QString::number (countBell)+ ",  середній діаметр:" +QString::number (averageDiametr/countBell));
-
-
                                 qDebug ()<<"count Bell "<< countBell<<"average diametr = " <<3*averageDiametr/countBell;
                                 /*
                                                 max value 40*40
@@ -269,30 +243,39 @@ void ImageProcessing::working(bool setting){
 }
 void ImageProcessing::setCalculation (bool value)
 {
-        if (value)
-                {
-                        this->time->restart ();
-                        this->file = new FileWriteRead(configInformation::getnameFile (),configInformation::getrewrite ());
-                         if (!this->file->tryOpen (""))
-                                 {
-                                         QMessageBox::about (new QWidget(), tr ("Помилка"),tr("Неможливо відкрити файл статистики" ));
-                                 }
-                }
-        else
-                {
-                        if (file!=NULL)
-                                {
-                                        this->file->closeAndSave ();
-                                       // this->file->deleteLater ();
-                                        this->file=NULL;
+ if (value)
+   {
+    this->time->restart ();
+    this->file = new FileWriteRead(configInformation::getnameFile (),configInformation::getrewrite ());
+    qDebug()<<"get file name "<<configInformation::getnameFile ();
+    if (!this->file->tryOpen (""))
+          {
+                  QMessageBox::about (new QWidget(), tr ("Помилка"),tr("Неможливо відкрити файл статистики" ));
+          }
+    else
+    {
+     QString sentance = "time:";
+     for (int i = 0; i<9; i++)
+       sentance.append( "< " +QString::number( this->intervals[i])+":");
+     sentance.append( "> " + QString::number(this->intervals[9])+":");
+     this->file->write(sentance);
+    }
+
+   }
+ else
+         {
+                 if (file!=NULL)
+                         {
+                                 this->file->closeAndSave ();
+                                 this->file=NULL;
 
 
-                                }
+                         }
 
-                }
-        this->calculateImage= value;
-        this->kadrProssesd = 0;
-        qDebug ()<<"get Signal to calculate :  "<<value;
+         }
+ this->calculateImage = value;
+ this->kadrProssesd = 0;
+ qDebug ()<<"get Signal to calculate :  "<<value;
 }
 // set values
 void ImageProcessing::setChoisedCpture (int value)
@@ -312,7 +295,7 @@ void ImageProcessing::setK2(double value)
 }
 void ImageProcessing::setWindowSize (int value)
 {
-        this->wishWindowsize= value;
+        this->wishWindowsize = value;
         double k;
         if (this ->captureWidth!=0&& this ->captureHeight!=0)
                 {

@@ -1,5 +1,6 @@
 #include "filewriteread.h"
 #include <iostream>
+#include <QDebug>
 
 FileWriteRead::FileWriteRead(QObject *parent) :
         QThread(parent)
@@ -14,9 +15,11 @@ FileWriteRead::FileWriteRead(QObject *parent) :
 FileWriteRead::FileWriteRead(QString fileNameTmp, bool rewriteTmp,QObject *parent):
 QThread(0)
 {
+
     this->fileopen = false;
     this->fileName=fileNameTmp;
     this->rewrite=rewriteTmp;
+    qDebug()<<"get file name(WRITER) " <<fileName;
 
 
 }
@@ -43,6 +46,7 @@ bool FileWriteRead::tryOpen(QString kode)
     }
     else {
 
+
         this->fileStream = new QFile (this->fileName);
         if ( (this->fileStream->exists()==false) || this->rewrite == true ){
             this->fileStream->open(QIODevice::WriteOnly);
@@ -52,11 +56,6 @@ bool FileWriteRead::tryOpen(QString kode)
             this->fileStream->open(QIODevice::Append);
         }
         this->textStream = new QTextStream (this->fileStream);
-         /*this->textStream->setFieldWidth(10);
-        this->textStream->setFieldAlignment(QTextStream::AlignCenter);
-       this->code=kode;
-        this->textStream->setCodec(this->code.toUtf8().constData());*/
-
 
 
     }
@@ -70,11 +69,12 @@ bool FileWriteRead::write( QString data )
         return false;
 
     }
-    else{
-        *this->textStream << data;
-            *this->textStream<<"\n";
-        return true;
+    else
+    {
 
+        *this->textStream << data;
+        *this->textStream<<"\n";
+        return true;
     }
 
 }
@@ -82,6 +82,7 @@ bool FileWriteRead::closeAndSave(){
     if (fileopen){
          this->fileopen=false;
          this->fileStream->close();
+         qDebug()<<"close and save";
          deleteThis();
          return true;
      }

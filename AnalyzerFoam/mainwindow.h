@@ -35,9 +35,10 @@ public:
         void closeEvent(QCloseEvent *event);
         explicit MainWindow(QWidget *parent = 0);
         FileWriteRead *tmp ;
+        bool showingSettingCapture;
         ~MainWindow();
-
 private slots:
+
         //signal getting :
         void imageGetting( IplImage *img);
         void infoGetting(double count,double diametr,double  *arr);

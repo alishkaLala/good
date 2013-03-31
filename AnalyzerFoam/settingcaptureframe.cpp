@@ -31,7 +31,7 @@ void SettingCaptureFrame::showEvent(QShowEvent *event){
                         ui->pushButton->setEnabled (true);
                 }
 
-        this->worker->working (true);
+        //this->worker->working (true);
         this->setPalette(configInformation::getpalleteAllWindows());
         this->setFont(configInformation::getfont());
         this->repaint();
@@ -51,7 +51,6 @@ void SettingCaptureFrame::closeEvent(QCloseEvent *event = NULL)
 {
         this->father->show();
         disconnect (this->worker,SIGNAL(imageIsReady( IplImage*)),this,SLOT(imageGetting( IplImage*)));
-        disconnect(this->worker,SIGNAL(imageCalculateReady(IplImage*)),this,SLOT(imageCalculatingGetting(IplImage*)));
         this->worker->setCalculation (false);
         this->worker->working (false);
         cvDestroyWindow(this->nameCaptureFrame.toAscii().constData());
