@@ -28,94 +28,94 @@ class MainWindow;
 
 class MainWindow : public QMainWindow
 {
-        Q_OBJECT
+  Q_OBJECT
 
 public:
-        void showEvent(QShowEvent *event);
-        void closeEvent(QCloseEvent *event);
-        explicit MainWindow(QWidget *parent = 0);
-        FileWriteRead *tmp ;
-        bool showingSettingCapture;
-        ~MainWindow();
+  void showEvent(QShowEvent *event);
+  void closeEvent(QCloseEvent *event);
+  explicit MainWindow(QWidget *parent = 0);
+  FileWriteRead *tmp ;
+  bool showingSettingCapture;
+  ~MainWindow();
 private slots:
 
-        //signal getting :
-        void imageGetting( IplImage *img);
-        void infoGetting(double count,double diametr,double  *arr);
+  //signal getting :
+  void imageGetting( IplImage *img);
+  void infoGetting(double count,double diametr,double  *arr);
 
-        //connect/disconnect image getting
-        void captureStop(); //disable capture
-        void hideCapture();
-        void showCapture();
-        void setSartStopImegeGetting(bool enabled);
-        void captureStart();
-        void calculateImagesStart();
-        void calculateImageStop();
-        void progressBarChange();
+  //connect/disconnect image getting
+  void captureStop(); //disable capture
+  void hideCapture();
+  void showCapture();
+  void setSartStopImegeGetting(bool enabled);
+  void captureStart();
+  void calculateImagesStart();
+  void calculateImageStop();
+  void progressBarChange();
 
 
-        //show frames
-        void showAboutProgram();
-        void showInfoFrame();
-        void showSettingFrame();
-        void showSettingCapture();
-        void showOpenGLGraph();
-        void showTestingFrame();
+  //show frames
+  void showAboutProgram();
+  void showInfoFrame();
+  void showSettingFrame();
+  void showSettingCapture();
+  void showOpenGLGraph();
+  void showTestingFrame();
 
-        //buttons (gui)
-        void on_startCalculation_clicked();
-        void on_buttonAnalizStart_clicked();
-        void on_buttonAnalizStop_clicked();
-        void on_buttonCaptureStart_clicked();
+  //buttons (gui)
+  void on_startCalculation_clicked();
+  void on_buttonAnalizStart_clicked();
+  void on_buttonAnalizStop_clicked();
+  void on_buttonCaptureStart_clicked();
 
 private:
-        qint64 workingTime;
-        qint64 workingTimeDelta;
+  qint64 workingTime;
+  qint64 workingTimeDelta;
 
-        //windows
-        InfoFrame *infoFrame;
-        SettingMainFrames *settingMainFrames;
-        SettingCaptureFrame *settingCaptureFrame;
-        OpenglGraph *gr ;
-        testingFrame *testFrame;
+  //windows
+  InfoFrame *infoFrame;
+  SettingMainFrames *settingMainFrames;
+  SettingCaptureFrame *settingCaptureFrame;
+  OpenglGraph *gr ;
+  testingFrame *testFrame;
 
-        ImageProcessing *worker; //working thread for capture
-        Ui::MainWindow *ui;
-        QList<QAction*>  menuCaptureArray;
-        qint8 numberOfCapture;   // кількість  підключенних камер
-        qint32 timeToWork;
-        uchar* dataToDelete;
+  ImageProcessing *worker; //working thread for capture
+  Ui::MainWindow *ui;
+  QList<QAction*>  menuCaptureArray;
+  qint8 numberOfCapture;   // кількість  підключенних камер
+  qint32 timeToWork;
+  uchar* dataToDelete;
 
 
-        // setting for working with capture
-        /*    IplImage* resize;
+  // setting for working with capture
+  /*    IplImage* resize;
         bool enabledResize;
         qint32 x1Resize,y1Resize;
         qint32 frameWidth,frameHight;
         qint32 frameWidthResize,frameHightResize;
         double coefficient;
         double coefficientResize;*/
-        void readSettingCaprure(); /// void for worker
+  void readSettingCaprure(); /// void for worker
 
-        // show image from resourses
-        void showImage();
-        bool showImageJpg;
-        // functions for initialize
-        void initialMenuCapture();
-        void initialConnections();
-        void initValues();
-        void initPalette();
-        void createWindows();
-        qint8 findCapture();
+  // show image from resourses
+  void showImage();
+  bool showImageJpg;
+  // functions for initialize
+  void initialMenuCapture();
+  void initialConnections();
+  void initValues();
+  void initPalette();
+  void createWindows();
+  qint8 findCapture();
 
 
-        //aditional f.
-        bool okToContinue(QString Msg);
-        IplImage* QImageToIplImage(const QImage * qImage);
-        QImage* IplImageToQImage(const IplImage * iplImage, uchar **data,
-                                 double mini, double maxi);
-        void elemetShow();
-        void elementHide();
+  //aditional f.
+  bool okToContinue(QString Msg);
+  IplImage* QImageToIplImage(const QImage * qImage);
+  QImage* IplImageToQImage(const IplImage * iplImage, uchar **data,
+                           double mini, double maxi);
+  void elemetShow();
+  void elementHide();
 
 
 
