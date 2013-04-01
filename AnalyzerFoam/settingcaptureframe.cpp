@@ -24,11 +24,11 @@ void SettingCaptureFrame::showEvent(QShowEvent *event){
   this->worker->setCalculation (true);
   if(this->worker->isRealyWork ())
     {
-      ui->pushButton->setEnabled (false);
+      //ui->pushButton->setEnabled (false);
     }
   else
     {
-      ui->pushButton->setEnabled (true);
+      //ui->pushButton->setEnabled (true);
     }
 
   //this->worker->working (true);
@@ -92,7 +92,7 @@ void SettingCaptureFrame::initialConnections()
   connect(ui->widthCaptureWindow,SIGNAL(valueChanged(int)), this->worker,SLOT(setWindowSize(int)));
   cvSetMouseCallback( this->nameCaptureFrame.toAscii().constData(),myMouseCallback, (void*)this->frame);
   connect (this,SIGNAL(resizing(bool,int,int,int,int)),this->worker,SLOT(setEnabledResize(bool,int,int,int,int)));
-  connect(ui->pushButton,SIGNAL(clicked()),this->worker,SLOT(getImage()));//menu capture Frame
+  //connect(ui->pushButton,SIGNAL(clicked()),this->worker,SLOT(getImage()));//menu capture Frame
 }
 
 //Callback to work with mouse&capture frame
@@ -367,7 +367,7 @@ void SettingCaptureFrame::workerStart ()
 
 void SettingCaptureFrame::on_pushButton_clicked()
 {
-  ui->pushButton->setEnabled (false);
+  //ui->pushButton->setEnabled (false);
 }
 void SettingCaptureFrame::on_widthCaptureWindow_valueChanged(int )
 {
@@ -378,4 +378,5 @@ void SettingCaptureFrame::on_pushButton_2_clicked()
 {
   worker->setEnabledResize (false,0,0,0,0);
   this->enabledResize= false;
+  ui->groupBox->setEnabled(true);
 }

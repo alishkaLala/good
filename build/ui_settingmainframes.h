@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'settingmainframes.ui'
 **
-** Created: Mon 11. Mar 22:13:33 2013
+** Created: Mon 1. Apr 12:52:44 2013
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'canal_contur.h'
 **
-** Created: Mon 11. Mar 22:14:11 2013
+** Created: Mon 1. Apr 12:54:14 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!

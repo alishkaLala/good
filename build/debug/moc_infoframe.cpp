@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'infoframe.h'
 **
-** Created: Tue 12. Mar 01:31:31 2013
+** Created: Mon 1. Apr 12:53:55 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
