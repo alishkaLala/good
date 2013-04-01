@@ -141,6 +141,30 @@ void OpenglGraph::drawAxis ()
       glEnd();
     }
   bb = 1.0/8.0;
+  for (int i = 0; i < 38; i+=8)  // зеленые широкие линии
+    {
+      qglColor(Qt::green);
+      glBegin(GL_QUADS);
+      glVertex3f(0.0, 0.0, (i)*0.3);
+      glVertex3f(20.0, 0.0, (i)*0.3);
+      glVertex3f(20.0, 0.0, (i+4)*0.3);
+      glVertex3f(0.0, 0.0, (i+4)*0.3);
+      glEnd();
+    }
+  this->setFont(QFont("Times", 12, QFont::Bold));
+  for (int i = 1; i < 38; i+=4)  //подписи промежутков
+    {
+      qglColor(Qt::blue);
+      this->renderText(-0.5,0,(i+1)*0.3,"п."+ QString::number(i/4 + 1));
+    }
+  this->setFont(QFont("Times", 14, QFont::Bold));
+  for (int i = 0; i <40; i+=4) // подписи вверх
+    {
+      qglColor(Qt::magenta);
+      this->renderText(-1, (i+1)*0.3, 0.0,"n="+ QString::number(i/4 + 1));
+      glEnd();
+    }
+
   for (int i = 0; i < 40; i++)  //синии xY
     {
       // glColor3f(0.0, (8-i)*bb, 1.0);
@@ -150,9 +174,9 @@ void OpenglGraph::drawAxis ()
       glVertex3f(20.0, 0.0, (i+1)*0.3);
       glEnd();
     }
-
+  qglColor(Qt::cyan);
   glLineWidth(3.0);  // вправо
-  glColor3f(255,255, 255);
+  // glColor3f(255,255, 255);
   glBegin(GL_LINES);
   glVertex3f(0.0, 0.0, 0.0);
   glVertex3f(20.0, 0.0, 0.0);
@@ -165,8 +189,9 @@ void OpenglGraph::drawAxis ()
   glVertex3f(20.0, 0.0, 0.0);
   glVertex3f(20, -0.2, 0.0);
   glEnd();
+  this->renderText(20,0,0,"Час");
 
-  glColor3f(255,255, 255); //стрелка вверх
+  //glColor3f(255,255, 255); //стрелка вверх
   glBegin(GL_LINES);
   glVertex3f(0.0, 0.0, 0.0);
   glVertex3f(0.0, 12.0, 0.0);
@@ -180,8 +205,9 @@ void OpenglGraph::drawAxis ()
   glVertex3f(0.0, 12.0, 0.2);
   glEnd();
 
-
-  glColor3f(255,255, 255);// к пользователю
+  this->renderText(-1,0,12,"Кількість");
+  this->renderText(-1,12,0,"Проміжки");
+  //glColor3f(255,255, 255);// к пользователю
   glBegin(GL_LINES);
   glVertex3f(0.0, 0.0, 0.0);
   glVertex3f(0.0, 0.0, 12.0);
@@ -198,29 +224,26 @@ void OpenglGraph::drawAxis ()
   glLineWidth(4.0);
   //glColor4f(0.0, 0.7, 0.1, 0.75);
 
-
+  int z=0;
   for (int i=0; i < max_cnt-1; i++) {
-
-
-
-    for (int j =0; j<10-1;j++)
+    z=2;
+    for (int j =0; j<10;j++)
       {
         if(j%2==0)
           glColor3f(50,0, 0);
         else
           glColor3f(255,255, 0);
-        /* glBegin(GL_QUADS);
-                glVertex3f(i*0.1, pol[i].k[j], j);
-                glVertex3f(i*0.1, pol[i].k[j+1], j+1);
-                glVertex3f((i+1)*0.1,pol[i+1].k[j+1],j+1);
-                glVertex3f((i+1)*0.1,pol[i+1].k[j],j);
-                glEnd();*/
-        glBegin(GL_LINES);
-        glVertex3f(i*0.1, pol[i].k[j], j);
-        glVertex3f((i+1)*0.1, pol[i+1].k[j], j);
-        glEnd();
 
+        glBegin(GL_LINES);
+
+        glVertex3f(i*0.1, pol[i].k[j], z*0.3);
+        glVertex3f((i+1)*0.1, pol[i+1].k[j], z*0.3);
+        glEnd();
+        z+=4;
       }
+
+
+
 
 
   }
@@ -231,7 +254,7 @@ void OpenglGraph::drawAxis ()
 
 void OpenglGraph::mousePressEvent(QMouseEvent *event)
 {
-  //  lastPos = event->pos();
+
   ptrMousePosition = event->pos();
 }
 
