@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>652</width>
+    <width>661</width>
     <height>391</height>
    </rect>
   </property>
@@ -182,23 +182,22 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>652</width>
-     <height>21</height>
+     <width>661</width>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuExport">
     <property name="title">
-     <string>Export</string>
+     <string>Експорт</string>
     </property>
     <addaction name="actionTo_fail"/>
     <addaction name="actionTo_graphik"/>
     <addaction name="separator"/>
-    <addaction name="actionPrint"/>
     <addaction name="actionShowFile"/>
    </widget>
    <widget class="QMenu" name="menuCapture">
     <property name="title">
-     <string>Capture</string>
+     <string>Камера</string>
     </property>
     <widget class="QMenu" name="menuChoise_capture">
      <property name="title">
@@ -215,17 +214,16 @@
    </widget>
    <widget class="QMenu" name="menuSetting">
     <property name="title">
-     <string>Setting</string>
+     <string>Налаштування</string>
     </property>
     <addaction name="actionConfiguration_of_program"/>
     <addaction name="actionConfiguration_of_capture"/>
-    <addaction name="actionOf_export"/>
     <addaction name="separator"/>
     <addaction name="actionStart_testing"/>
    </widget>
    <widget class="QMenu" name="menuInformation">
     <property name="title">
-     <string>information</string>
+     <string>Інформація</string>
     </property>
     <addaction name="actionHelper"/>
     <addaction name="actionInformation"/>
@@ -246,22 +244,22 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionHelper">
    <property name="text">
-    <string>Helper</string>
+    <string>допомога</string>
    </property>
   </action>
   <action name="actionDisable_capture">
    <property name="text">
-    <string>Disable capture </string>
+    <string>вимкнути камеру</string>
    </property>
   </action>
   <action name="actionConfiguration_of_program">
    <property name="text">
-    <string>of program...</string>
+    <string>програми...</string>
    </property>
   </action>
   <action name="actionConfiguration_of_capture">
    <property name="text">
-    <string>of capture... </string>
+    <string>камери... </string>
    </property>
   </action>
   <action name="actionOf_export">
@@ -271,17 +269,17 @@
   </action>
   <action name="actionStart_testing">
    <property name="text">
-    <string>start testing..</string>
+    <string>розпочати тестування..</string>
    </property>
   </action>
   <action name="actionTo_fail">
    <property name="text">
-    <string>to fail</string>
+    <string>до файлу</string>
    </property>
   </action>
   <action name="actionTo_graphik">
    <property name="text">
-    <string>to graphik</string>
+    <string>до графіку</string>
    </property>
   </action>
   <action name="actionPrint">
@@ -291,7 +289,7 @@
   </action>
   <action name="actionInformation">
    <property name="text">
-    <string>information</string>
+    <string>інформація</string>
    </property>
   </action>
   <action name="action1">
@@ -301,12 +299,12 @@
   </action>
   <action name="actionHide_capture">
    <property name="text">
-    <string>Hide capture</string>
+    <string>не показувати камеру</string>
    </property>
   </action>
   <action name="actionShow_capture">
    <property name="text">
-    <string>Show capture</string>
+    <string>показувати камеру</string>
    </property>
   </action>
   <action name="actionShowFile">

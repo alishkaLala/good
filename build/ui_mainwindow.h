@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Mon 1. Apr 12:52:44 2013
+** Created: Mon 1. Apr 17:12:03 2013
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -86,7 +86,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(652, 391);
+        MainWindow->resize(661, 391);
         actionHelper = new QAction(MainWindow);
         actionHelper->setObjectName(QString::fromUtf8("actionHelper"));
         actionDisable_capture = new QAction(MainWindow);
@@ -239,7 +239,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 652, 21));
+        menuBar->setGeometry(QRect(0, 0, 661, 18));
         menuExport = new QMenu(menuBar);
         menuExport->setObjectName(QString::fromUtf8("menuExport"));
         menuCapture = new QMenu(menuBar);
@@ -265,7 +265,6 @@ public:
         menuExport->addAction(actionTo_fail);
         menuExport->addAction(actionTo_graphik);
         menuExport->addSeparator();
-        menuExport->addAction(actionPrint);
         menuExport->addAction(actionShowFile);
         menuCapture->addAction(menuChoise_capture->menuAction());
         menuCapture->addSeparator();
@@ -276,7 +275,6 @@ public:
         menuChoise_capture->addAction(action1);
         menuSetting->addAction(actionConfiguration_of_program);
         menuSetting->addAction(actionConfiguration_of_capture);
-        menuSetting->addAction(actionOf_export);
         menuSetting->addSeparator();
         menuSetting->addAction(actionStart_testing);
         menuInformation->addAction(actionHelper);
@@ -290,19 +288,19 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
-        actionHelper->setText(QApplication::translate("MainWindow", "Helper", 0, QApplication::UnicodeUTF8));
-        actionDisable_capture->setText(QApplication::translate("MainWindow", "Disable capture ", 0, QApplication::UnicodeUTF8));
-        actionConfiguration_of_program->setText(QApplication::translate("MainWindow", "of program...", 0, QApplication::UnicodeUTF8));
-        actionConfiguration_of_capture->setText(QApplication::translate("MainWindow", "of capture... ", 0, QApplication::UnicodeUTF8));
+        actionHelper->setText(QApplication::translate("MainWindow", "\320\264\320\276\320\277\320\276\320\274\320\276\320\263\320\260", 0, QApplication::UnicodeUTF8));
+        actionDisable_capture->setText(QApplication::translate("MainWindow", "\320\262\320\270\320\274\320\272\320\275\321\203\321\202\320\270 \320\272\320\260\320\274\320\265\321\200\321\203", 0, QApplication::UnicodeUTF8));
+        actionConfiguration_of_program->setText(QApplication::translate("MainWindow", "\320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\270...", 0, QApplication::UnicodeUTF8));
+        actionConfiguration_of_capture->setText(QApplication::translate("MainWindow", "\320\272\320\260\320\274\320\265\321\200\320\270... ", 0, QApplication::UnicodeUTF8));
         actionOf_export->setText(QApplication::translate("MainWindow", "of export", 0, QApplication::UnicodeUTF8));
-        actionStart_testing->setText(QApplication::translate("MainWindow", "start testing..", 0, QApplication::UnicodeUTF8));
-        actionTo_fail->setText(QApplication::translate("MainWindow", "to fail", 0, QApplication::UnicodeUTF8));
-        actionTo_graphik->setText(QApplication::translate("MainWindow", "to graphik", 0, QApplication::UnicodeUTF8));
+        actionStart_testing->setText(QApplication::translate("MainWindow", "\321\200\320\276\320\267\320\277\320\276\321\207\320\260\321\202\320\270 \321\202\320\265\321\201\321\202\321\203\320\262\320\260\320\275\320\275\321\217..", 0, QApplication::UnicodeUTF8));
+        actionTo_fail->setText(QApplication::translate("MainWindow", "\320\264\320\276 \321\204\320\260\320\271\320\273\321\203", 0, QApplication::UnicodeUTF8));
+        actionTo_graphik->setText(QApplication::translate("MainWindow", "\320\264\320\276 \320\263\321\200\320\260\321\204\321\226\320\272\321\203", 0, QApplication::UnicodeUTF8));
         actionPrint->setText(QApplication::translate("MainWindow", "print ", 0, QApplication::UnicodeUTF8));
-        actionInformation->setText(QApplication::translate("MainWindow", "information", 0, QApplication::UnicodeUTF8));
+        actionInformation->setText(QApplication::translate("MainWindow", "\321\226\320\275\321\204\320\276\321\200\320\274\320\260\321\206\321\226\321\217", 0, QApplication::UnicodeUTF8));
         action1->setText(QApplication::translate("MainWindow", "1", 0, QApplication::UnicodeUTF8));
-        actionHide_capture->setText(QApplication::translate("MainWindow", "Hide capture", 0, QApplication::UnicodeUTF8));
-        actionShow_capture->setText(QApplication::translate("MainWindow", "Show capture", 0, QApplication::UnicodeUTF8));
+        actionHide_capture->setText(QApplication::translate("MainWindow", "\320\275\320\265 \320\277\320\276\320\272\320\260\320\267\321\203\320\262\320\260\321\202\320\270 \320\272\320\260\320\274\320\265\321\200\321\203", 0, QApplication::UnicodeUTF8));
+        actionShow_capture->setText(QApplication::translate("MainWindow", "\320\277\320\276\320\272\320\260\320\267\321\203\320\262\320\260\321\202\320\270 \320\272\320\260\320\274\320\265\321\200\321\203", 0, QApplication::UnicodeUTF8));
         actionShowFile->setText(QApplication::translate("MainWindow", "\320\277\320\276\320\272\320\260\320\267\320\260\321\202\320\270 \321\204\320\260\320\271\320\273", 0, QApplication::UnicodeUTF8));
         capturePicture->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QString());
@@ -313,11 +311,11 @@ public:
         buttonAnalizStart->setText(QApplication::translate("MainWindow", "\321\200\320\276\320\267\320\277\320\276\321\207\320\260\321\202\320\270 \320\260\320\275\320\260\320\273\321\226\320\267", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("MainWindow", "\320\206\320\275\321\204\320\276\321\200\320\274\320\260\321\206\321\226\321\217", 0, QApplication::UnicodeUTF8));
         label->setText(QString());
-        menuExport->setTitle(QApplication::translate("MainWindow", "Export", 0, QApplication::UnicodeUTF8));
-        menuCapture->setTitle(QApplication::translate("MainWindow", "Capture", 0, QApplication::UnicodeUTF8));
+        menuExport->setTitle(QApplication::translate("MainWindow", "\320\225\320\272\321\201\320\277\320\276\321\200\321\202", 0, QApplication::UnicodeUTF8));
+        menuCapture->setTitle(QApplication::translate("MainWindow", "\320\232\320\260\320\274\320\265\321\200\320\260", 0, QApplication::UnicodeUTF8));
         menuChoise_capture->setTitle(QApplication::translate("MainWindow", "\320\241\320\277\320\270\321\201\320\276\320\272 \320\277\321\226\320\264\320\272\321\216\321\207\320\265\320\275\320\270\321\205 \320\272\320\260\320\274\320\265\321\200", 0, QApplication::UnicodeUTF8));
-        menuSetting->setTitle(QApplication::translate("MainWindow", "Setting", 0, QApplication::UnicodeUTF8));
-        menuInformation->setTitle(QApplication::translate("MainWindow", "information", 0, QApplication::UnicodeUTF8));
+        menuSetting->setTitle(QApplication::translate("MainWindow", "\320\235\320\260\320\273\320\260\321\210\321\202\321\203\320\262\320\260\320\275\320\275\321\217", 0, QApplication::UnicodeUTF8));
+        menuInformation->setTitle(QApplication::translate("MainWindow", "\320\206\320\275\321\204\320\276\321\200\320\274\320\260\321\206\321\226\321\217", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
