@@ -21,24 +21,14 @@ SettingCaptureFrame::~SettingCaptureFrame()
 //Events
 void SettingCaptureFrame::showEvent(QShowEvent *event){
   connect (this->worker,SIGNAL(imageIsReady( IplImage*)),this,SLOT(imageGetting( IplImage*)));
-  this->worker->setCalculation (true);
-  if(this->worker->isRealyWork ())
-    {
-      //ui->pushButton->setEnabled (false);
-    }
-  else
-    {
-      //ui->pushButton->setEnabled (true);
-    }
-
-  //this->worker->working (true);
+  this->worker->setCalculation (true,false);
   this->setPalette(configInformation::getpalleteAllWindows());
   this->setFont(configInformation::getfont());
   this->repaint();
   this->initialize();
   this->hideAllBoxes();
   this->ui->groupBox_3->setEnabled(true);
-  this->enabledResize = configInformation::getEnabledResize ();
+  this->resizeEnabled = configInformation::getEnabledResize ();
   this->startCalculateDistance = false;
   this->startResize=false;
   this->resizeX=0;
@@ -81,6 +71,7 @@ void SettingCaptureFrame::initSetting()
   ui->widthCaptureWindow->setRange(configInformation::getSizeWindowCaptureMinimum (),configInformation::getSizeWindowCaptureMaximum ());
   ui->widthCaptureWindow->setValue(configInformation::getSizeWindowCapture());
   ui->spinBox->setValue(configInformation::getperiodCapture());
+
 }
 void SettingCaptureFrame::initialConnections()
 {
@@ -213,11 +204,11 @@ void SettingCaptureFrame::writeSetting()
 // buttons : Apply-Cansel -def
 void SettingCaptureFrame::on_SettingApply_clicked()
 {
-  if (ui->lineEdit->text().trimmed()=="")
-    if (QMessageBox::Yes == QMessageBox::warning(this,tr("Кількість міліметрів  не визначена"),
-                                                 tr("Застосувати раніше встановлені налаштування?"),
+  if (ui->lineEdit->text().trimmed()=="" || ui->lineEdit->text().toDouble()<= 0 )
+    if (QMessageBox::Yes == QMessageBox::warning(this,tr("Кількість міліметрів  визначена не коректно!"),
+                                                 tr("Застосувати значення по замовчуванню?"),
                                                  QMessageBox::Yes,QMessageBox::No)){
-      ui->lineEdit->setText(QString::number(configInformation::getdistanceInMm()));
+      ui->lineEdit->setText(QString::number(10));
     }
     else {
       QMessageBox::information(this,tr (""),tr("Визначте їх"), QMessageBox::Ok);
@@ -371,12 +362,12 @@ void SettingCaptureFrame::on_pushButton_clicked()
 }
 void SettingCaptureFrame::on_widthCaptureWindow_valueChanged(int )
 {
-  this->worker->setEnabledResize (false,0,0,0,0);
+  //this->worker->setEnabledResize (false,0,0,0,0);
 }
 
 void SettingCaptureFrame::on_pushButton_2_clicked()
 {
   worker->setEnabledResize (false,0,0,0,0);
-  this->enabledResize= false;
   ui->groupBox->setEnabled(true);
+  this->resizeEnabled = false;
 }

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'imageprocessing.h'
 **
-** Created: Mon 1. Apr 17:10:16 2013
+** Created: Sun 7. Apr 13:16:19 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_ImageProcessing[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -39,14 +39,15 @@ static const uint qt_meta_data_ImageProcessing[] = {
  // slots: signature, parameters, type, tag, flags
      157,   16,   16,   16, 0x0a,
      171,   16,   16,   16, 0x0a,
-     182,   16,   16,   16, 0x0a,
-     209,  203,   16,   16, 0x0a,
-     223,  203,   16,   16, 0x0a,
-     237,  203,   16,   16, 0x0a,
-     282,  256,   16,   16, 0x0a,
-     321,  203,   16,   16, 0x0a,
-     343,  203,   16,   16, 0x0a,
-     360,  203,   16,   16, 0x0a,
+     191,  182,   16,   16, 0x0a,
+     217,   16,   16,   16, 0x2a,
+     244,  238,   16,   16, 0x0a,
+     258,  238,   16,   16, 0x0a,
+     272,  238,   16,   16, 0x0a,
+     317,  291,   16,   16, 0x0a,
+     356,  238,   16,   16, 0x0a,
+     378,  238,   16,   16, 0x0a,
+     395,  238,   16,   16, 0x0a,
 
        0        // eod
 };
@@ -56,9 +57,10 @@ static const char qt_meta_stringdata_ImageProcessing[] = {
     "imageCalculateReady(IplImage*)\0"
     "count,diametr,arr\0infoIsReady(double,double,double*)\0"
     ",,\0captureProp(int,int,int)\0working(bool)\0"
-    "getImage()\0setCalculation(bool)\0value\0"
-    "setK1(double)\0setK2(double)\0"
-    "setWindowSize(int)\0,x1,y1,widthROI,heigthROI\0"
+    "getImage()\0,writing\0setCalculation(bool,bool)\0"
+    "setCalculation(bool)\0value\0setK1(double)\0"
+    "setK2(double)\0setWindowSize(int)\0"
+    ",x1,y1,widthROI,heigthROI\0"
     "setEnabledResize(bool,int,int,int,int)\0"
     "setChoisedCpture(int)\0setTesting(bool)\0"
     "setDelay(int)\0"
@@ -99,17 +101,18 @@ int ImageProcessing::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 3: captureProp((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
         case 4: working((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 5: getImage(); break;
-        case 6: setCalculation((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 7: setK1((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 8: setK2((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 9: setWindowSize((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 10: setEnabledResize((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5]))); break;
-        case 11: setChoisedCpture((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 12: setTesting((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 13: setDelay((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: setCalculation((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 7: setCalculation((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 8: setK1((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 9: setK2((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 10: setWindowSize((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 11: setEnabledResize((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5]))); break;
+        case 12: setChoisedCpture((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 13: setTesting((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 14: setDelay((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 14;
+        _id -= 15;
     }
     return _id;
 }

@@ -22,6 +22,8 @@ MainWindow::~MainWindow()
 }
 // events
 void MainWindow::showEvent(QShowEvent *event){
+  this->showingSettingCapture = false;
+  ui->frame->setEnabled(false);
   ui->label->setText ("Камера вимкнена");
   this->initPalette ();
   this->readSettingCaprure();

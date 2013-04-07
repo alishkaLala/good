@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'testingframe.ui'
 **
-** Created: Mon 1. Apr 17:08:44 2013
+** Created: Sun 7. Apr 13:15:14 2013
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

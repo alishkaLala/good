@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'testingframe.h'
 **
-** Created: Mon 1. Apr 17:10:24 2013
+** Created: Sun 7. Apr 13:16:27 2013
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!

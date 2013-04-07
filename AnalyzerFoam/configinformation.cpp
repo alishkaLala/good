@@ -32,7 +32,7 @@ void configInformation::setStandardPreferenceCapture()
 
   distanceInMmMinimum=0.001;
   distanceInMmMaximum=100;
-  distanceInMmNow = 10;
+  distanceInMmNow = 5;
 
   periodCaptureMinimum= 1;
   periodCaptureMaximum = 3000000;
@@ -430,7 +430,7 @@ bool configInformation::getrewrite(){
 
 bool configInformation::setrewrite(bool e)
 {
-  rewrite = e;
+
   return true;
 }
 

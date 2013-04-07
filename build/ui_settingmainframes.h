@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'settingmainframes.ui'
 **
-** Created: Mon 1. Apr 17:08:44 2013
+** Created: Sun 7. Apr 13:15:14 2013
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -40,8 +40,6 @@ public:
     QPushButton *pushButton_3;
     QPushButton *pushButton_11;
     QGridLayout *gridLayout;
-    QLabel *label_2;
-    QCheckBox *checkBox;
     QLabel *label_3;
     QCheckBox *checkBox_2;
     QGroupBox *groupBox;
@@ -67,7 +65,7 @@ public:
     {
         if (SettingMainFrames->objectName().isEmpty())
             SettingMainFrames->setObjectName(QString::fromUtf8("SettingMainFrames"));
-        SettingMainFrames->resize(417, 292);
+        SettingMainFrames->resize(417, 318);
         gridLayout_2 = new QGridLayout(SettingMainFrames);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         groupBox_2 = new QGroupBox(SettingMainFrames);
@@ -113,25 +111,15 @@ public:
 
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        label_2 = new QLabel(groupBox_2);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        gridLayout->addWidget(label_2, 0, 0, 1, 1);
-
-        checkBox = new QCheckBox(groupBox_2);
-        checkBox->setObjectName(QString::fromUtf8("checkBox"));
-
-        gridLayout->addWidget(checkBox, 0, 1, 1, 1);
-
         label_3 = new QLabel(groupBox_2);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
-        gridLayout->addWidget(label_3, 1, 0, 1, 1);
+        gridLayout->addWidget(label_3, 0, 0, 1, 1);
 
         checkBox_2 = new QCheckBox(groupBox_2);
         checkBox_2->setObjectName(QString::fromUtf8("checkBox_2"));
 
-        gridLayout->addWidget(checkBox_2, 1, 1, 1, 1);
+        gridLayout->addWidget(checkBox_2, 0, 1, 1, 1);
 
 
         verticalLayout->addLayout(gridLayout);
@@ -239,8 +227,6 @@ public:
         label->setText(QApplication::translate("SettingMainFrames", "\320\244\320\260\320\271\320\273 \321\226\320\274\320\277\320\276\321\200\321\202\321\203", 0, QApplication::UnicodeUTF8));
         pushButton_3->setText(QApplication::translate("SettingMainFrames", "\320\276\320\261\321\200\320\260\321\202\320\270", 0, QApplication::UnicodeUTF8));
         pushButton_11->setText(QApplication::translate("SettingMainFrames", "\321\201\321\202\320\262\320\276\321\200\320\270\321\202\320\270", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("SettingMainFrames", "\320\237\320\265\321\200\320\265\320\267\320\260\320\277\320\270\321\201\321\203\320\262\320\260\321\202\320\270?                               ", 0, QApplication::UnicodeUTF8));
-        checkBox->setText(QApplication::translate("SettingMainFrames", "\320\242\320\260\320\272 ", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("SettingMainFrames", "\320\227\320\260\320\277\320\270\321\201\321\203\320\262\320\260\321\202\320\270 \320\264\320\260\321\202\321\203 \320\275\320\260 \320\277\320\276\321\207\320\260\321\202\320\272\321\203 \321\204\320\260\320\271\320\273\321\203", 0, QApplication::UnicodeUTF8));
         checkBox_2->setText(QApplication::translate("SettingMainFrames", "\320\242\320\260\320\272", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("SettingMainFrames", "Colors", 0, QApplication::UnicodeUTF8));

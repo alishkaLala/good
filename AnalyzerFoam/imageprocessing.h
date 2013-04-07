@@ -5,6 +5,7 @@
 #include <QTime>
 #include <QMessageBox>
 #include <QDebug>
+#include <QDate>
 
 
 #include <cv.h>
@@ -36,7 +37,7 @@ public slots:
 
   void working(bool);
   void getImage();
-  void setCalculation(bool);
+  void setCalculation(bool,bool writing = true);
   void setK1(double value);
   void setK2(double value);
   void setWindowSize(int value);

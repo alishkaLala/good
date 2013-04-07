@@ -30,7 +30,7 @@ void ImageProcessing::getImage()
 {
   IplImage* frame =0;
   capture = cvCreateCameraCapture (this->choisedCapture);
-  cvNamedWindow("capture", CV_WINDOW_AUTOSIZE);
+  //cvNamedWindow("capture", CV_WINDOW_AUTOSIZE);
   this->realyWork= true;
   // frame = cvLoadImage("4.jpg",CV_LOAD_IMAGE_COLOR);
   this->captureWidth=  cvGetCaptureProperty (this->capture,3);
@@ -194,25 +194,14 @@ void ImageProcessing::getImage()
             str.append (QString::number (arrayDiam[i])+ ":");
 
           }
-        this->file->write (str);
-        for (int i=0;i<10;i++)
-          arrayDiam[i]=(int)arrayDiam[i]%10;
+         if (file!=NULL) this->file->write (str);
         emit infoIsReady (countBell*0.1,2.0 *averageDiametr/countBell,arrayDiam);
         qDebug ()<<"count Bell "<< countBell<<"average diametr = " <<3*averageDiametr/countBell;
-        /*
-                                                max value 40*40
-                                          GET :  count Bell  281 average diametr =  11.0071
 
-                                          400 count Bell  - 40
-                                          1count Bell  -  0.1
-
-                                        20  average diametr - 40
-                                        1 average diametr - 2
-                                */
 
       }
     emit imageIsReady(src);
-    //emit infoIsReady (qrand ()%40,qrand ()%40);
+
     cvWaitKey(delay);
     cvReleaseImage(&src);
   }
@@ -241,26 +230,29 @@ void ImageProcessing::working(bool setting){
   this->isWorking = setting;
   qDebug ()<<"set value working "<<setting;
 }
-void ImageProcessing::setCalculation (bool value)
+void ImageProcessing::setCalculation (bool value, bool writing )
 {
+
   if (value)
     {
       this->time->restart ();
-      this->file = new FileWriteRead(configInformation::getnameFile (),configInformation::getrewrite ());
-      qDebug()<<"get file name "<<configInformation::getnameFile ();
-      if (!this->file->tryOpen (""))
+      if (writing)
         {
-          QMessageBox::about (new QWidget(), tr ("Помилка"),tr("Неможливо відкрити файл статистики" ));
+          this->file = new FileWriteRead(configInformation::getnameFile (),configInformation::getrewrite ());
+          qDebug()<<"get file name "<<configInformation::getnameFile ();
+          if (!this->file->tryOpen (""))
+            {
+              QMessageBox::about (new QWidget(), tr ("Помилка"),tr("Неможливо відкрити файл статистики" ));
+            }
+          else
+            {
+              QString sentance = "time:";
+              for (int i = 0; i<9; i++)
+                sentance.append( "< " +QString::number( this->intervals[i])+":");
+              sentance.append( "> " + QString::number(this->intervals[9])+":");
+              this->file->write(sentance);
+            }
         }
-      else
-        {
-          QString sentance = "time:";
-          for (int i = 0; i<9; i++)
-            sentance.append( "< " +QString::number( this->intervals[i])+":");
-          sentance.append( "> " + QString::number(this->intervals[9])+":");
-          this->file->write(sentance);
-        }
-
     }
   else
     {
@@ -309,6 +301,7 @@ void ImageProcessing::setWindowSize (int value)
 }
 void ImageProcessing::setEnabledResize (bool value, int x1=0, int y1=0, int x2=0, int y2=0)
 {
+  qDebug()<<" set enable resize "<< value;
   this->enabledResize= value;
   this->x1= x1;
   this->y1 = y1;

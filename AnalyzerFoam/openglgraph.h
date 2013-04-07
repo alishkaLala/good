@@ -23,6 +23,7 @@ class OpenglGraph : public QGLWidget
 {
 
 public:
+  float k;
   myPoints * pol;
   GLfloat jjj;
   OpenglGraph(ImageProcessing *worker, QWidget *parent = 0);

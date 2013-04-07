@@ -7,6 +7,7 @@ SettingMainFrames::SettingMainFrames(QWidget *parent) :
 {
   ui->setupUi(this);
   this->readSetting();
+
   this->father = parent;
   this->apply();
   this->setGui();
@@ -20,7 +21,7 @@ void SettingMainFrames::apply()
 }
 void SettingMainFrames::setGui(){
   ui->lineEdit_2->setText(configInformation::getnameFile());
-  ui->checkBox->setChecked(configInformation::getrewrite());
+  //ui->checkBox->setChecked(configInformation::getrewrite());
   ui->checkBox_2->setChecked(configInformation::getfirstWriteDate());
 }
 SettingMainFrames::~SettingMainFrames()
@@ -37,7 +38,7 @@ void SettingMainFrames::writeSetting(){
   configInformation::setpalleteAllWindows(this->palletFrames);
   configInformation::setfont(this->fontFrame);
   configInformation::setnameFile (this->fileName);
-  configInformation::setrewrite(ui->checkBox->isChecked());
+  configInformation::setrewrite(true);
   configInformation::setfirstWriteDate(ui->checkBox_2->isChecked());
   configInformation::writeToFile();
 }

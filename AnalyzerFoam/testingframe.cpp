@@ -114,8 +114,10 @@ void testingFrame::progressBarChange ()
 }
 void testingFrame::applySetting ()
 {
+  configInformation::setStandardPreference();
+  configInformation::setStandardPreferenceCapture();
   configInformation::setCaptureNumber (this->ui->comboBox->currentIndex ());
-  configInformation::setPeriodCaptureMinMax (this->timedelta/3,300000);
+  configInformation::setPeriodCaptureMinMax (30,300000);
   configInformation::setEnabledResize (false);
   configInformation::setframeWidthAndFrameHight (this->w,this->h);
   configInformation::setWindowCaptureMinMax (50,this->w);
@@ -295,7 +297,7 @@ void testingFrame::on_pushButton_clicked()
   ui->comboBox->setEnabled (false);
   this->timedelta=1;
   t.restart ();
-  worker->setCalculation (true);
+  worker->setCalculation (true,false);
   worker->working (true);
 
   this->workingTime= 1000*60*ui->spinBox->value ();

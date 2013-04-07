@@ -13,6 +13,7 @@ OpenglGraph::OpenglGraph(ImageProcessing *worker, QWidget *parent): QGLWidget(pa
   this->worker = worker;
   setFormat(QGLFormat(QGL::DoubleBuffer | QGL::DepthBuffer));
   xRot=0; yRot=0; zRot=0; zTra=-2; nSca=1;
+  k = 1;
 
 
   pol = (myPoints *) malloc(max_cnt*sizeof(myPoints));
@@ -83,7 +84,7 @@ void OpenglGraph::drawAxis ()
 {
   float bb = 1.0/8.0;
   float ll;
-  for (int i = 0; i <40; i++) // красные вертикальные
+  for (int i = 0; i <40*k; i++) // красные вертикальные
     {
       //  glColor3f(1.0, bb*(8-i), 0.0);
       glColor3f(255,255, 255);
@@ -95,21 +96,17 @@ void OpenglGraph::drawAxis ()
   for (int i = 0; i < 64; i++)  // красные горизонтальные
     {
       glBegin(GL_LINES);
-      //   glColor3f(1.0, 1.0, 0.0);
-      glColor3f(255,255, 255);
       if ((i+1) % 3 == 0)
         ll = -0.3;
       else
         ll = 0.0;
       glVertex3f((i+1)*0.3, ll, 0.0);
-      //   glColor3f(1.0, 0.0, 0.0);
-      glColor3f(255,255, 255);
-      glVertex3f((i+1)*0.3, 12.0, 0.0);
+      glVertex3f((i+1)*0.3, 12.0*k, 0.0);
       glEnd();
     }
 
   bb = 1.0/8.0;   //зеленые Yz
-  for (int i = 0; i < 40; i++)
+  for (int i = 0; i < 0; i++)
     {
       // glColor3f((8-i)*bb, 1.0, 0.0);
       glColor3f(255,255, 255);
@@ -158,10 +155,10 @@ void OpenglGraph::drawAxis ()
       this->renderText(-0.5,0,(i+1)*0.3,"п."+ QString::number(i/4 + 1));
     }
   this->setFont(QFont("Times", 14, QFont::Bold));
-  for (int i = 0; i <40; i+=4) // подписи вверх
+  for (int i = 0; i <40*k; i+=4) // подписи вверх
     {
       qglColor(Qt::magenta);
-      this->renderText(-1, (i+1)*0.3, 0.0,"n="+ QString::number(i/4 + 1));
+      this->renderText(-1, (i+1)*0.3, 0.0,"n="+ QString::number(i*10/3));
       glEnd();
     }
 
@@ -205,8 +202,8 @@ void OpenglGraph::drawAxis ()
   glVertex3f(0.0, 12.0, 0.2);
   glEnd();
 
-  this->renderText(-1,0,12,"Кількість");
-  this->renderText(-1,12,0,"Проміжки");
+  this->renderText(-1,0,12,"Проміжки");
+  this->renderText(-1,12,0,"Кількість");
   //glColor3f(255,255, 255);// к пользователю
   glBegin(GL_LINES);
   glVertex3f(0.0, 0.0, 0.0);
@@ -340,7 +337,13 @@ void OpenglGraph::genCoords(double k,double m,double *arr)
   pol[0].y = m;
   for(int j=0;j<10;j++)
     {
-      pol[0].k[j]=arr[j];
+      pol[0].k[j]=arr[j]*0.3;
+      qDebug()<<"n = "<< pol[0].k[j] << "k = "<<this->k*12;
+      if (pol[0].k[j] >this->k*12)
+        {
+            this->k = pol[0].k[j]/12.0 +0.05;
+
+        }
     }
   updateGL();
 }
